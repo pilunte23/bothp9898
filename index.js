@@ -23,5 +23,5 @@ bot.on('message', function (message){
 })
 
 
-bot.login('NDQzMzY0NjM3MTUzNjg5NjAx.DdMTFA._OKvAkoz2A8A_YTcgwIggy-2-64')
+bot.login(process.env.TOKEN)
 
