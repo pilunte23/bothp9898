@@ -22,26 +22,25 @@ module.exports = class AHjce extends Command {
         }               
     }
 
-
-     checkUrl(url) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.send();
-        xhr.onreadystatechange = processRequest;
-
-        function processRequest(e){
-            if (xhr.readyState == 4){           
-                if (xhr.status == 200) {
-                    return true
-                }else
-                {
-                    console.log(xhr.status)
-                    return false
-                }
-            }
-        }
-        return false
-    }
 }
 
+function checkUrl(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.send();
+    xhr.onreadystatechange = processRequest;
+
+    function processRequest(e){
+        if (xhr.readyState == 4){           
+            if (xhr.status == 200) {
+                return true
+            }else
+            {
+                console.log(xhr.status)
+                return false
+            }
+        }
+    }
+    return false
+}
 
