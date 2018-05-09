@@ -10,13 +10,13 @@ module.exports = class AHjce extends Command {
         let args = message.content.split(' ')
         args.shift()      
         if (!isNaN(args[0])){ 
-            if (checkurl('http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg')){
+            if (checkUrl('http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg')){
                 message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg')
             }              
         }   
         else
         {               
-            if (checkurl('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))){
+            if (checkUrl('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))){
                 message.reply('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))
             }
         }               
