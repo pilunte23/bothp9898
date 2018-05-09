@@ -7,12 +7,12 @@ module.exports = class FFGNews extends Command {
     }
 
     static action (message){
-        const request = require('request');
      
-        axios.get('http://www.fantasyflightgames.fr/recherche/jeux/horreur_a_arkham_lcg')
-        .then(function(response){
-            console.log(response.data); 
-            console.log(response.status); 
-        }); 
+        var request = require('request');
+        request('http://www.fantasyflightgames.fr/recherche/jeux/horreur_a_arkham_lcg', function (error, response, body) {
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the HTML for the Google homepage.
+        })
     }   
 }
