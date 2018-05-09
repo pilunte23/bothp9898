@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
-
 const bot = new Discord.Client()
 const Ahjce = require('./commands/ahjce')
 const Arkhamdb = require('./commands/arkhamdb')
+
 
 bot.on('ready',function(){
     //bot.user.setAvatar('./avatar.png')
@@ -23,5 +23,5 @@ bot.on('message', function (message){
 })
 
 
-bot.login(process.env.TOKEN)
+bot.login(token)
 
