@@ -9,38 +9,29 @@ module.exports = class AHjce extends Command {
     static action (message){
         let args = message.content.split(' ')
         args.shift()      
+        
         if (!isNaN(args[0])){ 
-            if (checkUrl('http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg')){
-                message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg')
-            }              
+            let url = 'http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg'                     
         }   
         else
-        {               
-            if (checkUrl('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))){
-                message.reply('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))
-            }
-        }               
-    }
-
-}
-
-function checkUrl(url) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.send();
-    xhr.onreadystatechange = processRequest;
-
-    function processRequest(e){
-        if (xhr.readyState == 4){           
-            if (xhr.status == 200) {
-                return true
-            }else
-            {
-                console.log(xhr.status)
-                return false
-            }
+        {      
+            let url = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
         }
-    }
-    return false
+        const https = require('https');
+        https.get(url, (resp) => {
+        let data = '';
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+        data += chunk;
+        })
+        // The whole response has been received. Print out the result.
+        resp.on('end', () => {
+        console.log(JSON.parse(data).explanation);
+        })
+        }).on("error", (err) => {
+        console.log("Error: " + err.message);
+        })
+     
+    }   
 }
 

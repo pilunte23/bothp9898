@@ -1,9 +1,8 @@
 const Discord = require('discord.js')
-const bot = new Discord.Client()
 const Ahjce = require('./commands/ahjce')
 const Arkhamdb = require('./commands/arkhamdb')
-const Constants = require('./constants');
-
+const Constants = require('./constants')
+const bot = new Discord.Client()
 
 bot.on('ready',function(){
     //bot.user.setAvatar('./avatar.png')
@@ -12,9 +11,9 @@ bot.on('ready',function(){
     bot.user.setActivity('Horreur à Arkham ').catch(console.error)
 })
 
-bot.on('guildMemeberAdd', function(member){
+bot.on('guildMemberAdd', function(member){
  member.createDM().then(function (channel){
-     channel.send('Bienvenu dans le repaire de Cthulu' +memeber.displayName)
+     channel.send('Bienvenu dans le repaire de Cthulu' +member.displayName)
  }).catch(console.error)
 
 })
