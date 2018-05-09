@@ -18,18 +18,15 @@ module.exports = class AHjce extends Command {
             linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
         }
         const http = require('http');
+        
         http.get(linkUrl, (resp) => {
-        let data = '';
-        // A chunk of data has been recieved.
-        resp.on('data', (chunk) => {
-        data += chunk;
-        })
-        // The whole response has been received. Print out the result.
-        resp.on('end', () => {
-        console.log(JSON.parse(data).explanation);
-        })
-        }).on("error", (err) => {
-        console.log("Error: " + err.message);
+            const { statusCode } = resp;
+            if (statusCode !== 200) {
+                message.reply(linkUrl)
+            }else
+            {
+                message.reply('carte non trouvée')
+            }
         })
      
     }   
