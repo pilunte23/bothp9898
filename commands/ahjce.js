@@ -22,7 +22,7 @@ module.exports = class AHjce extends Command {
         http.get(linkUrl, (resp) => {
             const { statusCode } = resp;
             if (statusCode !== 200) {
-                message.reply('carte non trouvée')
+                message.reply(' désolé le mystère de cette carte reste entier')
             }else
             {
                 message.reply(linkUrl)
