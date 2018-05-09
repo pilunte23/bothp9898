@@ -17,8 +17,8 @@ module.exports = class AHjce extends Command {
         {      
             linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
         }
-        const https = require('https');
-        https.get(linkUrl, (resp) => {
+        const http = require('http');
+        http.get(linkUrl, (resp) => {
         let data = '';
         // A chunk of data has been recieved.
         resp.on('data', (chunk) => {
