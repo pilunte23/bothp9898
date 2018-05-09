@@ -12,7 +12,7 @@ module.exports = class Arkhamdb extends Command {
 
         let linkUrl
         if (!isNaN(args[0])){ 
-            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'                     
+            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'                     
         }   
         else
         {      
