@@ -13,7 +13,7 @@ bot.on('ready',function(){
 
 bot.on('guildMemberAdd', function(member){
  member.createDM().then(function (channel){
-     channel.send('Bienvenu dans le repaire de Cthulhu' +member.displayName)
+     channel.send('Bienvenu dans le repaire de Cthulu' +member.displayName)
  }).catch(console.error)
 
 })
