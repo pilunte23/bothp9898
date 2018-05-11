@@ -8,26 +8,33 @@ module.exports = class AHjce extends Command {
 
     static action (message){
         let args = message.content.split(' ')
-        args.shift()      
-        let linkUrl
+        args.shift()  
+
+        let linkUrl = 'http://www.ahjce.fr'
         if (!isNaN(args[0])){ 
-            linkUrl = 'http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg'                     
+           let pathUrl = '/IMAGES/CARTES/AH-'+args[0]+'.jpg'                     
         }   
         else
         {      
-            linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
+           let  pathUrl = '/carte_liste.php?rech=' +args.join('%20')                 
         }
         const http = require('http');
-        
-        http.get(linkUrl, (resp) => {
+        var optionsget = {
+            host : linkurl,
+            port : 80,
+            path : pathUrl, // the rest of the url with parameters if needed
+            method : 'GET' // do GET
+        };
+
+        http.get(optionsget, (resp) => {
             const { statusCode } = resp;
             if (statusCode !== 200) {
                 message.reply('désolé le mystère de cette carte reste entier')
             }else
             {
-                message.reply(linkUrl)
+                message.reply(linkUrl+pathUrl)
             }
-        })
+        }).catch(console.log("Promise Rejected"))
      
     }   
 }
