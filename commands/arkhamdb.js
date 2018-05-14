@@ -9,12 +9,13 @@ module.exports = class Arkhamdb extends Command {
     static action (message){
         let args = message.content.split(' ')
         args.shift()
-        const https = require('https');
+        let https = require('https');
 
         let linkUrl
         if (!isNaN(args[0])){ 
-            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'       
-            https.get(linkUrl, (resp) => {
+            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'  
+            let httpsbis = require('https');     
+            httpsbis.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 if (statusCode !== 200) {
                     linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
