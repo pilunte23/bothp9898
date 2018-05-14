@@ -12,7 +12,13 @@ module.exports = class Arkhamdb extends Command {
 
         let linkUrl
         if (!isNaN(args[0])){ 
-            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'                     
+            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'       
+            https.get(linkUrl, (resp) => {
+                const { statusCode } = resp;
+                if (statusCode !== 200) {
+                    linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
+                }
+            })             
         }   
         else
         {      
@@ -24,6 +30,7 @@ module.exports = class Arkhamdb extends Command {
             const { statusCode } = resp;
             if (statusCode !== 200) {
                 message.reply('désolé le mystère de cette carte reste entier')
+
             }else
             {
                 message.reply(linkUrl)
