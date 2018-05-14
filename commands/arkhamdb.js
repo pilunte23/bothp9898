@@ -9,14 +9,13 @@ module.exports = class Arkhamdb extends Command {
     static action (message){
         let args = message.content.split(' ')
         args.shift()
-        let https = require('https');
+        var https = require('https')
+        var { statusCode } = resp
+        var linkUrl
 
-        let linkUrl
         if (!isNaN(args[0])){ 
-            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'  
-            let httpsbis = require('https');     
-            httpsbis.get(linkUrl, (resp) => {
-                const { statusCode } = resp;
+            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'    
+            https.get(linkUrl, (resp) => { 
                 if (statusCode !== 200) {
                     linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
                 }
@@ -28,7 +27,6 @@ module.exports = class Arkhamdb extends Command {
         }
         
         https.get(linkUrl, (resp) => {
-            const { statusCode } = resp;
             if (statusCode !== 200) {
                 message.reply('désolé le mystère de cette carte reste entier')
 
