@@ -16,7 +16,7 @@ module.exports = class AHjce extends Command {
         }   
         else
         {linkUrl
-           pathUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
+           linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')                 
         }
         const http = require('http');
 

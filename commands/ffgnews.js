@@ -29,7 +29,7 @@ module.exports = class FFGNews extends Command {
                 //console.log( $(this).children('img').attr('src'))
                 //console.log( $(this).parent().attr('href') )
                // ffgMap.set($(this).parent().attr('href'),$(this).children('img').attr('src'))            
-               await message.channel.send( $(this).parent().attr('href'),{files: [$(this).children('img').attr('src') ]})
+               message.channel.awaitMessages( $(this).parent().attr('href'),{files: [$(this).children('img').attr('src') ]})
                 /*setTimeout(function () {
                     link = $(this).parent().attr('href')
                     img = $(this).children('img').attr('src')
