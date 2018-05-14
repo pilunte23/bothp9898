@@ -9,6 +9,7 @@ module.exports = class Arkhamdb extends Command {
     static action (message){
         let args = message.content.split(' ')
         args.shift()
+        const https = require('https');
 
         let linkUrl
         if (!isNaN(args[0])){ 
@@ -24,8 +25,7 @@ module.exports = class Arkhamdb extends Command {
         {      
             linkUrl = 'https://arkhamdb.com/find?q=' +args.join('%20')                 
         }
-        const https = require('https');
-       
+        
         https.get(linkUrl, (resp) => {
             const { statusCode } = resp;
             if (statusCode !== 200) {
