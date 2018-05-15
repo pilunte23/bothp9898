@@ -12,7 +12,7 @@ module.exports = class command {
         return false
     }
 
-    async action (message){
+    static action (message){
     }
 
 }
