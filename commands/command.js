@@ -8,11 +8,11 @@ module.exports = class command {
         return false
     }
 
-    async match (message) {
+    static match (message) {
         return false
     }
 
-    static action (message){
+    async action (message){
     }
 
 }
