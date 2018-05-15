@@ -1,4 +1,5 @@
 const Command = require('./command')
+const axios = require('axios');
 
 module.exports = class Arkhamdb extends Command {
 
@@ -20,20 +21,26 @@ async function arkhamDB (message){
     if (!isNaN(args[0])){ 
         console.log('is numeric');
         linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png' 
-        console.log(linkUrl);   
-        const resp = await https.get(linkUrl)
-        if (resp.statusCode !== 200) {
-            console.log('png not found. status code :' + resp.statusCode);
-            linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
+        console.log(linkUrl);
+        try {
+            const response = await axios.get(linkUrl)
+            console.log(response);
+            if (response.statusCode !== 200 ) {
+                console.log('png not found. status code :' + response.statusCode);
+                linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
+            }
+            else
+            {      
+                linkUrl = 'https://arkhamdb.com/find?q=' +args.join('%20')                 
+            }   
+          } catch (error) {
+            console.error(error);
         }
+        
     }   
-    else
-    {      
-        linkUrl = 'https://arkhamdb.com/find?q=' +args.join('%20')                 
-    }
-
+    console.log(linkUrl);
     https.get(linkUrl, (resp) => {
-        if (resp.statusCode !== 200) {
+        if (resp.statusCode !== 200 ) {
             console.log('link not found');
             message.reply('désolé le mystère de cette carte reste entier')
 
