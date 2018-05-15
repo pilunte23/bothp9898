@@ -14,11 +14,11 @@ module.exports = class Arkhamdb extends Command {
         let linkUrl
 
         if (!isNaN(args[0])){ 
-            console.log("is numeric");
+            console.log('is numeric');
             linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'    
             const resp = await https.get(linkUrl)
             if (statusCode !== 200) {
-                console.log("png not found");
+                console.log('png not found');
                 linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
             }
         }   
@@ -29,7 +29,7 @@ module.exports = class Arkhamdb extends Command {
         
         https.get(linkUrl, (resp) => {
             if (statusCode !== 200) {
-                console.log("link not found");
+                console.log('link not found');
                 message.reply('désolé le mystère de cette carte reste entier')
 
             }else
