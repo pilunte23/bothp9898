@@ -6,7 +6,7 @@ module.exports = class AHjce extends Command {
         return message.content.startsWith('!ha')
     }
 
-    static action (message){
+    async action (message){
         let args = message.content.split(' ')
         args.shift()  
 

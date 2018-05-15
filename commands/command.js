@@ -8,7 +8,7 @@ module.exports = class command {
         return false
     }
 
-    static match (message) {
+    async match (message) {
         return false
     }
 

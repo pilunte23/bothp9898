@@ -6,20 +6,21 @@ module.exports = class Arkhamdb extends Command {
         return message.content.startsWith('!ah')
     }
 
-    static action (message){
+    async action (message){
         let args = message.content.split(' ')
         args.shift()
-        var https = require('https')
-        var { statusCode } = resp
-        var linkUrl
+        let https = require('https')
+        let { statusCode } = resp
+        let linkUrl
 
         if (!isNaN(args[0])){ 
+            console.log("is numeric");
             linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.png'    
-            https.get(linkUrl, (resp) => { 
-                if (statusCode !== 200) {
-                    linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
-                }
-            })             
+            const resp = await https.get(linkUrl)
+            if (statusCode !== 200) {
+                console.log("png not found");
+                linkUrl = 'https://arkhamdb.com/bundles/cards/'+args[0]+'.jpg'   
+            }
         }   
         else
         {      
@@ -28,6 +29,7 @@ module.exports = class Arkhamdb extends Command {
         
         https.get(linkUrl, (resp) => {
             if (statusCode !== 200) {
+                console.log("link not found");
                 message.reply('désolé le mystère de cette carte reste entier')
 
             }else
