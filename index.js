@@ -49,18 +49,24 @@ bot.on('message', async message =>{
 
     if(command === Constants.prefix+'aide' || command === Constants.prefix+'help' ){
         let embed =new Discord.RichEmbed()
+            .set
+            .setTitle("Aide") 
             .setDescription("Voici les commandes pour vous aider mon ami")
             .setColor("#9B59B6")           
-            .addField("!userinfo", "Je vous connais et vous donnerais des informations sur votre identité")
             .addField("!ha ", "suivi d'un numero ou d'une chaine de caractère pour chercher une carte sur www.ahjce.fr")
-   
-        message.channel.send(embed)
+            .addField("!ah ", "suivi d'une chaine de caractère pour chercher la valeur sur arkhamdb.com , !!! en cours n'affiche pas de carte pour l'instant")
+            .addField("!ahnews ", "Affiche la dèrniere news Arkham Horror LCG sur fantasyflightgames.com ")
+            .addField("!hanews ", "Affiche la dèrniere news Horreur à Arkham JCE sur fantasyflightgames.fr ")
+            .addField("!chnews ", "Affiche la dèrniere news de Contrée de l'horreur sur fantasyflightgames.fr") 
+            .addField("!denews ", "Affiche la dèrniere news de Demeure de l'Epouvante sur fantasyflightgames.fr")
+            .addField("!userinfo", "Je vous connais et vous donnerais des informations sur votre identité")       
+        message.author.send(embed)
            
         return
     }
-    let linkUrl
+    
     if(command === Constants.prefix+'ha' ){ 
-       
+        let linkUrl
         const http = require('http');
         //si la recherche est basé sur un numéro
         if (!isNaN(args[0])){ 
@@ -79,24 +85,24 @@ bot.on('message', async message =>{
         //si la recherhe est basée sur une chaine de caractère
         {
            let linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')   
-           var jsdom = JSDOM.fromURL(linkUrl).then(dom => {
+           let jsdom = JSDOM.fromURL(linkUrl).then(dom => {
             
-                var { window } = dom;
-                var { document } = window;
+                let { window } = dom;
+                let { document } = window;
                 const $ = global.jQuery = require( 'jquery' )( window );
 
                 global.window = window;
                 global.document = document;
     
-               var carteUnique = false
-               var section= $('.section') 
+               let carteUnique = false
+               let section= $('.section') 
                section.each( function(){     
                     //s'il n'y a qu'une carte ayant le terme dans le titre
-                    var bool1 = $(this).html().includes("titre")
-                    var bool2 = $(this).html().includes("(1)")
+                    const bool1 = $(this).html().includes("titre")
+                    const bool2 = $(this).html().includes("(1)")
                     if (bool1 && bool2){ 
                          carteUnique = true
-                         var indexTable =$(this).index() + 1 
+                         const indexTable =$(this).index() + 1 
                         data =  $(this).parent().find('table:last').find('a').attr('href').split("/") 
                         if (data[0] ==="cartes"){
                             message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+data[1]+'.jpg')  
@@ -109,7 +115,7 @@ bot.on('message', async message =>{
                })
 
                if (carteUnique === false){ 
-                var font= $('font') 
+                let font= $('font') 
                     if (font.html() == '0 cartes'){
                         message.reply('désolé vous avez du saisir le nom d un grand ancien car je n ai rien trouvé')  
                     }
@@ -122,6 +128,69 @@ bot.on('message', async message =>{
         }
                    
     }
+
+    // Chaos Bag
+    // Lien de deck
+    // Lecture d'histoire lovecraft
+/*
+    if(command === Constants.prefix+'hadeck' ){
+        linkUrl = 'http://www.ahjce.fr/deck.php?id='+args[0]
+        let jsdom = JSDOM.fromURL(linkUrl).then(dom => {
+            
+            let { window } = dom;
+            let { document } = window;
+            const $ = global.jQuery = require( 'jquery' )( window );
+
+            global.window = window;
+            global.document = document;
+            let a = $("#carte_dans_deck").find('a')
+            a.each( function(){
+                console.log($(this).attr('href'))
+                message.reply($(this).attr('href'))
+            })
+        })
+    }
+
+*/
+    if(command === Constants.prefix+'ah' ){
+        let args = message.content.split(' ')
+        args.shift()
+        let https = require('https');
+        let linkUrl
+
+        if (isNaN(args[0])){      
+            linkUrl = 'https://arkhamdb.com/find?q=' +args.join('%20')  
+            https.get(linkUrl, (resp) => {
+                const { statusCode } = resp;
+                if (statusCode !== 200) {
+                    message.reply('désolé le mystère de cette carte reste entier')
+                }else
+                {
+                    message.reply(linkUrl)
+                }
+            })               
+        }   
+      
+    }
+
+    if(command === Constants.prefix+'chnews' ){
+        let linkUrl ="http://www.fantasyflightgames.fr/recherche/jeux/les_contrees_de_lhorreur"
+        lastNewsFr(linkUrl,message)       
+    }
+
+    if(command === Constants.prefix+'hanews' ){
+        let linkUrl ="http://www.fantasyflightgames.fr/recherche/jeux/horreur_a_arkham_lcg"
+        lastNewsFr(linkUrl,message)      
+    }
+    if(command === Constants.prefix+'denews' ){
+        let linkUrl ="http://www.fantasyflightgames.fr/recherche/jeux/les_demeures_de_lepouvante_2nde_edition"
+        lastNewsFr(linkUrl,message)      
+    }
+    
+    if(command === Constants.prefix+'ahnews' ){
+        let linkUrl ="https://www.fantasyflightgames.com/en/news/tag/arkham-horror-the-card-game/?page=1"
+        lastNewsEn(linkUrl,message)      
+    }
   // let commandUsed =  Ahjce.parse(message) || Arkhamdb.parse(message) || FFGNews.parse(message)
 })
 
@@ -132,3 +201,34 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+function lastNewsFr(linkUrl,message){
+    var jsdom = JSDOM.fromURL(linkUrl).then(dom => {
+            
+            var { window } = dom;
+            var { document } = window;
+            const $ = global.jQuery = require( 'jquery' )( window );
+
+            global.window = window;
+            global.document = document;
+            var a = $('a .news_img');
+            message.reply(a.parent().attr('href'),{files: [ a.children('img').attr('src') ]})
+            
+        })   
+}
+
+function lastNewsEn(linkUrl,message){
+    var jsdom = JSDOM.fromURL(linkUrl).then(dom => {
+            
+            var { window } = dom;
+            var { document } = window;
+            const $ = global.jQuery = require( 'jquery' )( window );
+
+            global.window = window;
+            global.document = document;
+            link = 'https://www.fantasyflightgames.com/'+ $('h1').children('a').attr('href')
+            img = $('.blog-visual').attr('src')
+            message.reply(link,{files: [ img ]})           
+        })   
+
+
+}
