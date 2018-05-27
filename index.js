@@ -49,7 +49,6 @@ bot.on('message', async message =>{
 
     if(command === Constants.prefix+'aide' || command === Constants.prefix+'help' ){
         let embed =new Discord.RichEmbed()
-            .set
             .setTitle("Aide") 
             .setDescription("Voici les commandes pour vous aider mon ami")
             .setColor("#9B59B6")           
