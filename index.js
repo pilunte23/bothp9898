@@ -56,6 +56,7 @@ bot.on('message', async message =>{
             .addField("!ah ", "suivi d'une chaine de caractère pour chercher la valeur sur arkhamdb.com , !!! en cours n'affiche pas de carte pour l'instant")
             .addField("!ahnews ", "Affiche la dèrniere news Arkham Horror LCG sur fantasyflightgames.com ")
             .addField("!hanews ", "Affiche la dèrniere news Horreur à Arkham JCE sur fantasyflightgames.fr ")
+            .addField("!hav3news ", "Affiche la dèrniere news Horreur à Arkham V3 sur fantasyflightgames.fr ")
             .addField("!chnews ", "Affiche la dèrniere news de Contrée de l'horreur sur fantasyflightgames.fr") 
             .addField("!denews ", "Affiche la dèrniere news de Demeure de l'Epouvante sur fantasyflightgames.fr")
             .addField("!userinfo", "Je vous connais et vous donnerais des informations sur votre identité")       
@@ -183,6 +184,10 @@ bot.on('message', async message =>{
     }
     if(command === Constants.prefix+'denews' ){
         let linkUrl ="http://www.fantasyflightgames.fr/recherche/jeux/les_demeures_de_lepouvante_2nde_edition"
+        lastNewsFr(linkUrl,message)      
+    }
+    if(command === Constants.prefix+'hav3news' ){
+        let linkUrl ="http://www.fantasyflightgames.fr/recherche/jeux/horreur_a_arkham_3e_edition"
         lastNewsFr(linkUrl,message)      
     }
     
