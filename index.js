@@ -151,7 +151,7 @@ bot.on('message', async message =>{
         })
     }
 
-*/
+
     if(command === Constants.prefix+'ah' ){
         let args = message.content.split(' ')
         args.shift()
