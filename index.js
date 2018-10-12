@@ -52,8 +52,8 @@ bot.on('message', async message =>{
             .setTitle("Aide") 
             .setDescription("Voici les commandes pour vous aider mon ami")
             .setColor("#9B59B6")           
-            .addField("!ha ", "suivi d'un numero ou d'une chaine de caractère pour chercher une carte sur www.ahjce.fr")
-            .addField("!ah ", "suivi d'une chaine de caractère pour chercher la valeur sur arkhamdb.com , !!! en cours n'affiche pas de carte pour l'instant")
+            .addField("!ha ", "suivi d'un numero ou d'une chaine de caractère pour chercher une carte sur http://arkhamdb.fr.cr")
+            .addField("!ah ", "suivi d'une chaine de caractère pour chercher la valeur sur http://fr.arkhamdb.com , !!! en cours n'affiche pas de carte pour l'instant")
             .addField("!ahnews ", "Affiche la dèrniere news Arkham Horror LCG sur fantasyflightgames.com ")
             .addField("!hanews ", "Affiche la dèrniere news Horreur à Arkham JCE sur fantasyflightgames.fr ")
             .addField("!hav3news ", "Affiche la dèrniere news Horreur à Arkham V3 sur fantasyflightgames.fr ")
@@ -159,7 +159,7 @@ bot.on('message', async message =>{
         let linkUrl
 
         if (isNaN(args[0])){      
-            linkUrl = 'https://arkhamdb.com/find?q=' +args.join('%20')  
+            linkUrl = 'https://fr.arkhamdb.com/find?q=' +args.join('%20')  
             https.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 if (statusCode !== 200) {
