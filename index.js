@@ -70,7 +70,7 @@ bot.on('message', async message =>{
         const http = require('http');
         //si la recherche est basé sur un numéro
         if (!isNaN(args[0])){ 
-            linkUrl = 'http://www.ahjce.fr/IMAGES/CARTES/AH-'+args[0]+'.jpg' 
+            linkUrl = 'http://arkhamdb.fr.cr/IMAGES/CARTES/AH-'+args[0]+'.jpg' 
             http.get(linkUrl, (resp) => { 
                 const { statusCode } = resp;
                 if (statusCode !== 200) {
@@ -84,7 +84,7 @@ bot.on('message', async message =>{
         else
         //si la recherhe est basée sur une chaine de caractère
         {
-           let linkUrl = 'http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20')   
+           let linkUrl = 'http://arkhamdb.fr.cr/carte_liste.php?rech=' +args.join('%20')   
            let jsdom = JSDOM.fromURL(linkUrl).then(dom => {
             
                 let { window } = dom;
@@ -105,11 +105,11 @@ bot.on('message', async message =>{
                          const indexTable =$(this).index() + 1 
                         data =  $(this).parent().find('table:last').find('a').attr('href').split("/") 
                         if (data[0] ==="cartes"){
-                            message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+data[1]+'.jpg')  
+                            message.reply('http://arkhamdb.fr.cr/IMAGES/CARTES/AH-'+data[1]+'.jpg')  
                         }
                         if (data[0] ==="investigateurs"){
-                            message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+data[1]+'.jpg') 
-                            message.reply('http://www.ahjce.fr/IMAGES/CARTES/AH-'+data[1]+'_back.jpg') 
+                            message.reply('http://arkhamdb.fr.cr/IMAGES/CARTES/AH-'+data[1]+'.jpg') 
+                            message.reply('http://arkhamdb.fr.cr/IMAGES/CARTES/AH-'+data[1]+'_back.jpg') 
                         }                             
                     }                  
                })
@@ -120,7 +120,7 @@ bot.on('message', async message =>{
                         message.reply('désolé vous avez du saisir le nom d un grand ancien car je n ai rien trouvé')  
                     }
                     else{
-                        message.reply('http://www.ahjce.fr/carte_liste.php?rech=' +args.join('%20'))  
+                        message.reply('http://arkhamdb.fr.cr/carte_liste.php?rech=' +args.join('%20'))  
                     }       
                }
             })
