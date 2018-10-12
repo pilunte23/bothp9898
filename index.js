@@ -132,9 +132,9 @@ bot.on('message', async message =>{
     // Chaos Bag
     // Lien de deck
     // Lecture d'histoire lovecraft
-/*
+
     if(command === Constants.prefix+'hadeck' ){
-        linkUrl = 'http://www.ahjce.fr/deck.php?id='+args[0]
+        linkUrl = 'http://arkhamdb.fr.cr/deck.php?id='+args[0]
         let jsdom = JSDOM.fromURL(linkUrl).then(dom => {
             
             let { window } = dom;
