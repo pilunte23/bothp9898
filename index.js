@@ -246,11 +246,11 @@ function role(){
     .setColor(0xffffff)
     .setTitle(args.join('Choisissez votre classe'));
     
-    let msg = await message.channel.send(embed);
-    await msg.react('443359750353190912');
-    await msg.react('443359489811546112');
-    await msg.react('443359627195973634');
-    await msg.react('443359703771250688');
-    await msg.react('443359575131947008');
+    let msg =  message.channel.send(embed);
+     msg.react('443359750353190912');
+     msg.react('443359489811546112');
+     msg.react('443359627195973634');
+     msg.react('443359703771250688');
+     msg.react('443359575131947008');
     
 }
