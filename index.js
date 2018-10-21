@@ -68,8 +68,7 @@ bot.on('message', async message =>{
         let embed =new Discord.RichEmbed()
             .setTitle("CHoississez votre classe") 
             .setColor("#9B59B6")                
-        const embed = new Discord.MessageEmbed()
-
+            
         let msg =  message.channel.send(embed)
          msg.react('443359750353190912')
          msg.react('443359489811546112')
