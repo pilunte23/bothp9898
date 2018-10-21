@@ -75,9 +75,13 @@ bot.on('message', async message =>{
          await msg.react('443359627195973634');
          await msg.react('443359703771250688');
          await msg.react('443359575131947008');
-                   
+              
+         
+
         return
     }
+
+
 
     if(command === Constants.prefix+'ha' ){ 
         let linkUrl
@@ -213,6 +217,14 @@ bot.on('message', async message =>{
   // let commandUsed =  Ahjce.parse(message) || Arkhamdb.parse(message) || FFGNews.parse(message)
 })
 
+
+
+bot.on('messageReactionAdd', (reaction,user) =>{
+    if  (reaction.emoji.name === '443359750353190912'){
+        let role = message.guild.roles.find(role => role.name === "Guardian")
+        user.addRole(role)
+    }
+});
 
 bot.login(Constants.token).catch(console.error)
 
