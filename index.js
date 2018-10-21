@@ -195,6 +195,10 @@ bot.on('message', async message =>{
         let linkUrl ="https://www.fantasyflightgames.com/en/news/tag/arkham-horror-the-card-game/?page=1"
         lastNewsEn(linkUrl,message)      
     }
+
+    if(command === Constants.prefix+'role' ){
+        role()
+    } 
   // let commandUsed =  Ahjce.parse(message) || Arkhamdb.parse(message) || FFGNews.parse(message)
 })
 
@@ -234,5 +238,15 @@ function lastNewsEn(linkUrl,message){
             message.reply(link,{files: [ img ]})           
         })   
 
+
+}
+
+function role(){
+    const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setTitle(args.join('Choisissez votre classe'));
+    
+    let msg = await message.channel.send(embed);
+    await msg.react(':ClassGuardian,:ClassRogue');
 
 }
