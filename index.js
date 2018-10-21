@@ -18,7 +18,7 @@ bot.on('ready',async () =>{
 
 bot.on('guildMemberAdd', function(member){
  member.createDM().then(function (channel){
-     channel.send('Bienvenu dans le repaire de Cthulhu' +member.displayName)
+     channel.send('Bienvenu dans le repaire des cultistes ' +member.displayName)
  }).catch(console.error)
 
 })
@@ -221,7 +221,7 @@ bot.on('message', async message =>{
 
 bot.on('messageReactionAdd', (reaction,user) =>{
     if  (reaction.emoji.name === '443359750353190912'){
-        let role = message.guild.roles.find(role => role.name === "Guardian")
+        let role = message.guild.roles.find(role => role.name === "Gardien")
         user.addRole(role)
     }
 });
