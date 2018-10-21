@@ -64,7 +64,22 @@ bot.on('message', async message =>{
            
         return
     }
-    
+    if(command === Constants.prefix+'role'  ){
+        let embed =new Discord.RichEmbed()
+            .setTitle("CHoississez votre classe") 
+            .setColor("#9B59B6")                
+        const embed = new Discord.MessageEmbed()
+
+        let msg =  message.channel.send(embed)
+         msg.react('443359750353190912')
+         msg.react('443359489811546112')
+         msg.react('443359627195973634')
+         msg.react('443359703771250688')
+         msg.react('443359575131947008')
+                   
+        return
+    }
+
     if(command === Constants.prefix+'ha' ){ 
         let linkUrl
         const http = require('http');
@@ -196,9 +211,6 @@ bot.on('message', async message =>{
         lastNewsEn(linkUrl,message)      
     }
 
-    if(command === Constants.prefix+'role' ){
-        role()
-    } 
   // let commandUsed =  Ahjce.parse(message) || Arkhamdb.parse(message) || FFGNews.parse(message)
 })
 
@@ -241,16 +253,3 @@ function lastNewsEn(linkUrl,message){
 
 }
 
-function role(){
-    const embed = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-    .setTitle(args.join('Choisissez votre classe'));
-    
-    let msg =  message.channel.send(embed);
-     msg.react('443359750353190912');
-     msg.react('443359489811546112');
-     msg.react('443359627195973634');
-     msg.react('443359703771250688');
-     msg.react('443359575131947008');
-    
-}
