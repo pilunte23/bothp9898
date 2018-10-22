@@ -219,11 +219,11 @@ bot.on('message', async message =>{
 
 
 
-bot.on('messageReactionAdd', (reaction) =>{
+bot.on('messageReactionAdd', (reaction, user ) =>{
     if  (reaction.emoji.name === '443359750353190912'){
         let userToModify = message.mentions.members.first();
         let role = message.guild.roles.find(role => role.name === "Gardien")
-        userToModify.addRole(role)
+        user.addRole(role)
     }
 });
 
