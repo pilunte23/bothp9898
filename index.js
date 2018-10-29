@@ -6,6 +6,10 @@ const bot = new Discord.Client()
 const jsdom = require("jsdom");
 const { JSDOM } = require( 'jsdom' );
 
+const roles = ["Gardien", "Truand", "Chercheur", "Mystique", "Survivant"];
+const reactions = ["443359750353190912","443359489811546112" ,"443359627195973634", "443359703771250688","443359575131947008"];
+
+
 bot.on('ready',async () =>{
     //bot.user.setAvatar('./avatar.png')
     //.then(() => console.log('Avatar mis en place avec succès'))
@@ -214,15 +218,18 @@ bot.on('message', async message =>{
         lastNewsEn(linkUrl,message)      
     }
 
+    if(command === Constants.prefix+'ffghaa' ){
+        message.reply('https://www.facebook.com/ffghaa/')       
+    }
   // let commandUsed =  Ahjce.parse(message) || Arkhamdb.parse(message) || FFGNews.parse(message)
 })
 
 
 
-bot.on('messageReactionAdd', (reaction, user ) =>{
+bot.on('messageReactionAdd', (reaction,user) =>{
     if  (reaction.emoji.name === '443359750353190912'){
         let userToModify = message.mentions.members.first();
-        let role = message.guild.roles.find(role => role.name === "Gardien")
+        let role = message.guild.roles.find(r => r.name === "Gardien")
         user.addRole(role)
     }
 });
