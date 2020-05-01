@@ -22,7 +22,7 @@ exports.run = (client, message, args) => {
                 if (args[0] == undefined) {
                     i = i + 1;
                     list = list + $(this).text() + "\n";
-                    if (i > 50) {
+                    if (i > 40) {
                         /*message.reply(list).then(msg => {
                             msg.delete({ timeout: 50000 })
                         });
@@ -32,7 +32,7 @@ exports.run = (client, message, args) => {
                             .setDescription(list)
                             .setColor("#8B0000")
                             .addField("Tips", "Utilise la commande !rules suivi du point de règles ci-dessus pour avoir le détail")
-                        message.channel.send(embed)
+                        message.author.send(embed)
                         list = "";
                         i = 0;
                     }
@@ -103,6 +103,7 @@ function cleanString(str) {
     stripedHtml = stripedHtml.replace(/(:cult:)/g, '<:ChaosCultist:443360241187291137>');
     stripedHtml = stripedHtml.replace(/(:rune:)/g, '<:ChaosTablet:443359804174630912>');
     stripedHtml = stripedHtml.replace(/(:poulpe:)/g, '<:ChaosElderOne:443360168458321935>');
+    stripedHtml = stripedHtml.replace(/(:poulp:)/g, '<:ChaosElderOne:443360168458321935>');
     stripedHtml = stripedHtml.replace(/(:tentac:)/g, '<:ChaosFail:443359948970393610>');
     stripedHtml = stripedHtml.replace(/(:signe:)/g, '<:ChaosElderSign:443360082806177803>');
     return stripedHtml;
