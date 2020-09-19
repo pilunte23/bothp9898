@@ -1,5 +1,5 @@
 module.exports = (reaction, user) => {
-    console.log("Message Reaction Add Top");
+   /* console.log("Message Reaction Add Top");
     //let applyRole = async() => {
     //let member = reaction.message.guild.members.cache.find(member => member.id == user.id);
     //if (member.user.bot) return;
@@ -9,7 +9,7 @@ module.exports = (reaction, user) => {
     //};
     reaction(reaction, user);
 
-
+*/
 
 
 };

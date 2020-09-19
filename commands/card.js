@@ -11,10 +11,21 @@ exports.run = (client, message, args) => {
     } else
     //si la recherhe est basée sur une chaine de caractère
     {
-        const name = args.join('%20');
+        let name = args.join('%20');
+        let xp
+        if (args.length >1){
+            //si plus d'un argument et que le denier est numerique à alors carte à xp
+            if (!isNaN(args[args.length - 1])){
+                xp = args.pop()
+                console.log(xp)
+                args = args.splice(0,args.length )
+                console.log(args)
+                name = args.join('%20')
+            }
+        }       
         let Url = 'http://arkhamdb.fr.cr/recherche/' + name
         console.log(Url)
-
+        
 
         let jsdom = JSDOM.fromURL(Url).then(dom => {
 
@@ -51,7 +62,27 @@ exports.run = (client, message, args) => {
                         SendCard(message, id);
                     } else {
                         //Si plusieurs lignes
-                        message.reply('Plusieurs références pour ce terme : <http://arkhamdb.fr.cr/recherche/' + name + '>');
+                        if (xp  === undefined){
+                            let celluleUne = ligneUne.cells[0];
+                            let url = celluleUne.getElementsByTagName("a")[0].pathname;
+                            let id = url.split('/')[2];
+                            console.log('ID : ', id);
+                            SendCard(message, id);
+                        } else {
+                            console.log(xp)
+                            xp = '(' + xp + ')'
+                            for (let i = 0; i < nombreLignes; i++) {
+                                let ligne = tbody.rows[i];
+                                let cellule= ligne.cells[0];
+                                console.log (cellule.textContent)
+                                if (cellule.textContent.includes(xp)){
+                                    let url = cellule.getElementsByTagName("a")[0].pathname;
+                                    let id = url.split('/')[2];
+                                    console.log('ID : ', id);
+                                    SendCard(message, id);
+                                }
+                            }
+                        }
                     }
                 } else {
                     //Si pas de resultat

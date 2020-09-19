@@ -9,7 +9,7 @@ module.exports = (client, message) => {
     console.log('args : ' + args);
     let command = args.shift().toLowerCase();
     //hack card=carte
-    if (command == "carte" || command == "cards" || command == "cartes") command = "card";
+    if (command == "carte" || command == "cards" || command == "cartes" || command =="!") command = "card";
     if (command == "regles") command = "rules";
     if (command == "aide") command = "help";
     if (command == "tabous" || command == "tabou" || command == "taboo") command = "taboos";
