@@ -69,19 +69,32 @@ exports.run = (client, message, args) => {
                             console.log('ID : ', id);
                             SendCard(message, id);
                         } else {
-                            console.log(xp)
-                            xp = '(' + xp + ')'
-                            for (let i = 0; i < nombreLignes; i++) {
-                                let ligne = tbody.rows[i];
-                                let cellule= ligne.cells[0];
-                                console.log (cellule.textContent)
-                                if (cellule.textContent.includes(xp)){
+                            if (xp === '0'){
+                                for (let i = 0; i < nombreLignes; i++) {
+                                    let ligne = tbody.rows[i];
+                                    let cellule= ligne.cells[0];                                 
                                     let url = cellule.getElementsByTagName("a")[0].pathname;
                                     let id = url.split('/')[2];
                                     console.log('ID : ', id);
-                                    SendCard(message, id);
+                                    SendCard(message, id);                      
+                                }     
+                            }else
+                            {
+                                console.log(xp)
+                                xp = '(' + xp + ')'
+                                for (let i = 0; i < nombreLignes; i++) {
+                                    let ligne = tbody.rows[i];
+                                    let cellule= ligne.cells[0];
+                                    console.log (cellule.textContent)
+                                    if (cellule.textContent.includes(xp)){
+                                        let url = cellule.getElementsByTagName("a")[0].pathname;
+                                        let id = url.split('/')[2];
+                                        console.log('ID : ', id);
+                                        SendCard(message, id);
+                                    }
                                 }
                             }
+                           
                         }
                     }
                 } else {
@@ -110,10 +123,18 @@ function SendCard(message, num) {
             http.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 console.log("statusCode : " + statusCode);
-                if (statusCode !== 301) {
-                    message.reply('désolé le mystère de cette carte reste entier')
-                } else {
-                    message.reply(linkUrl)
+                if (statusCode !== 200) {
+                    linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.jpg'
+                    console.log(linkUrl)
+                    http.get(linkUrl, (resp) => {
+                        const { statusCode } = resp;
+                        console.log("statusCode : " + statusCode);
+                        if (statusCode !== 301) {
+                            message.reply('désolé le mystère de cette carte reste entier')
+                        } else {
+                            message.reply(linkUrl)
+                        }
+                    })
                 }
             })
         } else {
@@ -134,5 +155,5 @@ function SendCard(message, num) {
 
 
 exports.help = {
-    name: "ha"
+    name: "card"
 };

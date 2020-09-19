@@ -6,5 +6,5 @@ exports.run = (client, message) => {
 }
 
 exports.help = {
-    name: "ahnews"
+    name: "ahlcgnews"
 };
