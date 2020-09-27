@@ -112,6 +112,7 @@ exports.run = (client, message, args) => {
 function SendCard(message, num) {
     let linkUrl
     const http = require('http');
+    const https = require('https');
     linkUrl = 'http://arkhamdb.fr.cr/IMAGES/CARTES/AH-' + num + '.jpg'
     console.log(linkUrl)
     http.get(linkUrl, (resp) => {
@@ -123,33 +124,45 @@ function SendCard(message, num) {
             http.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 console.log("statusCode : " + statusCode);
-                if (statusCode == 301) {
-                    linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.png'
+                if (statusCode == 200 ) {
                     message.reply(linkUrl)
-                } else {
-                    if (statusCode == 200 ) {
-                        message.reply(linkUrl)
-                    }
-                    else {
-                        linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.jpg'
-                        console.log(linkUrl)
-                        http.get(linkUrl, (resp) => {
-                            const { statusCode } = resp;
-                            console.log("statusCode : " + statusCode);
-                            if (statusCode == 301) {
-                                linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.jpg'
-                                message.reply(linkUrl)
-                            } else {
+                }
+                else {
+                    linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.jpg'
+                    console.log(linkUrl)
+                    http.get(linkUrl, (resp) => {
+                        const { statusCode } = resp;
+                        console.log("statusCode : " + statusCode);                          
+                        if (statusCode == 200 ) {
+                            message.reply(linkUrl)
+                        }
+                        else {
+                            linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.png'
+                            console.log(linkUrl)
+                            https.get(linkUrl, (resp) => {
+                                const { statusCode } = resp;
+                                console.log("statusCode : " + statusCode);
                                 if (statusCode == 200 ) {
                                     message.reply(linkUrl)
                                 }
                                 else {
-                                    message.reply('désolé le mystère de cette carte reste entier')
-                                }
-                            }                     
-                        })
-                    }
-                }            
+                                    linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.jpg'
+                                    console.log(linkUrl)
+                                    https.get(linkUrl, (resp) => {
+                                        const { statusCode } = resp;
+                                        console.log("statusCode : " + statusCode);                          
+                                        if (statusCode == 200 ) {
+                                            message.reply(linkUrl)
+                                        }
+                                        else {
+                                            message.reply('désolé le mystère de cette carte reste entier')
+                                        }                                               
+                                    })
+                                }           
+                            })
+                        }                                               
+                    })
+                }           
             })
         } else {
             message.reply(linkUrl)
