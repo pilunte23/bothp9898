@@ -118,21 +118,33 @@ function SendCard(message, num) {
         const { statusCode } = resp;
         console.log("statusCode : " + statusCode);
         if (statusCode !== 200) {
-            linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.png'
+            linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.png'
             console.log(linkUrl)
             http.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 console.log("statusCode : " + statusCode);
-                if (statusCode !== 200) {
-                    linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.jpg'
+                if (statusCode == 301) {
+                    linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.png'
+                    message.reply(linkUrl)
+                }
+                if (statusCode == 200 ) {
+                    message.reply(linkUrl)
+                }
+                else {
+                    linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.jpg'
                     console.log(linkUrl)
                     http.get(linkUrl, (resp) => {
                         const { statusCode } = resp;
                         console.log("statusCode : " + statusCode);
-                        if (statusCode !== 301) {
-                            message.reply('désolé le mystère de cette carte reste entier')
-                        } else {
+                        if (statusCode == 301) {
+                            linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.jpg'
                             message.reply(linkUrl)
+                        }
+                        if (statusCode == 200 ) {
+                            message.reply(linkUrl)
+                        }
+                        else {
+                            message.reply('désolé le mystère de cette carte reste entier')
                         }
                     })
                 }
