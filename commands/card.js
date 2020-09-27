@@ -118,13 +118,13 @@ function SendCard(message, num) {
         const { statusCode } = resp;
         console.log("statusCode : " + statusCode);
         if (statusCode !== 200) {
-            linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.png'
+            linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.png'
             console.log(linkUrl)
             http.get(linkUrl, (resp) => {
                 const { statusCode } = resp;
                 console.log("statusCode : " + statusCode);
                 if (statusCode !== 200) {
-                    linkUrl = 'http://arkhamdb.com/bundles/cards/' + num + '.jpg'
+                    linkUrl = 'https://arkhamdb.com/bundles/cards/' + num + '.jpg'
                     console.log(linkUrl)
                     http.get(linkUrl, (resp) => {
                         const { statusCode } = resp;
