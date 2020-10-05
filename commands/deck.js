@@ -23,10 +23,8 @@ exports.run = (client, message, args) => {
 
             $(document).ready(function() {
                 //recuperation du bon tableau
-                document.getElementById('deck').querySelectorAll('a').forEach(
-                 link => {console.log(link.text)}   
-                );            
-
+                let deck = document.getElementById('deck')
+                console.log(deck);            
             })
 
         })
