@@ -1,68 +1,74 @@
 //const jsdom = require("jsdom");
 const { JSDOM } = require('jsdom');
 let rand = require('../function/random.js');
+const cron = require('cron');
 
 exports.run = (client, message) => {
 
-    var cardArray = []; 
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));           
-    cardArray.push(getRandomInt(2001,2038));
-    cardArray.push(getRandomInt(2105,2117));
-    cardArray.push(getRandomInt(2147,2158));
-    cardArray.push(getRandomInt(2184,2194));
-    cardArray.push(getRandomInt(2225,2235));
-    cardArray.push(getRandomInt(2260,2273));
-    cardArray.push(getRandomInt(2299,2310));
-    cardArray.push(getRandomInt(3001,3042));
-    cardArray.push(getRandomInt(3106,3119));
-    cardArray.push(getRandomInt(3147,3158));
-    cardArray.push(getRandomInt(3189,3199));
-    cardArray.push(getRandomInt(3228,3239));
-    cardArray.push(getRandomInt(3263,3273));
-    cardArray.push(getRandomInt(3304,3315));           
-    cardArray.push(getRandomInt(4001,4042));
-    cardArray.push(getRandomInt(4103,4112));
-    cardArray.push(getRandomInt(4149,4160));
-    cardArray.push(getRandomInt(4192,4204));
-    cardArray.push(getRandomInt(4229,4236));
-    cardArray.push(getRandomInt(4265,4276));
-    cardArray.push(getRandomInt(4304,4313));
-    cardArray.push(getRandomInt(5001,5042));
-    cardArray.push(getRandomInt(5109,5119));
-    cardArray.push(getRandomInt(5151,5160));
-    cardArray.push(getRandomInt(5186,5196));
-    cardArray.push(getRandomInt(5229,5237));
-    cardArray.push(getRandomInt(5273,5283));
-    cardArray.push(getRandomInt(5313,5324));
-    cardArray.push(getRandomInt(6001,6038));
-    cardArray.push(getRandomInt(6110,6118));
-    cardArray.push(getRandomInt(6155,6167));
-    cardArray.push(getRandomInt(6195,6205));
-    cardArray.push(getRandomInt(6234,6246));
-    cardArray.push(getRandomInt(6276,6285));
-    cardArray.push(getRandomInt(6323,6332));           
-   
-   
-    num =  cardArray[rand.getRandomInt(cardArray.length)]
-    numString = num.toString().padStart(5, '0');
-    console.log(numString);
-    let linkUrl
-    const http = require('http');
-    linkUrl = 'http://arkhamdb.fr.cr/IMAGES/CARTES/AH-' + numString + '.jpg'
-    http.get(linkUrl, (resp) => {
-        const { statusCode } = resp;
-        if (statusCode == 200) {
-            message.reply(linkUrl)
-        
-        } 
-    })
-    
+    let scheduledMessage = new cron.CronJob('00 28 19 * * *', () => {
+        // This runs every day at 10:30:00, you can do anything you want
+        const channel = client.channels.cache.find(channel => channel.name === bot-test)
+           
+        var cardArray = []; 
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));
+        cardArray.push(getRandomInt(1001,1103));           
+        cardArray.push(getRandomInt(2001,2038));
+        cardArray.push(getRandomInt(2105,2117));
+        cardArray.push(getRandomInt(2147,2158));
+        cardArray.push(getRandomInt(2184,2194));
+        cardArray.push(getRandomInt(2225,2235));
+        cardArray.push(getRandomInt(2260,2273));
+        cardArray.push(getRandomInt(2299,2310));
+        cardArray.push(getRandomInt(3001,3042));
+        cardArray.push(getRandomInt(3106,3119));
+        cardArray.push(getRandomInt(3147,3158));
+        cardArray.push(getRandomInt(3189,3199));
+        cardArray.push(getRandomInt(3228,3239));
+        cardArray.push(getRandomInt(3263,3273));
+        cardArray.push(getRandomInt(3304,3315));           
+        cardArray.push(getRandomInt(4001,4042));
+        cardArray.push(getRandomInt(4103,4112));
+        cardArray.push(getRandomInt(4149,4160));
+        cardArray.push(getRandomInt(4192,4204));
+        cardArray.push(getRandomInt(4229,4236));
+        cardArray.push(getRandomInt(4265,4276));
+        cardArray.push(getRandomInt(4304,4313));
+        cardArray.push(getRandomInt(5001,5042));
+        cardArray.push(getRandomInt(5109,5119));
+        cardArray.push(getRandomInt(5151,5160));
+        cardArray.push(getRandomInt(5186,5196));
+        cardArray.push(getRandomInt(5229,5237));
+        cardArray.push(getRandomInt(5273,5283));
+        cardArray.push(getRandomInt(5313,5324));
+        cardArray.push(getRandomInt(6001,6038));
+        cardArray.push(getRandomInt(6110,6118));
+        cardArray.push(getRandomInt(6155,6167));
+        cardArray.push(getRandomInt(6195,6205));
+        cardArray.push(getRandomInt(6234,6246));
+        cardArray.push(getRandomInt(6276,6285));
+        cardArray.push(getRandomInt(6323,6332));           
+     
+        num =  cardArray[rand.getRandomInt(cardArray.length)]
+        numString = num.toString().padStart(5, '0');
+        console.log(numString);
+        let linkUrl
+        const http = require('http');
+        linkUrl = 'http://arkhamdb.fr.cr/IMAGES/CARTES/AH-' + numString + '.jpg'
+        http.get(linkUrl, (resp) => {
+            const { statusCode } = resp;
+            if (statusCode == 200) {     
+                channel.send(message.reply(linkUrl));
+            } 
+        })
+    });
+
+
+    scheduledMessage.start()
 }
 
 function getRandomInt(min, max) {
