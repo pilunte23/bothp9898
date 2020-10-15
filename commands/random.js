@@ -59,7 +59,7 @@ exports.run = (client, message) => {
         http.get(linkUrl, (resp) => {
             const { statusCode } = resp;
             if (statusCode == 200) {     
-                message.channel.reply(linkUrl)
+                message.reply(linkUrl)
             } 
         })   
     }, 1 * 1000);
