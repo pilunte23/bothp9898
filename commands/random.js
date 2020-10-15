@@ -1,14 +1,11 @@
 //const jsdom = require("jsdom");
 const { JSDOM } = require('jsdom');
 let rand = require('../function/random.js');
-const cron = require('cron');
+
 
 exports.run = (client, message) => {
-
-    let scheduledMessage = new cron.CronJob('00 28 19 * * *', () => {
-        // This runs every day at 10:30:00, you can do anything you want
-        const channel = client.channels.cache.find(channel => channel.name === bot-test)
-           
+    var interval = setInterval (function () {
+       
         var cardArray = []; 
         cardArray.push(getRandomInt(1001,1103));
         cardArray.push(getRandomInt(1001,1103));
@@ -62,13 +59,10 @@ exports.run = (client, message) => {
         http.get(linkUrl, (resp) => {
             const { statusCode } = resp;
             if (statusCode == 200) {     
-                channel.send(message.reply(linkUrl));
+                message.channel.reply(linkUrl)
             } 
-        })
-    });
-
-
-    scheduledMessage.start()
+        })   
+    }, 1 * 1000);
 }
 
 function getRandomInt(min, max) {
