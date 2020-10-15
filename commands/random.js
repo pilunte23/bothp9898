@@ -1,5 +1,6 @@
 //const jsdom = require("jsdom");
 const { JSDOM } = require('jsdom');
+let rand = require('../function/random.js');
 
 exports.run = (client, message) => {
 
