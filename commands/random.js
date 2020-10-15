@@ -1,14 +1,14 @@
 //const jsdom = require("jsdom");
 const { JSDOM } = require('jsdom');
 
-exports.run = (client, message, args) => {
+exports.run = (client, message) => {
 
-    console.log(args);
+    
 
     find = false
     while (find == false){
-        num = getRandomArbitrary(1001,7163)
-        num = "0" + num
+        num = getRandomInt(1001,99999).padStart(5, '0').toString();
+        console.log(num);
         let linkUrl
         const http = require('http');
         linkUrl = 'http://arkhamdb.fr.cr/IMAGES/CARTES/AH-' + num + '.jpg'
@@ -23,8 +23,10 @@ exports.run = (client, message, args) => {
  
 }
 
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 exports.help = {
