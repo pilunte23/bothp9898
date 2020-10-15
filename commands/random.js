@@ -7,7 +7,7 @@ exports.run = (client, message) => {
 
     find = false
     while (find == false){
-        num = getRandomInt(1001,99999).padStart(5, '0').toString();
+        num = getRandomInt(1001,99999).toString().padStart(5, '0');
         console.log(num);
         let linkUrl
         const http = require('http');
