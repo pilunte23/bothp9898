@@ -62,7 +62,7 @@ exports.run = (client, message) => {
                 message.reply(linkUrl)
             } 
         })   
-    }, 1 * 1000);
+    }, 60000);
 }
 
 function getRandomInt(min, max) {
