@@ -20,6 +20,7 @@ module.exports = (client, message) => {
     if (command == "s") command = "search";
     if (command == "b") command = "bag";
     if (command == "d") command = "deck";
+    if (command == "rand") command = "random";
     if (command == "tabous" || command == "tabou" || command == "taboo" || command == "t") command = "taboos";
     const cmd = client.commands.get(command);
     if (!cmd) return undefined;
