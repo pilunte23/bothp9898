@@ -33,6 +33,21 @@ exports.run = (client, message) => {
     cardArray.push(getRandomInt(4229,4236));
     cardArray.push(getRandomInt(4265,4276));
     cardArray.push(getRandomInt(4304,4313));
+    cardArray.push(getRandomInt(5001,5042));
+    cardArray.push(getRandomInt(5109,5119));
+    cardArray.push(getRandomInt(5151,5160));
+    cardArray.push(getRandomInt(5186,5196));
+    cardArray.push(getRandomInt(5229,5237));
+    cardArray.push(getRandomInt(5273,5283));
+    cardArray.push(getRandomInt(5313,5324));
+    cardArray.push(getRandomInt(6001,6038));
+    cardArray.push(getRandomInt(6110,6118));
+    cardArray.push(getRandomInt(6155,6167));
+    cardArray.push(getRandomInt(6195,6205));
+    cardArray.push(getRandomInt(6234,6246));
+    cardArray.push(getRandomInt(6276,6285));
+    cardArray.push(getRandomInt(6323,6332));           
+   
    
     num =  cardArray[rand.getRandomInt(cardArray.length)]
     numString = num.toString().padStart(5, '0');
