@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
     console.log(args);
 
     //si la recherche est basé sur un numéro
-    if (!isNaN(args[0])) {
+    if (args[0].match(/^\d/)) {
         SendCard(message, args[0])
     } else
     //si la recherhe est basée sur une chaine de caractère
