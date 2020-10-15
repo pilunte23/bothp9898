@@ -5,16 +5,16 @@ let rand = require('../function/random.js');
 exports.run = (client, message) => {
 
     var cardArray = []; 
-    cardArray.push(getRandomInt(1001,1103).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2001,2038).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2105,2117).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2147,2158).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2184,2194).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2225,2235).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2260,2273).toString().padStart(5, '0'));
-    cardArray.push(getRandomInt(2299,2310).toString().padStart(5, '0'));    
-   
-    num =  cardArray[rand.getRandomInt(cardArray.length)]
+    addArray(cardArray,1001,1103);
+    addArray(cardArray,2001,2038);
+    addArray(cardArray,2105,2117);
+    addArray(cardArray,2147,2158);
+    addArray(cardArray,2184,2194);
+    addArray(cardArray,2225,2235);
+    addArray(cardArray,2260,2273);
+    addArray(cardArray,2299,2310);    
+    
+    num =  cardArray[rand.getRandomInt(cardArray.length)].toString().padStart(5, '0');
     console.log(num);
     let linkUrl
     const http = require('http');
@@ -27,15 +27,13 @@ exports.run = (client, message) => {
         } 
     })
     
- 
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function addArray( array, min, max) {
+    for (let pas = min ; pas = max; pas++) {
+        array.push(pas)
+      }  
 }
-
 exports.help = {
     name: "random"
 };
