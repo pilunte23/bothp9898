@@ -6,16 +6,16 @@ let rand = require('../function/random.js');
 exports.run = (client, message, args) => {
     if (args[0] === "24"){
         var interval = setInterval (function () {
-            card()
+            card(message)
          }, 86400000);
     }else
     {
-        card()
+        card(message)
     }
     
 }
 
-function card(){
+function card(message){
     var cardArray = []; 
     cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));
