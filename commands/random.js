@@ -124,7 +124,7 @@ function card(message){
             const embed = new MessageEmbed()
             .setTitle("Carte du Jour")
             .setThumbnail(thumb)
-            .setDescription("Campagne : " , campaign)
+            .addField("Campagne : " , campaign)
             .addField("Pack : " , pack)
             .setColor("#9B59B6")
             .setImage(linkUrl)
