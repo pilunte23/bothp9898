@@ -64,6 +64,7 @@ function card(message){
     num =  cardArray[rand.getRandomInt(cardArray.length)]
     let pack
     let campaign
+    let thumb
     switch (true) {
         case (num < 1104):
             thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
@@ -106,6 +107,9 @@ function card(message){
             pack = "Perdu dans le Temps et l'Espace"
             break;
         default:
+            thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            campaign = "Campagne Inconnue"
+            pack = "Pack Inconnu"
             break;
     }
     numString = num.toString().padStart(5, '0');
