@@ -106,6 +106,41 @@ function card(message){
             campaign = "Cycle de Dunwich"
             pack = "Perdu dans le Temps et l'Espace"
             break;
+            case (num < 3043):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext15.png"
+                campaign = "Cycle de Carcosa"
+                pack = "La Route de Carcosa"
+                break;
+            case (num < 3120):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext16.png"
+                campaign = "Cycle de Carcosa"
+                pack = "Les Échos du Passé"
+                break;
+            case (num < 3159):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext18.png"
+                campaign = "Cycle de Carcosa"
+                pack = "Le Serment Indicible"
+                break;
+            case (num < 3200):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext19.png"
+                campaign = "Cycle de Carcosa"
+                pack = "Le Spectre de la Vérité"
+                break;
+            case (num < 3240):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext20.png"
+                campaign = "Cycle de Dunwich"
+                pack = "Le Masque Blême"
+                break;
+            case (num < 3274):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext21.png"
+                campaign = "Cycle de Carcosa"
+                pack = "Sous les Étoiles Noires"
+                break;
+            case (num < 3316):
+                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext22.png"
+                campaign = "Cycle de Carcosa"
+                pack = "La Pâle Carcosa"
+                break;
         default:
             thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
             campaign = "Campagne Inconnue"
