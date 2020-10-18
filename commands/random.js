@@ -1,6 +1,7 @@
 //const jsdom = require("jsdom");
 const { JSDOM } = require('jsdom');
 let rand = require('../function/random.js');
+const { MessageEmbed } = require('discord.js');
 
 
 exports.run = (client, message, args) => {
