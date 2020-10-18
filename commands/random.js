@@ -22,8 +22,6 @@ function card(message){
     cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
-    cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));           
     cardArray.push(getRandomInt(2001,2038));
     cardArray.push(getRandomInt(2105,2117));
@@ -74,7 +72,7 @@ function card(message){
         case (num < 2039):
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext2.png"
             campaign = "Cycle de Dunwich"
-            pack = "L'Héritage de Dunwich"
+            pack = "Deluxe - L'Héritage de Dunwich"
             break;
         case (num < 2118):
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext6.png"
@@ -106,41 +104,111 @@ function card(message){
             campaign = "Cycle de Dunwich"
             pack = "Perdu dans le Temps et l'Espace"
             break;
-            case (num < 3043):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext15.png"
-                campaign = "Cycle de Carcosa"
-                pack = "La Route de Carcosa"
-                break;
-            case (num < 3120):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext16.png"
-                campaign = "Cycle de Carcosa"
-                pack = "Les Échos du Passé"
-                break;
-            case (num < 3159):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext18.png"
-                campaign = "Cycle de Carcosa"
-                pack = "Le Serment Indicible"
-                break;
-            case (num < 3200):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext19.png"
-                campaign = "Cycle de Carcosa"
-                pack = "Le Spectre de la Vérité"
-                break;
-            case (num < 3240):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext20.png"
-                campaign = "Cycle de Dunwich"
-                pack = "Le Masque Blême"
-                break;
-            case (num < 3274):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext21.png"
-                campaign = "Cycle de Carcosa"
-                pack = "Sous les Étoiles Noires"
-                break;
-            case (num < 3316):
-                thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext22.png"
-                campaign = "Cycle de Carcosa"
-                pack = "La Pâle Carcosa"
-                break;
+        case (num < 3043):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext15.png"
+            campaign = "Cycle de Carcosa"
+            pack = "Deluxe - La Route de Carcosa"
+            break;
+        case (num < 3120):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext16.png"
+            campaign = "Cycle de Carcosa"
+            pack = "Les Échos du Passé"
+            break;
+        case (num < 3159):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext18.png"
+            campaign = "Cycle de Carcosa"
+            pack = "Le Serment Indicible"
+            break;
+        case (num < 3200):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext19.png"
+            campaign = "Cycle de Carcosa"
+            pack = "Le Spectre de la Vérité"
+            break;
+        case (num < 3240):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext20.png"
+            campaign = "Cycle de Dunwich"
+            pack = "Le Masque Blême"
+            break;
+        case (num < 3274):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext21.png"
+            campaign = "Cycle de Carcosa"
+            pack = "Sous les Étoiles Noires"
+            break;
+        case (num < 3316):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext22.png"
+            campaign = "Cycle de Carcosa"
+            pack = "La Pâle Carcosa"
+            break;
+        case (num < 4043):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext24.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Deluxe - La Civilisation Oubliée"
+            break;
+        case (num < 4113):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext25.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Les Fils du Destin"
+            break;
+        case (num < 4161):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext26.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Par-delà les Limites"
+            break;
+        case (num < 4205):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext27.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Le Coeur des Anciens"
+            break;
+        case (num < 4237):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext28.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "La Cité des Archives"
+            break;
+        case (num < 4277):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext29.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Les Profondeurs de Yoth"
+            break;
+        case (num < 4314):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext30.png"
+            campaign = "Cycle la Civilisation Oubliée"
+            pack = "Paradoxes Temporels"
+            break;
+        case (num < 5043):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext34.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Deluxe - Le Cercle Brisé"
+            break;
+        case (num < 5120):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext35.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Le Nom Secret"
+            break;
+        case (num < 5161):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext36.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Le Salaire du Péché"
+            break;
+        case (num < 5197):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext39.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Pour le Bien Commun"
+            break;
+        case (num < 5238):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext40.png"
+            campaign = "Union et Désillusion"
+            pack = "Le Masque Blême"
+            break;
+        case (num < 5284):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext41.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Dans les Griffes du Chaos"
+            break;
+        case (num < 5325):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext42.png"
+            campaign = "Cycle Le Cercle Brisé"
+            pack = "Devant le Trône Noir"
+            break;
         default:
             thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
             campaign = "Campagne Inconnue"
