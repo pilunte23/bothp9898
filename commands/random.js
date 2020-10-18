@@ -105,7 +105,6 @@ function card(message){
             pack = "Perdu dans le Temps et l'Espace"
             break;
         default:
-            alert("none");
             break;
     }
     numString = num.toString().padStart(5, '0');
