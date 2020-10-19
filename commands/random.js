@@ -245,8 +245,8 @@ function card(message){
             break; 
         case (num < 7041):
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
-            campaign = "Cycle La Conspirationd'Innsmouth"
-            pack = "Deluxe - La Conspirationd'Innsmouth"
+            campaign = "Cycle La Conspiration d'Innsmouth"
+            pack = "Deluxe - La Conspiration d'Innsmouth"
             break;            
         default:
             thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
