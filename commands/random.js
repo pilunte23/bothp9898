@@ -254,6 +254,7 @@ function card(message){
             pack = "Pack Inconnu"
             break;
     }
+    
     numString = num.toString().padStart(5, '0');
     console.log(numString);
     let linkUrl
