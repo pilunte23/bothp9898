@@ -209,42 +209,42 @@ function card(message){
             pack = "Devant le Trône Noir"
             break;
         case (num < 6039):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext43.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "Deluxe - Les Dévoreurs de Rêves"
             break;
         case (num < 6119):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext45.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "A la Recherche de Kadath"
             break;
         case (num < 6168):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext46.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "Mille Nuances d'Horreur"
             break;
         case (num < 6206):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext47.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "La Face Cachée de la Lune"
             break;
         case (num < 6247):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext48.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "Point de Non-Retour"
             break;
         case (num < 6286):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext49.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "La Demeure des Dieux"
             break;
         case (num < 6333):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext50.png"
             campaign = "Cycle Les Dévoreurs de Rêves"
             pack = "Tisseuse du Cosmos"
             break; 
         case (num < 7041):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext57.png"
             campaign = "Cycle La Conspiration d'Innsmouth"
             pack = "Deluxe - La Conspiration d'Innsmouth"
             break;            
