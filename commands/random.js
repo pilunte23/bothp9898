@@ -278,27 +278,27 @@ function card(message){
             pack = "La Civilisation Oubliée"
             break;
         case (num < 60133):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext33.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext52.png"
             campaign = "Decks de Départ Investigateurs"
             pack = "Nathaniel Cho"
             break;
         case (num < 60234):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext37.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext53.png"
             campaign = "Decks de Départ Investigateurs"
             pack = "Harvey Walters"
             break;
         case (num < 60333):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext44.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext54.png"
             campaign = "Decks de Départ Investigateurs"
             pack = "Winifred Habbamock"
             break; 
         case (num < 60433):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext58.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext55.png"
             campaign = "Decks de Départ Investigateurs"
             pack = "Jacqueline Fine"
             break;
         case (num < 60532):
-            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext58.png"
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext56.png"
             campaign = "Decks de Départ Investigateurs"
             pack = "Stella Clark"
             break;                         
