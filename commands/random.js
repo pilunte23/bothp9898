@@ -2,21 +2,23 @@
 const { JSDOM } = require('jsdom');
 let rand = require('../function/random.js');
 const { MessageEmbed } = require('discord.js');
-
+var titre
 
 exports.run = (client, message, args) => {
     if (args[0] === "24"){
         var interval = setInterval (function () {
-            card(message)
+            titre = "Carte du Jour"
+            card(message, titre)
          }, 86400000);
     }else
     {
-        card(message)
+        titre = "Carte Aleatoire"
+        card(message, titre)
     }
     
 }
 
-function card(message){
+function card(message,titre){
     var cardArray = [];
     cardArray.push(getRandomInt(50001,50010)); 
     cardArray.push(getRandomInt(51001,51011));
@@ -319,7 +321,7 @@ function card(message){
         if (statusCode == 200) {     
             //message.reply(linkUrl)
             const embed = new MessageEmbed()
-            .setTitle("Carte du Jour")
+            .setTitle(titre)
             .setThumbnail(thumb)
             .addField("Campagne : " , campaign)
             .addField("Pack : " , pack)
