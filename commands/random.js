@@ -17,7 +17,16 @@ exports.run = (client, message, args) => {
 }
 
 function card(message){
-    var cardArray = []; 
+    var cardArray = [];
+    cardArray.push(getRandomInt(50001,50010)); 
+    cardArray.push(getRandomInt(51001,51011));
+    cardArray.push(getRandomInt(52001,52013)); 
+    cardArray.push(getRandomInt(53001,53015));
+    cardArray.push(getRandomInt(60101,60132)); 
+    cardArray.push(getRandomInt(60201,60233));
+    cardArray.push(getRandomInt(60301,60332)); 
+    cardArray.push(getRandomInt(60401,60432));
+    cardArray.push(getRandomInt(60501,60531));            
     cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));
     cardArray.push(getRandomInt(1001,1103));         
@@ -247,7 +256,52 @@ function card(message){
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext57.png"
             campaign = "Cycle La Conspiration d'Innsmouth"
             pack = "Deluxe - La Conspiration d'Innsmouth"
-            break;            
+            break;
+        case (num < 50011):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext33.png"
+            campaign = "Renouveau"
+            pack = "La Nuit de la Zélatrice"
+            break;
+        case (num < 51012):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext37.png"
+            campaign = "Renouveau"
+            pack = "L'Héritage de Dunwich"
+            break;
+        case (num < 52014):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext44.png"
+            campaign = "Renouveau"
+            pack = "La Route de Carcosa"
+            break; 
+        case (num < 52016):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext58.png"
+            campaign = "Renouveau"
+            pack = "La Civilisation Oubliée"
+            break;
+        case (num < 60133):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext33.png"
+            campaign = "Decks de Départ Investigateurs"
+            pack = "Nathaniel Cho"
+            break;
+        case (num < 60234):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext37.png"
+            campaign = "Decks de Départ Investigateurs"
+            pack = "Harvey Walters"
+            break;
+        case (num < 60333):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext44.png"
+            campaign = "Decks de Départ Investigateurs"
+            pack = "Winifred Habbamock"
+            break; 
+        case (num < 60433):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext58.png"
+            campaign = "Decks de Départ Investigateurs"
+            pack = "Jacqueline Fine"
+            break;
+        case (num < 60532):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext58.png"
+            campaign = "Decks de Départ Investigateurs"
+            pack = "Stella Clark"
+            break;                         
         default:
             thumb= "http://arkhamdb.fr.cr/IMAGES/EXT/ext1.png"
             campaign = "Campagne Inconnue"
