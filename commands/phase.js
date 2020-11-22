@@ -1,7 +1,5 @@
 exports.run = (client, message) => {
-    message.channel.send({
-        files: ['image/phase.jpg']
-    });
+    message.reply('image/phase.jpg')
 }
 
 exports.help = {
