@@ -10,7 +10,7 @@ const fs = require("fs");
 //const reactions = ["443359750353190912", "443359489811546112", "443359627195973634", "443359703771250688", "443359575131947008"];
 //collections des commandes valides
 client.commands = new Collection();
-
+client.user.setAvatar('usr/src/bot/image/avatar.jpg')
 //chargement des evenements
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error;
