@@ -1,6 +1,6 @@
 exports.run = (client, message) => {
     message.channel.send({
-        files: ['../image/timing.jpg']
+        files: ['../../../image/timing.jpg']
     });
 }
 
