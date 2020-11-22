@@ -5,4 +5,5 @@ module.exports = (client) => {
         //ajout d'un status aléatoire
     const gameArray = ["Contrée de l'Horreur", "Le Signe des Anciens", "Horreur à Arkham JCE", "Horreur à Arkham", "Les Demeures de l'Epouvante"]
     client.user.setActivity(gameArray[rand.getRandomInt(5)]).catch(console.error)
+    client.user.setAvatar('usr/src/bot/image/avatar.jpg')
 };
