@@ -1,5 +1,7 @@
 exports.run = (client, message) => {
-    message.channel.send(new Discord.Attachment('../image/phase.jpg'))
+    message.channel.send({
+        files: ['../image/phase.jpg']
+    });
 }
 
 exports.help = {
