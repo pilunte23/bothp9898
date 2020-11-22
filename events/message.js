@@ -20,8 +20,10 @@ module.exports = (client, message) => {
     if (command == "s") command = "search";
     if (command == "b") command = "bag";
     if (command == "d") command = "deck";
+    if (command == "t" ) command = "timing";
+    if (command == "p" ) command = "phase";
     if (command == "rd") command = "random";
-    if (command == "tabous" || command == "tabou" || command == "taboo" || command == "t") command = "taboos";
+    if (command == "tabous" || command == "tabou" || command == "taboo" || command == "tb") command = "taboos";
     const cmd = client.commands.get(command);
     if (!cmd) return undefined;
     cmd.run(client, message, args);

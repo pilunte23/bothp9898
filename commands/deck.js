@@ -11,7 +11,6 @@ exports.run = (client, message, args) => {
         let Url = 'https://arkhamdb.com/deck/view/' + args[0]
         console.log(Url)
         
-
         let jsdom = JSDOM.fromURL(Url).then(dom => {
 
             let { window } = dom;
@@ -22,7 +21,7 @@ exports.run = (client, message, args) => {
             global.document = document;
 
             $(document).ready(function() {
-                //recuperation du bon tableau
+                //recuperation du deck
                 let deck = document.getElementById('deck')
                 console.log(deck);            
             })
