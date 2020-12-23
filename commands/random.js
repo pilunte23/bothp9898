@@ -68,7 +68,9 @@ function card(message,titre){
     cardArray.push(getRandomInt(6276,6285));
     cardArray.push(getRandomInt(6323,6332));           
     cardArray.push(getRandomInt(7001,7040));   
-    
+    cardArray.push(getRandomInt(7108,7122));  
+    cardArray.push(getRandomInt(7153,7162));  
+
     num =  cardArray[rand.getRandomInt(cardArray.length)]
     let pack
     let campaign
@@ -136,7 +138,7 @@ function card(message,titre){
             break;
         case (num < 3240):
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext20.png"
-            campaign = "Cycle de Dunwich"
+            campaign = "Cycle de Carcosa"
             pack = "Le Masque Blême"
             break;
         case (num < 3274):
@@ -259,6 +261,16 @@ function card(message,titre){
             campaign = "Cycle La Conspiration d'Innsmouth"
             pack = "Deluxe - La Conspiration d'Innsmouth"
             break;
+        case (num < 7123):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext61.png"
+            campaign = "Cycle La Conspiration d'Innsmouth"
+            pack = "Mouillés jusqu'au cou"
+            break; 
+        case (num < 7163):
+            thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext63.png"
+            campaign = "Cycle La Conspiration d'Innsmouth"
+            pack = "Le Récif du Diable"
+            break;           
         case (num < 50011):
             thumb="http://arkhamdb.fr.cr/IMAGES/EXT/ext33.png"
             campaign = "Renouveau"
