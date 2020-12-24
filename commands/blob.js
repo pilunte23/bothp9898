@@ -20,12 +20,8 @@ exports.run = (client, message, args) => {
         } 
     }
     else
-    {
-        member.guild.channels.cache.find(chan => 
-            {console.log(chan.name)
-             if (chan.name.startsWith("groupe")){chan.send("Pong !"); }
-            }
-        )
+    {  
+        client.guilds.cache.find(guild => {if (guild.name.startsWith("groupe")){ chan.send("Pong !")}});       
     }
 }
 
