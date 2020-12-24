@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
     }
     else
     {
-        message.guild.channels.cache.forEach(chan => 
+        member.guild.channels.cache.find(chan => 
             {console.log(chan.name)
              if (chan.name.startsWith("groupe")){chan.send("Pong !"); }
             }
