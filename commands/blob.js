@@ -24,6 +24,7 @@ exports.run = (client, message, args) => {
             totalpv = 15 * args[1]
             contreMesure = Math.ceil(args[1]/2)
             indice =  2 * args[1]
+            message.channel.send("Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
         }
         else{
             message.channel.send("Il faut mettre le nombre de participant");
