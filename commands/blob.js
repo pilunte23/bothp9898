@@ -10,20 +10,23 @@ exports.run = (client, message, args) => {
 
     //si le premier argument est numerique c'est la commande de base pour enlever des pv
     if (isNaN(args[0] )){
-        message.guild.channels.cache.forEach(chan => 
-            {if (chan.startsWith("groupe")){chan.send("Pong !"); }
+        {
+            if (arg[0] == "init"){
+                                    
             }
-        )
+            if (arg[0] == "heal"){
+    
+            }
+        } 
     }
     else
     {
-        if (arg[0] == "init"){
-                                
-        }
-        if (arg[0] == "heal"){
-
-        }
-    } 
+        message.guild.channels.cache.forEach(chan => 
+            {console.log(chan.text)
+             if (chan.text.startsWith("groupe")){chan.send("Pong !"); }
+            }
+        )
+    }
 }
 
 
