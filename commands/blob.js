@@ -1,8 +1,10 @@
 const { MessageEmbed } = require('discord.js');
 
-vie = 0;
+totalpv = 0;
+damage = 0;
 contreMesure = 0;
-text_channel_list = [];
+indice = 0;
+
 
 exports.run = (client, message, args) => {
 
@@ -23,7 +25,8 @@ exports.run = (client, message, args) => {
     {  
         degat = args[0]
         client.channels.cache.filter(chan => chan.name.startsWith("group") && chan.category === "text").forEach(channel => {
-            channel.send('<:jelly:733931040942587965> take ${degat}<:TokenDamage:443355098773585920>')
+            restant = pv - damage
+            channel.send('Le ${chan.name} ajoute ${degat}<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste ${restant}/${pv}')
             })     
     }
 }
