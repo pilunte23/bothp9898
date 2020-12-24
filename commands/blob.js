@@ -11,17 +11,17 @@ exports.run = (client, message, args) => {
     //si le premier argument est numerique c'est la commande de base pour enlever des pv
     if (isNaN(args[0] )){
         {
-            if (arg[0] == "init"){
+            if (args[0] == "init"){
                                     
             }
-            if (arg[0] == "heal"){
+            if (args[0] == "heal"){
     
             }
         } 
     }
     else
     {  
-        degat = arg[0]
+        degat = args[0]
         client.channels.cache.filter(chan => chan.name.startsWith("group") && chan.category === "text").forEach(channel => {
             channel.send('<:jelly:733931040942587965> take ${degat}<:TokenDamage:443355098773585920>')
             })     
