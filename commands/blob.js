@@ -15,9 +15,11 @@ exports.run = (client, message, args) => {
     restant = totalpv - damage
     if (message.channel.name.startsWith("group") && !isNaN(args[0])){
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
+            damage = damage - parseInt(args[0])
+            restant = totalpv - damage
             channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')
             }) 
-        damage = damage + degat  
+        
     }
     if (args[0] == "init"){
         if (!isNaN(args[1])){
