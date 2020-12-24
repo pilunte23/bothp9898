@@ -12,8 +12,9 @@ exports.run = (client, message, args) => {
 
     //channel.send('Le ${channel.name} ajoute ${degat}<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste ${restant}/${pv}')
     degat = args[0]
+    restant = totalpv - damage
     client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
-        channel.send('Le '+message.channel.name+' ajoute '+degat+'<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste '+restant+'/'+pv)
+        channel.send('Le '+message.channel.name+' ajoute '+degat+'<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste '+restant+'/'+totalpv)
         })    
     
 }
