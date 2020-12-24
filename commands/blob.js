@@ -21,12 +21,10 @@ exports.run = (client, message, args) => {
     }
     else
     {  
-        client.guilds.cache.find(guild => {
-            console.log(guild.name)
-            if (guild.name.startsWith("groupe")){
-                 guild.send("Pong !")
-                }
-        });       
+        degat = arg[0]
+        client.channels.cache.filter(chan => chan.name.startsWith("group") && chan.category === "text").forEach(channel => {
+            channel.send('<:jelly:733931040942587965> take ${degat}<:TokenDamage:443355098773585920>')
+            })     
     }
 }
 
