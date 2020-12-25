@@ -3,9 +3,9 @@ totalpv = 0;
 damage = 0;
 contreMesure = 0;
 indice = 0;
+initialIndice = 0;
 
-
-exports.run = async (client, message, args) => {
+exports.run = (message, args) => {
 
     console.log(args);
    
@@ -20,6 +20,7 @@ exports.run = async (client, message, args) => {
             totalpv = 15 * args[1]
             contreMesure = Math.ceil(args[1]/2)
             indice =  2 * args[1]
+            initialIndice = indice
             damage = 0
             SendMessagetoGroup("Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
         }
@@ -42,11 +43,17 @@ exports.run = async (client, message, args) => {
             indice = indice--
             SendMessagetoGroup('Le **'+message.channel.name+'** depose **1 Indice** , il en reste **'+indice+'**') 
         }       
-    }  
+    }
+    if (args[0] == "reset"){
+        if (!isNaN(args[1])){
+            indice  = initialIndice
+            SendMessagetoGroup('Reinitialisation du nombre d indice Acte 1 à **'+indice+'**') 
+        }  
+    }    
 }
 
-async function SendMessagetoGroup(text) {
-    await client.channels.cache.filter(async chan => await chan.name.startsWith("group").forEach(async channel => { await channel.send(text)})) 
+function SendMessagetoGroup(text) {
+    client.channels.cache.filter(chan => chan.name.startsWith("group").forEach(channel => { channel.send(text)})) 
 }
 
 exports.help = {
