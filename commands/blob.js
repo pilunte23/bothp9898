@@ -12,8 +12,11 @@ exports.run = (client, message, args) => {
         degat = args[0]
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
-        SendMessagetoGroup(client,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')         
+        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
+            channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')
+        })        
     }
+
     if (args[0] == "init"){
         if (!isNaN(args[1])){
             totalpv = 15 * args[1]
@@ -32,7 +35,7 @@ exports.run = (client, message, args) => {
         contreMesure = contreMesure--
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
             channel.send('\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
-            })
+        })
     }
 
     if (args[0] == "i"){
@@ -40,15 +43,16 @@ exports.run = (client, message, args) => {
             indice  = indice - parseInt(args[1])
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
                 channel.send('Le **'+message.channel.name+'** depose **'+parseInt(args[1])+' Indice(s)** , il en reste **'+indice+'**')
-                })
+            })
         }else
         {
             indice = indice--
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
                 channel.send('Le **'+message.channel.name+'** depose **1 Indice** , il en reste **'+indice+'**')
-                })
+            })
         }       
     }
+
     if (args[0] == "reset"){
         if (!isNaN(args[1])){
             indice  = initialIndice
@@ -56,7 +60,7 @@ exports.run = (client, message, args) => {
                 channel.send('Reinitialisation du nombre d indice Acte 1 à **'+indice+'**')
                 })
         }  
-    }    
+    }
 
 }
 
