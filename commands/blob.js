@@ -4,11 +4,7 @@ contreMesure = 0;
 indice = 0;
 initialIndice = 0;
 
-<<<<<<< HEAD
 exports.run = (client, message, args) => {
-=======
-exports.run = (client,message, args) => {
->>>>>>> abbfdcc01f3be39ea73995bb2c1210439ed2f2f3
 
     console.log(args);
    
