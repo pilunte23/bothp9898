@@ -1,12 +1,14 @@
-const { MessageEmbed } = require('discord.js');
-
 totalpv = 0;
 damage = 0;
 contreMesure = 0;
 indice = 0;
 initialIndice = 0;
 
+<<<<<<< HEAD
 exports.run = (client, message, args) => {
+=======
+exports.run = (client,message, args) => {
+>>>>>>> abbfdcc01f3be39ea73995bb2c1210439ed2f2f3
 
     console.log(args);
    
@@ -14,10 +16,7 @@ exports.run = (client, message, args) => {
         degat = args[0]
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
-        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-            channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')
-            }) 
-        
+        SendMessagetoGroup(client,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')         
     }
     if (args[0] == "init"){
         if (!isNaN(args[1])){
@@ -29,7 +28,7 @@ exports.run = (client, message, args) => {
             message.channel.send("Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
         }
         else{
-            message.channel.send("Il faut mettre le nombre de participant");
+            message.channel.send(client,"Il faut mettre le nombre de participant");
         }
     }
    
