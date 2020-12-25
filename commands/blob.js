@@ -32,7 +32,7 @@ exports.run = (client, message, args) => {
     }
    
     if (args[0] == "cm"){
-        contreMesure = contreMesure--
+        contreMesure = contreMesure - 1
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
             channel.send('\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
         })
@@ -42,24 +42,22 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('Le **'+message.channel.name+'** depose **'+parseInt(args[1])+' Indice(s)** , il en reste **'+indice+'**')
+                channel.send('Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>** , il en reste **'+indice+'**')
             })
         }else
         {
-            indice = indice--
+            indice = indice - 1
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('Le **'+message.channel.name+'** depose **1 Indice** , il en reste **'+indice+'**')
+                channel.send('Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**')
             })
         }       
     }
 
     if (args[0] == "reset"){
-        if (!isNaN(args[1])){
-            indice  = initialIndice
-            client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('Reinitialisation du nombre d indice Acte 1 à **'+indice+'**')
-                })
-        }  
+        indice  = initialIndice
+        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
+            channel.send('Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
+            })
     }
 
 }
