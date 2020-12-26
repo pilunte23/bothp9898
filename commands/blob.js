@@ -78,7 +78,7 @@ exports.run = (client, message, args) => {
             message.channel.send(embed);
     }
     //Command for admin
-    if (args[0] == "welcome" && message.channel.name == "Admin-Event"){
+    if (args[0] == "welcome" && message.channel.name == "admin-event"){
         let embed = new MessageEmbed()
             .setTitle("**Dévoreur de Toute Chose**")
             .setColor("#67C355")
@@ -89,7 +89,7 @@ exports.run = (client, message, args) => {
             SendMessage(client,embed)
     }
     
-    if (args[0] == "admin" && message.channel.name == "Admin-Event"){
+    if (args[0] == "admin" && message.channel.name == "admin-event"){
         let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
             .attachFiles(imgJelly)
@@ -105,7 +105,7 @@ exports.run = (client, message, args) => {
             message.channel.send(embed);
     }
 
-    if (args[0] == "init" && message.channel.name == "Admin-Event"){
+    if (args[0] == "init" && message.channel.name == "admin-event"){
         if (!isNaN(args[1])){
             totalpv = 15 * args[1]
             contreMesure = Math.ceil(args[1]/2)
@@ -119,7 +119,7 @@ exports.run = (client, message, args) => {
         }
     }
 
-    if (args[0] == "reset" && message.channel.name == "Admin-Event"){
+    if (args[0] == "reset" && message.channel.name == "admin-event"){
         indice  = initialIndice
         SendMessage(client,'Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
     }
