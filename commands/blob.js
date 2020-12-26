@@ -189,10 +189,9 @@ exports.run = (client, message, args) => {
 
 function SendMessage(client,messagetoGroup){
     client.channels.cache.filter(chan => {
-        if (chan.name != undefined){
-            chan.name.startsWith("group").forEach(channel => {channel.send(messagetoGroup)})
-        }else
-        {
+        try{
+             chan.name.startsWith("group").forEach(channel => channel.send(messagetoGroup))
+        }catch (e){
             message.channel.send('Désolé <:jelly:733931040942587965> à manger ta commande, ressaisis la');
         }   
     })
