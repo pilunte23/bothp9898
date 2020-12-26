@@ -47,7 +47,12 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             if (indice > 0){
-                SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                if (parseInt(args[1]) > 3){
+                    message.channel.send(client,"Pas de tricherie, on peut pas en mettre plus de 3 indices");
+                }
+                else{
+                    SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                }               
             }else
             {
                 SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
@@ -160,20 +165,19 @@ exports.run = (client, message, args) => {
             var interval = setInterval (function () {
                 count = count + 1
                 timeRest = timeInMinute - count
-                if (timeRest > 10){
-                    message.channel.send(timeRest+' minute(s) restante(s)')
+                message.channel.send(timeRest+' minute(s) restante(s)')
+                if (timeRest > 10){      
                     rest = timeRest % 5 
                     if (rest == 0){
                         SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
                     }        
                 }else
                 {
-                    if (timeRest = 0){
+                    if (timeRest == 0){
                         SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
                         clearInterval(interval);
                     }else
                     {
-                        message.channel.send('Il reste '+timeRest+' minute(s)')
                         SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
                     }           
                 }   
