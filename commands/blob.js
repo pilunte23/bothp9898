@@ -15,7 +15,13 @@ exports.run = (client, message, args) => {
         degat = args[0]
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
-        SendMessage('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+        if (restant < 0){
+            SendMessage('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+        }else
+        {
+            SendMessage('**Félicitation** les \:spy: ont vaincu <:jelly:733931040942587965>')       
+        }
+        
     }
 
     if (args[0] == "init"){
@@ -36,10 +42,10 @@ exports.run = (client, message, args) => {
         if (args[1] == "+"){
             contreMesure = contreMesure + 1
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('\:warning: Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+                channel.send('\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
             })
         }
-        if (args[1] == "-" || args[1] == ""){
+        if (args[1] == "-" || args[1] == null){
             contreMesure = contreMesure - 1
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
                 channel.send('\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
