@@ -75,30 +75,32 @@ exports.run = (client, message, args) => {
     if (args[0] == "help" || args[0] == "aide" ){
         let embed = new MessageEmbed()
             .setTitle("Aide Dévoreur de Toute Chose")
-            .setThumbnail('http://localhost/image/jelly.png')
+            .setThumbnail('https://imgur.com/xrskwKO')
             .setColor("#67C355")
-            .addField("Toute les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
+            .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
             .addField("!blob suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
             .addField("!blob i", "Retire un indice sur l'acte 1")
             .addField("!blob i suivi d'une chiffre", "Retire le nombre indiqué d'indice sur l'acte 1")
             .addField("!blob cm", "Utilise une contre mesure")
             .addField("!blob cm +", "(Cas rare) Ajout une contre mesure.")
             .addField("!blob eat", "Permet de savoir quel aspect de la réalité est dévoré (a faire peut etre)")
-        message.reply(embed);
+            message.channel.send(embed);
     }
     if (args[0] == "welcome"){
         let embed = new MessageEmbed()
-            .setTitle("Vous voila face au **Dévoreur de Toute Chose**")
+            .setTitle("**Dévoreur de Toute Chose**")
             .setColor("#67C355")
-            .setImage('http://localhost/image/green.png')
-            .addField("Toute les commandes pour l'evenement commencent par !blob.", "Le !b peut être utilisé en raccourci")
+            .setImage('https://imgur.com/AmKKLqF')
+            .addField("Toutes les commandes pour l'evenement commencent par !blob.", "Le !b peut être utilisé en raccourci")
             .addField("!blob help ou !blob aide", "Pour obtenir la liste des commandes à tout moment")
-        message.reply(embed);
+            client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
+                channel.send(embed)
+            })
     }
     if (args[0] == "admin"){
         let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
-            .setThumbnail('http://localhost/image/jelly.png')
+            .setThumbnail('https://imgur.com/xrskwKO')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
@@ -106,7 +108,7 @@ exports.run = (client, message, args) => {
             .addField("!blob fixPV suivi d'un chiffre", "Refixe le nombre de PV suite missplay ou crashbot (a faire)")
             .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot (a faire)")
             .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot (a faire)")
-        message.author.send(embed);
+            message.author.send(embed);
     }
 
 }
