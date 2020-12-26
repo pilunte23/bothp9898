@@ -157,19 +157,19 @@ exports.run = (client, message, args) => {
         //temps en miliseconde
             timer = time * 1000
         }
-        message.channel.send('Mise en place d un timer de '+(time)/60000)+'minutes'
+        message.channel.send('Mise en place d un timer de '+args[1]+'minutes')
         //log pour le canal admin toutes les minutes
         if (!isNaN(args[1]) > 10 ){
             var interval = setInterval (function () {
-                message.channel.send('Il reste '+(time-60000)/60000)+'minute(s)'
+                message.channel.send('Il reste '+(timer-60000)/60000).toString()+'minute(s)'
             }, 60000);
             //log pour le canal groupe toutes les 10 minutes
             var interval2 = setInterval (function () {
-                SendMessage(client,'\:spy: Il reste '+(time-600000)/60000)+'minute(s)'
+                SendMessage(client,'\:spy: Il reste '+(timer-600000)/60000).toString()+'minute(s)'
             }, 600000);
         }else{
             var interval3 = setInterval (function () {
-                SendMessage(client,'\:spy: Il reste '+(time-60000)/60000)+'minute(s)'
+                SendMessage(client,'\:spy: Il reste '+(timer-60000)/60000).toString()+'minute(s)'
             }, 60000); 
         }
     }
