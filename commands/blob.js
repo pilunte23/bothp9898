@@ -9,7 +9,7 @@ indice = 0;
 initialIndice = 0;
 timer = 0;
 count = 0;
-rest = 0
+timeRest = 0;
 
 exports.run = (client, message, args) => {
 
@@ -154,20 +154,21 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
         //temps en miliseconde  
             timeInMinute = parseInt(args[1])
-            timer = timeInMinute * 60000   
-            message.channel.send('Mise en place d un timer de '+timeInMinute+' minutes')
+            timer = timeInMinute * 60000          
+            SendMessage(client,'Mise en place d un timer de '+timeInMinute+' minutes')
 
             var interval = setInterval (function () {
                 count = count + 1
-                rest = timeInMinute - count
-                if (rest > 10){
-                    message.channel.send('Il reste '+rest+' minute(s)')
-                    if (rest % 5 == 0){
+                timeRest = timeInMinute - count
+                if (timeRest > 10){
+                    message.channel.send(rest+' minute(s) restante(s)')
+                    rest = timeRest % 5 
+                    if (rest == 0){
                         SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
                     }        
                 }else
                 {
-                    if (rest = 0){
+                    if (timeRest = 0){
                         SendMessage(client,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
                         clearInterval(interval);
                     }else
