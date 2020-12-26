@@ -16,10 +16,10 @@ exports.run = (client, message, args) => {
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
         if (restant < 0){
-            SendMessage('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+            SendMessage(client,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
         }else
         {
-            SendMessage('**Félicitation** les \:spy: ont vaincu <:jelly:733931040942587965>')       
+            SendMessage(client,'**Félicitation** les \:spy: ont vaincu \:skill_crossbones:<:jelly:733931040942587965>\:skill_crossbones:')       
         }
         
     }
@@ -121,7 +121,7 @@ exports.run = (client, message, args) => {
 
 }
 
-function SendMessage(messagetoGroup){
+function SendMessage(client,messagetoGroup){
     client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
 }
 
