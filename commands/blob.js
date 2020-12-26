@@ -8,6 +8,7 @@ contreMesure = 0;
 indice = 0;
 initialIndice = 0;
 timer = 0;
+count = 0;
 
 exports.run = (client, message, args) => {
 
@@ -150,28 +151,26 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-        //temps en minute
-            time = parseInt(args[1]) 
-        //temps en seconde  
-            time = time * 60
-        //temps en miliseconde
-            timer = time * 1000
+        //temps en miliseconde  
+            timeInMinute = parseInt(args[1])
+            timer = timeInMinute * 60000   
+            message.channel.send('Mise en place d un timer de '+timeInMinute+' minutes')
         }
-        message.channel.send('Mise en place d un timer de '+args[1]+'minutes')
-        //log pour le canal admin toutes les minutes
-        if (!isNaN(args[1]) > 10 ){
-            var interval = setInterval (function () {
-                message.channel.send('Il reste '+(timer-60000)/60000).toString()+'minute(s)'
-            }, 60000);
-            //log pour le canal groupe toutes les 10 minutes
-            var interval2 = setInterval (function () {
-                SendMessage(client,'\:spy: Il reste '+(timer-600000)/60000).toString()+'minute(s)'
-            }, 600000);
-        }else{
-            var interval3 = setInterval (function () {
-                SendMessage(client,'\:spy: Il reste '+(timer-60000)/60000).toString()+'minute(s)'
-            }, 60000); 
-        }
+        rest = 0
+        var interval = setInterval (function () {
+            count = count + 1
+            rest = timeInMinute - count
+            if (rest > 10){
+                message.channel.send('Il reste '+rest+' minute(s)')
+                if (timeInMinute % 10 == 0){
+                    SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+                }        
+            }else
+            {
+                message.channel.send('Il reste '+rest+' minute(s)')
+                SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+            }   
+        }, 60000 );   
     }
 }
 
