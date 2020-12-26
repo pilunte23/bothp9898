@@ -97,7 +97,7 @@ exports.run = (client, message, args) => {
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
-            .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
+            .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer ", "Lance le timer si pas de chiffre indiqué alors 180 minutes (a faire)")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
             .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe (a faire)")
