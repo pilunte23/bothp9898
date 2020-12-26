@@ -18,63 +18,67 @@ exports.run = (client, message, args) => {
     if (!message.channel.name.startsWith("group")){
         return
     }
-
-    if (args[0] == "d"){
-        if (!isNaN(args[1])){
-            degat = args[1]
-            damage = damage + parseInt(args[1])
-            restant = totalpv - damage
-            if (restant > 0){
-                SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
-            }else
-            {
-                SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
-            }
-        }  
-    }
- 
-    if (args[0] == "cm"){
-        if (args[1] == "+"){
-            contreMesure = contreMesure + 1
-            SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
-        }
-        if (args[1] == "-" || args[1] == null){
-            if (contreMesure > 0){
-                contreMesure = contreMesure - 1
-                SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
-            }else
-            {
-                message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
-            }
-        }
-    }
-
-    if (args[0] == "i"){
-        if (!isNaN(args[1])){
-            indice  = indice - parseInt(args[1])
-            if (indice > 0){
-                if (parseInt(args[1]) > 3){
-                    message.channel.send(client,"Pas de tricherie, on peut pas en mettre plus de 3 indices");
+    if (timeRest > 0){
+        if (args[0] == "d"){
+            if (!isNaN(args[1])){
+                degat = args[1]
+                damage = damage + parseInt(args[1])
+                restant = totalpv - damage
+                if (restant > 0){
+                    SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+                }else
+                {
+                    SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
                 }
-                else{
-                    SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
-                }               
-            }else
-            {
-                SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
-            }        
-        }else
-        {
-            indice = indice - 1
-            if (indice > 0){
-                SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
-            }else
-            {
-                SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+            }  
+        }
+     
+        if (args[0] == "cm"){
+            if (args[1] == "+"){
+                contreMesure = contreMesure + 1
+                SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
             }
-                  
-        }       
+            if (args[1] == "-" || args[1] == null){
+                if (contreMesure > 0){
+                    contreMesure = contreMesure - 1
+                    SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+                }else
+                {
+                    message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
+                }
+            }
+        }
+    
+        if (args[0] == "i"){
+            if (!isNaN(args[1])){
+                indice  = indice - parseInt(args[1])
+                if (indice > 0){
+                    if (parseInt(args[1]) > 3){
+                        message.channel.send("Pas de tricherie, on peut pas en mettre plus de 3 indices");
+                    }
+                    else{
+                        SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                    }               
+                }else
+                {
+                    SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                }        
+            }else
+            {
+                indice = indice - 1
+                if (indice > 0){
+                    SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                }else
+                {
+                    SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                }
+                      
+            }       
+        }
+    }else{
+        message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");
     }
+   
 
     if (args[0] == "help" || args[0] == "aide" ){
         let embed = new MessageEmbed()
@@ -109,7 +113,7 @@ exports.run = (client, message, args) => {
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
-            .addField("!blob timer ", "Lance le timer si pas de chiffre indiqué alors 180 minutes (a faire)")
+            .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
             .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe (a faire)")
             .addField("!blob stats", "Diffuse les statistiques par groupe (a faire)")
@@ -162,7 +166,8 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
         //temps en miliseconde  
             timeInMinute = parseInt(args[1])
-            timer = timeInMinute * 60000          
+            timer = timeInMinute * 60000
+            timerRest = timer         
             SendMessage(client,message,'Mise en place d un timer de '+timeInMinute+' minutes')
 
             var interval = setInterval (function () {
