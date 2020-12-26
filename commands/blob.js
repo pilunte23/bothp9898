@@ -73,7 +73,7 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "help" || args[0] == "aide" ){
-        const embed = new MessageEmbed()
+        let embed = new MessageEmbed()
             .setTitle("Aide Dévoreur de Toute Chose")
             .setThumbnail('image/jelly.png')
             .setColor("#67C355")
@@ -87,9 +87,8 @@ exports.run = (client, message, args) => {
         message.reply(embed);
     }
     if (args[0] == "welcome"){
-        const embed = new MessageEmbed()
+        let embed = new MessageEmbed()
             .setTitle("Vous voila face au **Dévoreur de Toute Chose**")
-            .setThumbnail('/jelly.png')
             .setColor("#67C355")
             .setImage('image/green.png')
             .addField("Toute les commandes pour l'evenement commencent par !blob. Le !b peut être utilisé en raccourci", "")
@@ -97,7 +96,7 @@ exports.run = (client, message, args) => {
         message.reply(embed);
     }
     if (args[0] == "admin"){
-        const embed = new MessageEmbed()
+        let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
             .setThumbnail('image/jelly.png')
             .setColor("#67C355")
@@ -107,7 +106,7 @@ exports.run = (client, message, args) => {
             .addField("!blob fixPV suivi d'un chiffre", "Refixe le nombre de PV suite missplay ou crashbot (a faire)")
             .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot (a faire)")
             .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot (a faire)")
-            message.author.reply(embed);
+        message.author.send(embed);
     }
 
 }
