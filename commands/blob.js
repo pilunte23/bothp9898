@@ -1,6 +1,7 @@
 const { MessageEmbed,MessageAttachment } = require('discord.js');
 const imgJelly = new MessageAttachment('image/jelly.png');
 const imgGreen = new MessageAttachment('image/green.png');
+const adminEventChannel = "groupe-admin-event";
 totalpv = 0;
 damage = 0;
 contreMesure = 0;
@@ -34,7 +35,7 @@ exports.run = (client, message, args) => {
                 SendMessage(client,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
             }else
             {
-                message.channel.send("Désolé les \:spy: , vous n'avez plus de **Contre-Mesure**; il en reste 0");
+                message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
             }
         }
     }
@@ -43,10 +44,10 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             if (indice > 0){
-                SendMessage(client,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                SendMessage(client,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
             }else
             {
-                SendMessage(client,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>')
+                SendMessage(client,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
             }
            
         }else
@@ -56,7 +57,7 @@ exports.run = (client, message, args) => {
                 SendMessage(client,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
             }else
             {
-                SendMessage(client,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>')
+                SendMessage(client,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
             }
                   
         }       
@@ -78,7 +79,7 @@ exports.run = (client, message, args) => {
             message.channel.send(embed);
     }
     //Command for admin
-    if (args[0] == "welcome" && message.channel.name == "groupe-admin-event"){
+    if (args[0] == "welcome" && message.channel.name == adminEventChannel){
         let embed = new MessageEmbed()
             .setTitle("**Dévoreur de Toute Chose**")
             .setColor("#67C355")
@@ -89,23 +90,28 @@ exports.run = (client, message, args) => {
             SendMessage(client,embed)
     }
     
-    if (args[0] == "admin" && message.channel.name == "groupe-admin-event"){
+    if (args[0] == "admin" && message.channel.name == adminEventChannel){
         let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
-            .addField("!blob timer ", "Lance le timer si pas de chiffre indiqué alors 180minutes (a faire)")
+            .addField("!blob timer ", "Lance le timer si pas de chiffre indiqué alors 180 minutes (a faire)")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
             .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe (a faire)")
-            .addField("!blob fixPV suivi d'un chiffre", "Refixe le nombre de PV suite missplay ou crashbot (a faire)")
-            .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot (a faire)")
-            .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot (a faire)")
+            .addField("!blob stats", "Diffuse les statistiques par groupe (a faire)")
+            .addField("Commande de Maintenance", "**Les commandes dont on espere ne pas avoir besoin**")
+            .addField("!blob repair", "Envoi un message indiquant qu'on remet d'aplomb les valeurs")
+            .addField("!blob go", "Message indiquant la reprise de l'event")
+            .addField("!blob fixD suivi d'un chiffre", "Refixe le nombre de dégat suite missplay ou crashbot")
+            .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot")
+            .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot")
+            .addField("!blob fixT suivi d'un chiffre", "Refixe le timer (a faire)")
             message.channel.send(embed);
     }
 
-    if (args[0] == "init" && message.channel.name == "groupe-admin-event"){
+    if (args[0] == "init" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
             totalpv = 15 * args[1]
             contreMesure = Math.ceil(args[1]/2)
@@ -119,9 +125,27 @@ exports.run = (client, message, args) => {
         }
     }
 
-    if (args[0] == "reset" && message.channel.name == "groupe-admin-event"){
+    if (args[0] == "reset" && message.channel.name == adminEventChannel){
         indice  = initialIndice
         SendMessage(client,'Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
+    }
+    if (args[0] == "repair" && message.channel.name == adminEventChannel){
+        SendMessage(client,'\:tools: **@Event Un peu de patience nous remettons les valeurs**\:tools:')
+    }
+    if (args[0] == "go" && message.channel.name == adminEventChannel){
+        SendMessage(client,'\:ok_hand: **@Event, Reprise de la partie **\:ok_hand:')
+    }
+    if (args[0] == "fixI" && message.channel.name == adminEventChannel){
+        indice = parseInt(args[1])
+        message.channel.send('\:tools: Compteur <:TokenClue:443357925369577482> remis à '+indice+'**')
+    }
+    if (args[0] == "fixD" && message.channel.name == adminEventChannel){
+        damage = parseInt(args[1])
+        message.channel.send('\:tools: Compteur <:TokenDamage:443355098773585920> remis à '+damage+'**')
+    }
+    if (args[0] == "fixCM" && message.channel.name == adminEventChannel){
+        contreMesure = parseInt(args[1])
+        message.channel.send('\:tools: Compteur Contre-Mesure remis à '+contreMesure+'**');
     }
 }
 
