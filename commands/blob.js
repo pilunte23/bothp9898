@@ -162,7 +162,7 @@ exports.run = (client, message, args) => {
                 rest = timeInMinute - count
                 if (rest > 10){
                     message.channel.send('Il reste '+rest+' minute(s)')
-                    if (timeInMinute % 5 == 0){
+                    if (rest % 5 == 0){
                         SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
                     }        
                 }else
