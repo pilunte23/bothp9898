@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-
+const imgJelly = new MessageAttachment('image/jelly.png');
+const imgGreen = new MessageAttachment('image/green.png');
 totalpv = 0;
 damage = 0;
 contreMesure = 0;
@@ -75,7 +76,8 @@ exports.run = (client, message, args) => {
     if (args[0] == "help" || args[0] == "aide" ){
         let embed = new MessageEmbed()
             .setTitle("Aide Dévoreur de Toute Chose")
-            .setThumbnail('https://imgur.com/xrskwKO')
+            .attachFiles(imgJelly)
+            .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
             .addField("!blob suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
@@ -90,7 +92,8 @@ exports.run = (client, message, args) => {
         let embed = new MessageEmbed()
             .setTitle("**Dévoreur de Toute Chose**")
             .setColor("#67C355")
-            .setImage('https://imgur.com/AmKKLqF')
+            .attachFiles(imgGreen)
+            .setImage('attachment://green.png')
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", "Le !b peut être utilisé en raccourci")
             .addField("!blob help ou !blob aide", "Pour obtenir la liste des commandes à tout moment")
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
@@ -100,7 +103,8 @@ exports.run = (client, message, args) => {
     if (args[0] == "admin"){
         let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
-            .setThumbnail('https://imgur.com/xrskwKO')
+            .attachFiles(imgJelly)
+            .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
