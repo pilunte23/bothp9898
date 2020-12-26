@@ -18,8 +18,8 @@ module.exports = (client, message) => {
     if (command == "regles" || command =="r") command = "rules";
     if (command == "aide" || command == "h") command = "help";
     if (command == "s") command = "search";
-    if (command == "b") command = "bag";
     if (command == "d") command = "deck";
+    if (command == "b") command = "blob";
     if (command == "t" ) command = "timing";
     if (command == "p" ) command = "phase";
     if (command == "rd") command = "random";

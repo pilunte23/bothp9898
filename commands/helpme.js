@@ -10,7 +10,7 @@ exports.run = (client, message) => {
         .addField("!search ou le raccourci !s ", "suivi d'un mot pour avoir tous les points de règles contant ce mot, saisir ensuite !rules suivi d'un point de règle pour avoir l'explication")
         .addField("!phase ou le raccourci !p", "Affiche les différentes phases")
         .addField("!timing ou le raccourci !t", "Affiche le timing des compétences")
-        .addField("!bag ou le raccourci !b", "Pioche un jeton dans le Chaos Bag")       
+        .addField("!bag", "Pioche un jeton dans le Chaos Bag")       
         .addField("!tabous ou le raccourci !tb", "Affiche la règle d'utilisation et la liste des cartes tabous")
         .addField("!ahlcgnews ", "Affiche la dernière news Arkham Horror LCG sur fantasyflightgames.com ")
         .addField("!hajcenews ", "Affiche la dernière news Horreur à Arkham JCE sur fantasyflightgames.fr ")
