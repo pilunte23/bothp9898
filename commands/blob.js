@@ -9,6 +9,7 @@ indice = 0;
 initialIndice = 0;
 timer = 0;
 count = 0;
+rest = 0
 
 exports.run = (client, message, args) => {
 
@@ -72,7 +73,7 @@ exports.run = (client, message, args) => {
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
-            .addField("!blob suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
+            .addField("!blob d suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
             .addField("!blob i", "Retire un indice sur l'acte 1")
             .addField("!blob i suivi d'une chiffre", "Retire le nombre indiqué d'indice sur l'acte 1")
             .addField("!blob cm", "Utilise une contre mesure")
@@ -155,22 +156,33 @@ exports.run = (client, message, args) => {
             timeInMinute = parseInt(args[1])
             timer = timeInMinute * 60000   
             message.channel.send('Mise en place d un timer de '+timeInMinute+' minutes')
+
+            var interval = setInterval (function () {
+                count = count + 1
+                rest = timeInMinute - count
+                if (rest > 10){
+                    message.channel.send('Il reste '+rest+' minute(s)')
+                    if (timeInMinute % 5 == 0){
+                        SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+                    }        
+                }else
+                {
+                    if (rest = 0){
+                        SendMessage(client,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
+                        clearInterval(interval);
+                    }else
+                    {
+                        message.channel.send('Il reste '+rest+' minute(s)')
+                        SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+                    }           
+                }   
+            }, 60000 );
+        }else{
+            if ((args[1]) == "clean"){
+                clearInterval(interval);
+            }
         }
-        rest = 0
-        var interval = setInterval (function () {
-            count = count + 1
-            rest = timeInMinute - count
-            if (rest > 10){
-                message.channel.send('Il reste '+rest+' minute(s)')
-                if (timeInMinute % 10 == 0){
-                    SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
-                }        
-            }else
-            {
-                message.channel.send('Il reste '+rest+' minute(s)')
-                SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
-            }   
-        }, 60000 );   
+    
     }
 }
 
