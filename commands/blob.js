@@ -140,15 +140,15 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "fixI" && message.channel.name == adminEventChannel){
         indice = parseInt(args[1])
-        message.channel.send('\:tools: Compteur <:TokenClue:443357925369577482> remis à '+indice+'**')
+        message.channel.send('\:tools: Compteur <:TokenClue:443357925369577482> remis à **'+indice+'**')
     }
     if (args[0] == "fixD" && message.channel.name == adminEventChannel){
         damage = parseInt(args[1])
-        message.channel.send('\:tools: Compteur <:TokenDamage:443355098773585920> remis à '+damage+'**')
+        message.channel.send('\:tools: Compteur <:TokenDamage:443355098773585920> remis à **'+damage+'**')
     }
     if (args[0] == "fixCM" && message.channel.name == adminEventChannel){
         contreMesure = parseInt(args[1])
-        message.channel.send('\:tools: Compteur Contre-Mesure remis à '+contreMesure+'**');
+        message.channel.send('\:tools: Compteur Contre-Mesure remis à **'+contreMesure+'**');
     }
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
@@ -161,10 +161,10 @@ exports.run = (client, message, args) => {
                 count = count + 1
                 timeRest = timeInMinute - count
                 if (timeRest > 10){
-                    message.channel.send(rest+' minute(s) restante(s)')
+                    message.channel.send(timeRest+' minute(s) restante(s)')
                     rest = timeRest % 5 
                     if (rest == 0){
-                        SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+                        SendMessage(client,'\:spy: Il reste '+timeRest+' minute(s)')
                     }        
                 }else
                 {
@@ -173,8 +173,8 @@ exports.run = (client, message, args) => {
                         clearInterval(interval);
                     }else
                     {
-                        message.channel.send('Il reste '+rest+' minute(s)')
-                        SendMessage(client,'\:spy: Il reste '+rest+' minute(s)')
+                        message.channel.send('Il reste '+timeRest+' minute(s)')
+                        SendMessage(client,'\:spy: Il reste '+timeRest+' minute(s)')
                     }           
                 }   
             }, 60000 );
@@ -188,7 +188,14 @@ exports.run = (client, message, args) => {
 }
 
 function SendMessage(client,messagetoGroup){
-    client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
+    client.channels.cache.filter(chan => {
+        if (chan.name != undefined){
+            chan.name.startsWith("group").forEach(channel => {channel.send(messagetoGroup)})
+        }else
+        {
+            message.channel.send('Désolé <:jelly:733931040942587965> à manger ta commande, ressaisis la');
+        }   
+    })
 }
 
 exports.help = {
