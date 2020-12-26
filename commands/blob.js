@@ -7,6 +7,7 @@ damage = 0;
 contreMesure = 0;
 indice = 0;
 initialIndice = 0;
+timer = 0;
 
 exports.run = (client, message, args) => {
 
@@ -146,6 +147,31 @@ exports.run = (client, message, args) => {
     if (args[0] == "fixCM" && message.channel.name == adminEventChannel){
         contreMesure = parseInt(args[1])
         message.channel.send('\:tools: Compteur Contre-Mesure remis à '+contreMesure+'**');
+    }
+    if (args[0] == "timer" && message.channel.name == adminEventChannel){
+        if (!isNaN(args[1])){
+        //temps en minute
+            time = parseInt(args[1]) 
+        //temps en seconde  
+            time = time * 60
+        //temps en miliseconde
+            timer = time * 1000
+        }
+        message.channel.send('Mise en place d un timer de '+(time)/60000)+'minutes'
+        //log pour le canal admin toutes les minutes
+        if (!isNaN(args[1]) > 10 ){
+            var interval = setInterval (function () {
+                message.channel.send('Il reste '+(time-60000)/60000)+'minute(s)'
+            }, 60000);
+            //log pour le canal groupe toutes les 10 minutes
+            var interval2 = setInterval (function () {
+                SendMessage(client,'\:spy: Il reste '+(time-600000)/60000)+'minute(s)'
+            }, 600000);
+        }else{
+            var interval3 = setInterval (function () {
+                SendMessage(client,'\:spy: Il reste '+(time-60000)/60000)+'minute(s)'
+            }, 60000); 
+        }
     }
 }
 
