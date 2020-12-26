@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 totalpv = 0;
 damage = 0;
 contreMesure = 0;
@@ -70,7 +72,7 @@ exports.run = (client, message, args) => {
             })
     }
 
-    if (args[0] == "help"){
+    if (args[0] == "help" || args[0] == "aide" ){
         const embed = new MessageEmbed()
             .setTitle("Aide Dévoreur de Toute Chose")
             .setThumbnail('image/jelly.png')
@@ -91,7 +93,7 @@ exports.run = (client, message, args) => {
             .setColor("#67C355")
             .setImage('image/green.png')
             .addField("Toute les commandes pour l'evenement commencent par !blob. Le !b peut être utilisé en raccourci", "")
-            .addField("!blob help", "Pour obtenir la liste des commandes à tout moment")
+            .addField("!blob help ou !blob aide", "Pour obtenir la liste des commandes à tout moment")
         message.reply(embed);
     }
     if (args[0] == "admin"){
