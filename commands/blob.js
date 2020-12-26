@@ -15,16 +15,22 @@ exports.run = (client, message, args) => {
 
     console.log(args);
     //Command for players
-    if (message.channel.name.startsWith("group") && !isNaN(args[0])){
-        degat = args[0]
-        damage = damage + parseInt(args[0])
-        restant = totalpv - damage
-        if (restant > 0){
-            SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
-        }else
-        {
-            SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
-        }    
+    if (!message.channel.name.startsWith("group")){
+        return
+    }
+
+    if (args[0] == "d"){
+        if (!isNaN(args[1])){
+            degat = args[1]
+            damage = damage + parseInt(args[1])
+            restant = totalpv - damage
+            if (restant > 0){
+                SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+            }else
+            {
+                SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
+            }
+        }  
     }
  
     if (args[0] == "cm"){
@@ -43,7 +49,7 @@ exports.run = (client, message, args) => {
         }
     }
 
-    if (args[0] == "i" || args[0] == "indice"){
+    if (args[0] == "i"){
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             if (indice > 0){
@@ -56,8 +62,7 @@ exports.run = (client, message, args) => {
             }else
             {
                 SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
-            }
-           
+            }        
         }else
         {
             indice = indice - 1
@@ -79,11 +84,10 @@ exports.run = (client, message, args) => {
             .setColor("#67C355")
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
             .addField("!blob d suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
-            .addField("!blob i", "Retire un indice sur l'acte 1")
-            .addField("!blob i suivi d'une chiffre", "Retire le nombre indiqué d'indice sur l'acte 1")
+            .addField("!blob i", "Ajoute un indice sur l'acte 1")
+            .addField("!blob i suivi d'une chiffre", "Ajoute le nombre indiqué d'indice sur l'acte 1")
             .addField("!blob cm", "Utilise une contre mesure")
             .addField("!blob cm +", "(Cas rare) Ajout une contre mesure.")
-            .addField("!blob eat", "Permet de savoir quel aspect de la réalité est dévoré (a faire peut etre)")
             message.channel.send(embed);
     }
     //Command for admin
@@ -115,7 +119,6 @@ exports.run = (client, message, args) => {
             .addField("!blob fixD suivi d'un chiffre", "Refixe le nombre de dégat suite missplay ou crashbot")
             .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot")
             .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot")
-            .addField("!blob fixT suivi d'un chiffre", "Refixe le timer (a faire)")
             message.channel.send(embed);
     }
 
@@ -190,10 +193,12 @@ exports.run = (client, message, args) => {
     
     }
 }
+
 function SendMessage(client,message,messagetoGroup){
     try{
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
     }catch (e){
+        console.log(e)
         message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, ressaisis la');
     } 
     
