@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed,MessageAttachment } = require('discord.js');
 const imgJelly = new MessageAttachment('image/jelly.png');
 const imgGreen = new MessageAttachment('image/green.png');
 totalpv = 0;
