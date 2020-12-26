@@ -72,7 +72,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "help"){
         const embed = new MessageEmbed()
-            .setTitle(Aide Dévoreur de Toute Chose)
+            .setTitle("Aide Dévoreur de Toute Chose")
             .setThumbnail('image/jelly.png')
             .setColor("#67C355")
             .addField("Toute les commandes pour l'evenement commencent par !blob. Le !b peut être utilisé en raccourci", "")
@@ -86,7 +86,7 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "welcome"){
         const embed = new MessageEmbed()
-            .setTitle(Bienvenu Dévoreur de Toute Chose)
+            .setTitle("Vous voila face au **Dévoreur de Toute Chose**")
             .setThumbnail('/jelly.png')
             .setColor("#67C355")
             .setImage('image/green.png')
@@ -96,7 +96,7 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "admin"){
         const embed = new MessageEmbed()
-            .setTitle(Administration Dévoreur de Toute Chose)
+            .setTitle("Administration Dévoreur de Toute Chose")
             .setThumbnail('image/jelly.png')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
