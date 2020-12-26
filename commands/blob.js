@@ -15,9 +15,7 @@ exports.run = (client, message, args) => {
         degat = args[0]
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
-        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-            channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')
-        })        
+        SendMessage('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
     }
 
     if (args[0] == "init"){
@@ -38,7 +36,7 @@ exports.run = (client, message, args) => {
         if (args[1] == "+"){
             contreMesure = contreMesure + 1
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+                channel.send('\:warning: Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
             })
         }
         if (args[1] == "-" || args[1] == ""){
@@ -55,13 +53,13 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>** , il en reste **'+indice+'**')
+                channel.send('Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
             })
         }else
         {
             indice = indice - 1
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {          
-                channel.send('Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**')
+                channel.send('Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
             })
         }       
     }
@@ -115,6 +113,10 @@ exports.run = (client, message, args) => {
             message.author.send(embed);
     }
 
+}
+
+function SendMessage(messagetoGroup){
+    client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
 }
 
 exports.help = {
