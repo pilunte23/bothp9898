@@ -75,9 +75,9 @@ exports.run = (client, message, args) => {
     if (args[0] == "help" || args[0] == "aide" ){
         let embed = new MessageEmbed()
             .setTitle("Aide Dévoreur de Toute Chose")
-            .setThumbnail('image/jelly.png')
+            .setThumbnail('http://localhost/image/jelly.png')
             .setColor("#67C355")
-            .addField("Toute les commandes pour l'evenement commencent par !blob. Le !b peut être utilisé en raccourci", "")
+            .addField("Toute les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
             .addField("!blob suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
             .addField("!blob i", "Retire un indice sur l'acte 1")
             .addField("!blob i suivi d'une chiffre", "Retire le nombre indiqué d'indice sur l'acte 1")
@@ -90,15 +90,15 @@ exports.run = (client, message, args) => {
         let embed = new MessageEmbed()
             .setTitle("Vous voila face au **Dévoreur de Toute Chose**")
             .setColor("#67C355")
-            .setImage('image/green.png')
-            .addField("Toute les commandes pour l'evenement commencent par !blob. Le !b peut être utilisé en raccourci", "")
+            .setImage('http://localhost/image/green.png')
+            .addField("Toute les commandes pour l'evenement commencent par !blob.", "Le !b peut être utilisé en raccourci")
             .addField("!blob help ou !blob aide", "Pour obtenir la liste des commandes à tout moment")
         message.reply(embed);
     }
     if (args[0] == "admin"){
         let embed = new MessageEmbed()
             .setTitle("Administration Dévoreur de Toute Chose")
-            .setThumbnail('image/jelly.png')
+            .setThumbnail('http://localhost/image/jelly.png')
             .setColor("#67C355")
             .addField("!blob init suivi d'un chiffre ", "Initialistions des compteurs selon le nombre de participants")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
