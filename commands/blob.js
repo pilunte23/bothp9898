@@ -20,22 +20,22 @@ exports.run = (client, message, args) => {
         damage = damage + parseInt(args[0])
         restant = totalpv - damage
         if (restant > 0){
-            SendMessage(client,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+            SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
         }else
         {
-            SendMessage(client,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
+            SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
         }    
     }
  
     if (args[0] == "cm"){
         if (args[1] == "+"){
             contreMesure = contreMesure + 1
-            SendMessage(client,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+            SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
         }
         if (args[1] == "-" || args[1] == null){
             if (contreMesure > 0){
                 contreMesure = contreMesure - 1
-                SendMessage(client,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+                SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
             }else
             {
                 message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
@@ -47,20 +47,20 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             indice  = indice - parseInt(args[1])
             if (indice > 0){
-                SendMessage(client,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
             }else
             {
-                SendMessage(client,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
             }
            
         }else
         {
             indice = indice - 1
             if (indice > 0){
-                SendMessage(client,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
             }else
             {
-                SendMessage(client,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
             }
                   
         }       
@@ -90,7 +90,7 @@ exports.run = (client, message, args) => {
             .setImage('attachment://green.png')
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", "Le !b peut être utilisé en raccourci")
             .addField("!blob help ou !blob aide", "Pour obtenir la liste des commandes à tout moment")
-            SendMessage(client,embed)
+            SendMessage(client,message,embed)
     }
     
     if (args[0] == "admin" && message.channel.name == adminEventChannel){
@@ -121,7 +121,7 @@ exports.run = (client, message, args) => {
             indice =  2 * args[1]
             initialIndice = indice
             damage = 0
-            SendMessage(client,"Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
+            SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de participant");
@@ -130,13 +130,13 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
         indice  = initialIndice
-        SendMessage(client,'Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
+        SendMessage(client,message,'Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
     }
     if (args[0] == "repair" && message.channel.name == adminEventChannel){
-        SendMessage(client,'\:tools: **@Event Un peu de patience nous remettons les valeurs**\:tools:')
+        SendMessage(client,message,'\:tools: **@Event Un peu de patience nous remettons les valeurs**\:tools:')
     }
     if (args[0] == "go" && message.channel.name == adminEventChannel){
-        SendMessage(client,'\:ok_hand: **@Event, Reprise de la partie **\:ok_hand:')
+        SendMessage(client,message,'\:ok_hand: **@Event, Reprise de la partie **\:ok_hand:')
     }
     if (args[0] == "fixI" && message.channel.name == adminEventChannel){
         indice = parseInt(args[1])
@@ -155,7 +155,7 @@ exports.run = (client, message, args) => {
         //temps en miliseconde  
             timeInMinute = parseInt(args[1])
             timer = timeInMinute * 60000          
-            SendMessage(client,'Mise en place d un timer de '+timeInMinute+' minutes')
+            SendMessage(client,message,'Mise en place d un timer de '+timeInMinute+' minutes')
 
             var interval = setInterval (function () {
                 count = count + 1
@@ -164,17 +164,17 @@ exports.run = (client, message, args) => {
                     message.channel.send(timeRest+' minute(s) restante(s)')
                     rest = timeRest % 5 
                     if (rest == 0){
-                        SendMessage(client,'\:spy: Il reste '+timeRest+' minute(s)')
+                        SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
                     }        
                 }else
                 {
                     if (timeRest = 0){
-                        SendMessage(client,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
+                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
                         clearInterval(interval);
                     }else
                     {
                         message.channel.send('Il reste '+timeRest+' minute(s)')
-                        SendMessage(client,'\:spy: Il reste '+timeRest+' minute(s)')
+                        SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
                     }           
                 }   
             }, 60000 );
@@ -186,15 +186,13 @@ exports.run = (client, message, args) => {
     
     }
 }
-
-function SendMessage(client,messagetoGroup){
-    client.channels.cache.filter(chan => {
-        try{
-             chan.name.startsWith("group").forEach(channel => channel.send(messagetoGroup))
-        }catch (e){
-            message.channel.send('Désolé <:jelly:733931040942587965> à manger ta commande, ressaisis la');
-        }   
-    })
+function SendMessage(client,message,messagetoGroup){
+    try{
+        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
+    }catch (e){
+        message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, ressaisis la');
+    } 
+    
 }
 
 exports.help = {
