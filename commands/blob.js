@@ -13,7 +13,7 @@ timer = 0;
 timeInMinute = 0;
 count = 0;
 timeRest = 0;
-interval;
+var interval= null;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
 groupe = ['groupe-admin-event', 'groupe-1','groupe-2','groupe-3','groupe-4','groupe-5'];
 stat = new Map([
