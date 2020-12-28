@@ -147,7 +147,7 @@ exports.run = (client, message, args) => {
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         numRandom = rand.getRandomInt(story.length)
         story[numRandom]
-        SendMessage(client,message,'L\'histoire choisit est : **'+story[numRandom]+'** pour l\'acte 3b')
+        SendMessage(client,message,'\:mega: L\'histoire choisit est : **'+story[numRandom]+'** pour l\'acte 3b')
         story = story.splice(numRandom, 1)
     }
 
@@ -185,7 +185,7 @@ exports.run = (client, message, args) => {
             var interval = setInterval (function () {
                 count = count + 1
                 timeRest = timeInMinute - count
-                message.channel.send(timeRest+' minute(s) restante(s)')
+                message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
                 if (timeRest > 10){      
                     rest = timeRest % 5 
                     if (rest == 0){
