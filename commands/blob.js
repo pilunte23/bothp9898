@@ -10,6 +10,8 @@ initialIndice = 0;
 timer = 0;
 count = 0;
 timeRest = 0;
+story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
+groupe = ['groupe-admin-event', 'groupe-1','groupe-2','groupe-3','groupe-4','groupe-5'];
 
 exports.run = (client, message, args) => {
 
@@ -18,22 +20,25 @@ exports.run = (client, message, args) => {
     if (!message.channel.name.startsWith("group")){
         return
     }
-    if (timeRest > 0){
+    
         if (args[0] == "d"){
+            checkTime()
             if (!isNaN(args[1])){
                 degat = args[1]
                 damage = damage + parseInt(args[1])
                 restant = totalpv - damage
-                if (restant > 0){
+                if (restant > 0 ){
                     SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
-                }else
+                }
+                else
                 {
                     SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
-                }
+                }           
             }  
         }
      
         if (args[0] == "cm"){
+            checkTime()
             if (args[1] == "+"){
                 contreMesure = contreMesure + 1
                 SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
@@ -50,6 +55,7 @@ exports.run = (client, message, args) => {
         }
     
         if (args[0] == "i"){
+            checkTime()
             if (!isNaN(args[1])){
                 indice  = indice - parseInt(args[1])
                 if (indice > 0){
@@ -75,10 +81,7 @@ exports.run = (client, message, args) => {
                       
             }       
         }
-    }else{
-        message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");
-    }
-   
+  
 
     if (args[0] == "help" || args[0] == "aide" ){
         let embed = new MessageEmbed()
@@ -115,7 +118,7 @@ exports.run = (client, message, args) => {
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
-            .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe (a faire)")
+            .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe")
             .addField("!blob stats", "Diffuse les statistiques par groupe (a faire)")
             .addField("Commande de Maintenance", "**Les commandes dont on espere ne pas avoir besoin**")
             .addField("!blob repair", "Envoi un message indiquant qu'on remet d'aplomb les valeurs")
@@ -139,6 +142,13 @@ exports.run = (client, message, args) => {
             message.channel.send(client,"Il faut mettre le nombre de participant");
         }
     }
+    if (args[0] == "story" && message.channel.name == adminEventChannel){
+        numRandom = rand.getRandomInt(story.length)
+        story[numRandom]
+        SendMessage(client,message,'L\'histoire choisit est : **'+story[numRandom]+'** pour l\'acte 3b')
+        story = story.splice(numRandom, 1)
+    }
+
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
         indice  = initialIndice
@@ -198,14 +208,25 @@ exports.run = (client, message, args) => {
     
     }
 }
+function checkTime(){
+    if (timer = 0){
+        message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");
+        return
+    }
+}
 
 function SendMessage(client,message,messagetoGroup){
-    try{
+    /*try{
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
     }catch (e){
         console.log(e)
         message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, ressaisis la');
-    } 
+    }
+    */
+    group.foreach(function(item){
+        onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+        onechannel.send(messagetoGroup)
+    })
     
 }
 
