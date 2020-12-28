@@ -174,15 +174,15 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "fixI" && message.channel.name == adminEventChannel){
         indice = parseInt(args[1])
-        message.channel.send('\:tools: Compteur <:TokenClue:443357925369577482> remis à **'+indice+'**')
+        SendMessage(client,message,'\:tools: Compteur <:TokenClue:443357925369577482> remis à **'+indice+'**')
     }
     if (args[0] == "fixD" && message.channel.name == adminEventChannel){
         damage = parseInt(args[1])
-        message.channel.send('\:tools: Compteur <:TokenDamage:443355098773585920> remis à **'+damage+'**')
+        SendMessage(client,message,'\:tools: Compteur <:TokenDamage:443355098773585920> remis à **'+damage+'**')
     }
     if (args[0] == "fixCM" && message.channel.name == adminEventChannel){
         contreMesure = parseInt(args[1])
-        message.channel.send('\:tools: Compteur Contre-Mesure remis à **'+contreMesure+'**');
+        SendMessage(client,message,'\:tools: Compteur Contre-Mesure remis à **'+contreMesure+'**');
     }
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
