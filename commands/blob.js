@@ -19,10 +19,7 @@ exports.run = (client, message, args) => {
 
     console.log(args);
     //Command for players
-    if (!message.channel.name.startsWith("group")){
-        return
-    }
-    
+    if (message.channel.name.startsWith("group")){
         if (args[0] == "d"){
             if (timer = 0){
                 message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");   
@@ -94,21 +91,22 @@ exports.run = (client, message, args) => {
                 } 
             }    
         }
-  
 
-    if (args[0] == "help" || args[0] == "aide" ){
-        let embed = new MessageEmbed()
-            .setTitle("Aide Dévoreur de Toute Chose")
-            .attachFiles(imgJelly)
-            .setThumbnail('attachment://jelly.png')
-            .setColor("#67C355")
-            .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
-            .addField("!blob d suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
-            .addField("!blob i", "Ajoute un indice sur l'acte 1")
-            .addField("!blob i suivi d'une chiffre", "Ajoute le nombre indiqué d'indice sur l'acte 1")
-            .addField("!blob cm", "Utilise une contre mesure")
-            .addField("!blob cm +", "(Cas rare) Ajout une contre mesure.")
-            message.channel.send(embed);
+    }else{
+        if (args[0] == "help" || args[0] == "aide" ){
+            let embed = new MessageEmbed()
+                .setTitle("Aide Dévoreur de Toute Chose")
+                .attachFiles(imgJelly)
+                .setThumbnail('attachment://jelly.png')
+                .setColor("#67C355")
+                .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
+                .addField("!blob d suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
+                .addField("!blob i", "Ajoute un indice sur l'acte 1")
+                .addField("!blob i suivi d'une chiffre", "Ajoute le nombre indiqué d'indice sur l'acte 1")
+                .addField("!blob cm", "Utilise une contre mesure")
+                .addField("!blob cm +", "(Cas rare) Ajout une contre mesure.")
+                message.channel.send(embed);
+        }
     }
     //Command for admin
     if (args[0] == "welcome" && message.channel.name == adminEventChannel){
