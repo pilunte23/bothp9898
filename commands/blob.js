@@ -10,8 +10,10 @@ damage = 0;
 contreMesure = 0;
 indice = 0;
 timer = 0;
+timeInMinute = 0;
 count = 0;
 timeRest = 0;
+interval;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
 groupe = ['groupe-admin-event', 'groupe-1','groupe-2','groupe-3','groupe-4','groupe-5'];
 stat = new Map([
@@ -49,7 +51,7 @@ exports.run = (client, message, args) => {
                         }
                         else
                         {
-                            speed = timer - timeRest
+                            speed = timeInMinute - timeRest
                             SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
                             clearInterval(interval);      
                         }
@@ -187,13 +189,13 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
-        if (story.length > 0) {
+        if (story == []) {
+            message.channel.send(client,"Histoire épuisée");
+        }else
+        {
             numRandom = getRandomInt(story.length)
             SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
             story.splice(numRandom, 1)
-        }else
-        {
-            message.channel.send(client,"Histoire épuisée");
         }   
     }
 
