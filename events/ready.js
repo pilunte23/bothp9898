@@ -7,5 +7,5 @@ module.exports = (client) => {
     client.user.setActivity(gameArray[rand.getRandomInt(1)]).catch(console.error)    
     //const gameArray = ["Contrée de l'Horreur", "Le Signe des Anciens", "Horreur à Arkham JCE", "Horreur à Arkham", "Les Demeures de l'Epouvante"]
     //client.user.setActivity(gameArray[rand.getRandomInt(5)]).catch(console.error)
-    client.user.setAvatar('image/avatar.jpg')
+    //client.user.setAvatar('image/avatar.jpg')
 };
