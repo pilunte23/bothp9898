@@ -223,7 +223,7 @@ function SendMessage(client,message,messagetoGroup){
         message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, ressaisis la');
     }
     */
-    group.foreach(function(item){
+    groupe.foreach(function(item){
         onechannel = message.guild.channels.cache.find(channel => channel.name === item)
         onechannel.send(messagetoGroup)
     })
