@@ -35,12 +35,12 @@ exports.run = (client, message, args) => {
                     degat = args[1]
                     if (restantPV > 0 ){
                         if (degat > BigHit){
-                            BigHit = degat
+                            BigHit = parseInt(degat)
                             BigHitName = message.channel.name
                         }
                         damage = damage + parseInt(args[1])
                         restantPV = initialPV - damage
-                        addStats(message.channel.name,"damage",degat)
+                        addStats(message.channel.name,"damage",parseInt(degat))
                         if (restantPV > 0 ){
                             SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
                         }
@@ -106,7 +106,7 @@ exports.run = (client, message, args) => {
                 {
                     if (indice > 0){
                         indice = indice - 1
-                        addStats(message.channel.name,"clues",args[1])
+                        addStats(message.channel.name,"clues",parseInt(args[1]))
                         if (indice > 0){
                             SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
