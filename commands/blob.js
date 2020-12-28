@@ -163,7 +163,7 @@ exports.run = (client, message, args) => {
             .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
             .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe")
-            .addField("!blob stats", "Diffuse les statistiques par groupe (a faire)")
+            .addField("!blob stats", "Diffuse les statistiques par groupe")
             .addField("Commande de Maintenance", "**Les commandes dont on espere ne pas avoir besoin**")
             .addField("!blob repair", "Envoi un message indiquant qu'on remet d'aplomb les valeurs")
             .addField("!blob go", "Message indiquant la reprise de l'event")
@@ -270,11 +270,20 @@ exports.run = (client, message, args) => {
                 m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
                 stats.set(channel.name,m)
                 message.channel.send(channel.name+' ajouté');
-            }) 
+            })
+            message.channel.send('Scan fini')
         }catch (e){
             console.log(e)
             message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, redemarre le bot');
         }  
+    }
+
+    if (args[0] == "stats" && message.channel.name == adminEventChannel){       
+        SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
+        SendMessage(client,message,"Statistiques globales :")
+        for (const [groupname, groupstats] of stats) {
+            SendMessage(client,message, groupname+" a infligé **"+groupstats.get(damage)+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get(clues)+"** , utilisé **"+groupstats.get(cmUsed)+" Contre-Mesure** et en a offert **"+groupstats.get(cmAdded)+"**"
+        }
     }
 }
 
@@ -293,6 +302,7 @@ function addStats(name,type,changedValue) {
     stat.set(type, changedValue + oldvalue)
     stats.set(name,stat)
 }
+
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
