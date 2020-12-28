@@ -49,7 +49,9 @@ exports.run = (client, message, args) => {
                         }
                         else
                         {
-                            SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
+                            speed = timer - timeRest
+                            SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
+                            clearInterval(interval);      
                         }
                     }else{
                         message.channel.send("Trop tard <:jelly:733931040942587965> est déjà vaincu.");  
@@ -152,6 +154,8 @@ exports.run = (client, message, args) => {
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
+            .addField("Ordre conseillé des commandes", "!b welcome, !b init et !b timer")
+            .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
@@ -227,7 +231,7 @@ exports.run = (client, message, args) => {
             var interval = setInterval (function () {
                 count = count + 1
                 timeRest = timeInMinute - count
-                message.channel.send('\:timer: **'+timeRest+'** minute(s) restantPVe(s)')
+                message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
                 if (timeRest > 10){      
                     rest = timeRest % 5 
                     if (rest == 0){
@@ -235,7 +239,7 @@ exports.run = (client, message, args) => {
                     }        
                 }else
                 {
-                    if (timeRest == 0){
+                    if (timeRest == 0 && restantPV > 0){
                         SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
                         clearInterval(interval);
                     }else
@@ -244,10 +248,6 @@ exports.run = (client, message, args) => {
                     }           
                 }   
             }, 60000 );
-        }else{
-            if ((args[1]) == "clean"){
-                clearInterval(interval);
-            }
         }
     
     }
