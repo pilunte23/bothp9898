@@ -15,14 +15,8 @@ count = 0;
 timeRest = 0;
 var interval= null;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
-groupe = ['groupe-admin-event', 'groupe-1','groupe-2','groupe-3','groupe-4','groupe-5'];
-stat = new Map([
-    ['groupe-1', {"damage" : 0, "clues" : 0 , "cmUsed" : 0}],
-    ['groupe-2', {"damage" : 0, "clues" : 0 , "cmUsed" : 0}],
-    ['groupe-3', {"damage" : 0, "clues" : 0 , "cmUsed" : 0}],
-    ['groupe-4', {"damage" : 0, "clues" : 0 , "cmUsed" : 0}],
-    ['groupe-5', {"damage" : 0, "clues" : 0 , "cmUsed" : 0}]
-  ])
+groupe = [];
+stat = new Map();
 BigHit = 0
 BigHitName = ""
 
@@ -46,6 +40,7 @@ exports.run = (client, message, args) => {
                         }
                         damage = damage + parseInt(args[1])
                         restantPV = initialPV - damage
+                        addStats(message.channel.name,"damage",degat)
                         if (restantPV > 0 ){
                             SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
                         }
@@ -157,7 +152,8 @@ exports.run = (client, message, args) => {
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
-            .addField("Ordre conseillé des commandes", "!b welcome, !b init et !b timer")
+            .addField("Ordre conseillé des commandes", "**!b scan, !b welcome, !b init et !b timer**")
+            .addField("!blob scan ", "Permet de mettre à jour la liste des salons commençant par 'group'")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
@@ -260,16 +256,23 @@ exports.run = (client, message, args) => {
         }
     
     }
+
+    if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
+        try{
+            groupe = []
+            stat.clear()
+            client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
+                groupe.push(channel.name)
+                stat.set(channel.name,{"damage" : 0, "clues" : 0 , "cmUsed" : 0})
+            }) 
+        }catch (e){
+            console.log(e)
+            message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, redemarre le bot');
+        }  
+    }
 }
 
 function SendMessage(client,message,messagetoGroup){
-    /*try{
-        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {channel.send(messagetoGroup)})
-    }catch (e){
-        console.log(e)
-        message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, ressaisis la');
-    }
-    */
     groupe.forEach(function(item){
         onechannel = message.guild.channels.cache.find(channel => channel.name === item)
         onechannel.send(messagetoGroup)
