@@ -235,7 +235,7 @@ exports.run = (client, message, args) => {
             timerRest = timer         
             SendMessage(client,message,'\:timer: Mise en place d un timer de **'+timeInMinute+'** minutes')
 
-            var interval = setInterval (function () {
+            interval = setInterval (function () {
                 count = count + 1
                 timeRest = timeInMinute - count
                 message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
