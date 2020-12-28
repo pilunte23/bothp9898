@@ -187,9 +187,14 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
-        numRandom = getRandomInt(story.length)
-        SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
-        story.splice(numRandom, 1)
+        if (story.length > 0) {
+            numRandom = getRandomInt(story.length)
+            SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
+            story.splice(numRandom, 1)
+        }else
+        {
+            message.channel.send(client,"Histoire épuisée");
+        }   
     }
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
