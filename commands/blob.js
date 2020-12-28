@@ -266,8 +266,8 @@ exports.run = (client, message, args) => {
             groupe = []
             stats.clear()
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
-                groupe.push(channel.name)
-                stats.set(channel.name,{"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded" : 0})
+                groupe.push(channel.name)   
+                stats.set(channel.name,[["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])
                 message.channel.send(channel.name+' ajouté');
             }) 
         }catch (e){
