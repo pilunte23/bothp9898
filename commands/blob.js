@@ -24,64 +24,75 @@ exports.run = (client, message, args) => {
     }
     
         if (args[0] == "d"){
-            checkTime()
-            if (!isNaN(args[1])){
-                degat = args[1]
-                damage = damage + parseInt(args[1])
-                restant = totalpv - damage
-                if (restant > 0 ){
-                    SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
-                }
-                else
-                {
-                    SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
-                }           
-            }  
+            if (timer = 0){
+                message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");   
+            }else
+            {
+                if (!isNaN(args[1])){
+                    degat = args[1]
+                    damage = damage + parseInt(args[1])
+                    restant = totalpv - damage
+                    if (restant > 0 ){
+                        SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restant+'**/**'+totalpv+'**')       
+                    }
+                    else
+                    {
+                        SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones:')       
+                    }           
+                } 
+            }        
         }
      
         if (args[0] == "cm"){
-            checkTime()
-            if (args[1] == "+"){
-                contreMesure = contreMesure + 1
-                SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
-            }
-            if (args[1] == "-" || args[1] == null){
-                if (contreMesure > 0){
-                    contreMesure = contreMesure - 1
-                    SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
-                }else
-                {
-                    message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
+            if (timer = 0){
+                message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");      
+            }else
+            {
+                if (args[1] == "+"){
+                    contreMesure = contreMesure + 1
+                    SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
                 }
-            }
+                if (args[1] == "-" || args[1] == null){
+                    if (contreMesure > 0){
+                        contreMesure = contreMesure - 1
+                        SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
+                    }else
+                    {
+                        message.channel.send("Désolé les \:spy:, vous n'avez plus de **Contre-Mesure** ; il en reste 0");
+                    }
+                }
+            }          
         }
     
         if (args[0] == "i"){
-            checkTime()
-            if (!isNaN(args[1])){
-                indice  = indice - parseInt(args[1])
-                if (indice > 0){
-                    if (parseInt(args[1]) > 3){
-                        message.channel.send("Pas de tricherie, on peut pas en mettre plus de 3 indices");
-                    }
-                    else{
-                        SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
-                    }               
-                }else
-                {
-                    SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
-                }        
+            if (timer = 0){
+                message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");    
             }else
             {
-                indice = indice - 1
-                if (indice > 0){
-                    SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                if (!isNaN(args[1])){  
+                    if ((indice - parseInt(args[1])) > 0){
+                        if (parseInt(args[1]) > 3){
+                            message.channel.send("Pas de tricherie, on peut pas en mettre plus de 3 indices");
+                            indice  = indice - parseInt(args[1])
+                        }
+                        else{
+                            SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                        }               
+                    }else
+                    {
+                        SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                    }        
                 }else
                 {
-                    SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
-                }
-                      
-            }       
+                    indice = indice - 1
+                    if (indice > 0){
+                        SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                    }else
+                    {
+                        SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                    }          
+                } 
+            }    
         }
   
 
@@ -146,8 +157,7 @@ exports.run = (client, message, args) => {
     }
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         numRandom = rand.getRandomInt(story.length)
-        story[numRandom]
-        SendMessage(client,message,'\:mega: L\'histoire choisit est : **'+story[numRandom]+'** pour l\'acte 3b')
+        SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
         story = story.splice(numRandom, 1)
     }
 
@@ -180,7 +190,7 @@ exports.run = (client, message, args) => {
             timeInMinute = parseInt(args[1])
             timer = timeInMinute * 60000
             timerRest = timer         
-            SendMessage(client,message,'Mise en place d un timer de '+timeInMinute+' minutes')
+            SendMessage(client,message,'\:timer: Mise en place d un timer de **'+timeInMinute+'** minutes')
 
             var interval = setInterval (function () {
                 count = count + 1
@@ -189,7 +199,7 @@ exports.run = (client, message, args) => {
                 if (timeRest > 10){      
                     rest = timeRest % 5 
                     if (rest == 0){
-                        SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
+                        SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
                     }        
                 }else
                 {
@@ -198,7 +208,7 @@ exports.run = (client, message, args) => {
                         clearInterval(interval);
                     }else
                     {
-                        SendMessage(client,message,'\:spy: Il reste '+timeRest+' minute(s)')
+                        SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
                     }           
                 }   
             }, 60000 );
@@ -208,12 +218,6 @@ exports.run = (client, message, args) => {
             }
         }
     
-    }
-}
-function checkTime(){
-    if (timer = 0){
-        message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");
-        return
     }
 }
 
