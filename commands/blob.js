@@ -169,12 +169,12 @@ exports.run = (client, message, args) => {
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("Ordre conseillé des commandes", "**!b scan, !b welcome, !b init et !b timer**")
-            .addField("!blob scan ", "Permet de mettre à jour la liste des salons commençant par 'group'")
+            .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
-            .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionné à chaque groupe")
+            .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionnée à chaque groupe")
             .addField("!blob stats", "Diffuse les statistiques par groupe")
             .addField("Commande de Maintenance", "**Les commandes dont on espere ne pas avoir besoin**")
             .addField("!blob repair", "Envoi un message indiquant qu'on remet d'aplomb les valeurs")
@@ -218,11 +218,11 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "repair" && message.channel.name == adminEventChannel){
-        SendMessage(client,message,'\:tools: **@Event Un peu de patience nous remettons les valeurs**\:tools:')
+        SendMessage(client,message,'\:tools: **Un peu de patience nous remettons les valeurs**\:tools:')
     }
 
     if (args[0] == "go" && message.channel.name == adminEventChannel){
-        SendMessage(client,message,'\:ok_hand: **@Event, Reprise de la partie **\:ok_hand:')
+        SendMessage(client,message,'\:ok_hand: **Reprise de la partie **\:ok_hand:')
     }
 
     if (args[0] == "fixI" && message.channel.name == adminEventChannel){
@@ -275,6 +275,8 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
         try{
+            BigHit = 0
+            BigHitName = ""
             groupe = []
             stats.clear()
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
