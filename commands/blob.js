@@ -51,9 +51,9 @@ exports.run = (client, message, args) => {
                         }
                         else
                         {
-                            SendMessage(client,message,'Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
+                            SendMessage(client,message,'\:information_source: Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
                             speed = timeInMinute - timeRest
-                            SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
+                            SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
                             clearInterval(interval);
                             timer = 0      
                         }
@@ -107,8 +107,8 @@ exports.run = (client, message, args) => {
                         if (indice > 0){
                             SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+intIndice+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
                         }else{
-                            SendMessage(client,message,'Le **'+message.channel.name+'** depose le(s) dernier(s) **'+intIndice+'<:TokenClue:443357925369577482>** manquant(s)') 
-                            SendMessage(client,message,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose le(s) dernier(s) **'+intIndice+'<:TokenClue:443357925369577482>** manquant(s)') 
+                            SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         } 
                     }else{
                         message.channel.send("Il n'y a plus besoin de déposer des indices pour l'instant")
@@ -119,10 +119,10 @@ exports.run = (client, message, args) => {
                         indice = indice - 1
                         addStats(message.channel.name,"clues",1)
                         if (indice > 0){
-                            SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
                         {
-                            SendMessage(client,message,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                            SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         }
                     }else
                     {
@@ -213,7 +213,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
         indice  = initialIndice
-        SendMessage(client,message,'Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
+        SendMessage(client,message,'\:mega: Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
     }
 
     if (args[0] == "repair" && message.channel.name == adminEventChannel){
