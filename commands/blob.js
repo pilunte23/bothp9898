@@ -295,8 +295,9 @@ exports.run = (client, message, args) => {
     if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
         SendMessage(client,message,"RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
         SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
-        SendMessage(client,message,"Statistiques globales :")   
-        for (const [groupname, groupstats] of sortMapByValue(stats)) {
+        SendMessage(client,message,"Statistiques globales :") 
+        mapAsc = new Map(sortMapByValue(stats))
+        for (const [groupname, groupstats] of mapAsc) {
             if (groupname != adminEventChannel){
                 SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, découvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
             }  
