@@ -282,7 +282,7 @@ exports.run = (client, message, args) => {
         SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
         SendMessage(client,message,"Statistiques globales :")
         for (const [groupname, groupstats] of stats) {
-            SendMessage(client,message, groupname+" a infligé **"+groupstats.get(damage)+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get(clues)+"** , utilisé **"+groupstats.get(cmUsed)+" Contre-Mesure** et en a offert **"+groupstats.get(cmAdded)+"**")
+            SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get("clues")+"** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
         }
     }
 }
