@@ -168,14 +168,14 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "init" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-            initialpv = 15 * args[1]
-            restantPV = initialpv
+            initialPV = 15 * args[1]
+            restantPV = initialPV
             initialIndice = 2 * args[1]
             indice = initialIndice 
             initialCM = Math.ceil(args[1]/2)
             contreMesure = initialCM  
             damage = 0
-            SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+totalpv+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+indice+"**\n Contre mesure : **"+contreMesure+"**")
+            SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de participant");
