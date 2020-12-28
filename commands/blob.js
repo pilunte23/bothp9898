@@ -16,7 +16,7 @@ timeRest = 0;
 var interval= null;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
 groupe = [];
-stat = new Map();
+stats = new Map();
 BigHit = 0
 BigHitName = ""
 
@@ -65,11 +65,13 @@ exports.run = (client, message, args) => {
             {
                 if (args[1] == "+"){
                     contreMesure = contreMesure + 1
+                    addStats(message.channel.name,"cmAdded",1)
                     SendMessage(client,message,'\:ok_hand: Bonne nouvelle, Le **'+message.channel.name+'** ajoute **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
                 }
                 if (args[1] == "-" || args[1] == null){
                     if (contreMesure > 0){
                         contreMesure = contreMesure - 1
+                        addStats(message.channel.name,"cmUsed",1)
                         SendMessage(client,message,'\:warning: Le **'+message.channel.name+'** utilise **1 Contre-Mesure** , il en reste **'+contreMesure+'**')
                     }else
                     {
@@ -91,6 +93,7 @@ exports.run = (client, message, args) => {
                             return     
                         }
                         indice  = indice - parseInt(args[1])
+                        addStats(message.channel.name,"clues",parseInt(args[1]))
                         if (indice > 0){
                             SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
                         }else{
@@ -103,6 +106,7 @@ exports.run = (client, message, args) => {
                 {
                     if (indice > 0){
                         indice = indice - 1
+                        addStats(message.channel.name,"clues",args[1])
                         if (indice > 0){
                             SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
@@ -260,10 +264,10 @@ exports.run = (client, message, args) => {
     if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
         try{
             groupe = []
-            stat.clear()
+            stats.clear()
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
                 groupe.push(channel.name)
-                stat.set(channel.name,{"damage" : 0, "clues" : 0 , "cmUsed" : 0})
+                stats.set(channel.name,{"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded" : 0})
                 message.channel.send(channel.name+' ajouté');
             }) 
         }catch (e){
@@ -279,6 +283,14 @@ function SendMessage(client,message,messagetoGroup){
         onechannel.send(messagetoGroup)
     })
     
+}
+
+function addStats(name,type,changedValue) {
+    stat = stats.get(name)
+    //"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded"
+    oldvalue = stat.get(type)
+    stat.set(type, changedValue + oldvalue)
+    stats.set(name,stat)
 }
 
 function getRandomInt(max) {
