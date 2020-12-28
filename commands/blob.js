@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
                     if (restantPV > 0 ){
                         if (degat > BigHit){
                             BigHit = degat
-                            BitHitName = message.channel.name
+                            BigHitName = message.channel.name
                         }
                         damage = damage + parseInt(args[1])
                         restantPV = initialPV - damage
@@ -191,12 +191,12 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         numRandom = getRandomInt(story.length)
-        if (story[numRandom] === undefined){
-            message.channel.send(client,"Histoire épuisée");
-        }else
-        {
+        if (typeof story !== 'undefined' && story.length > 0){    
             SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
             story.splice(numRandom, 1)
+        }else
+        {
+            message.channel.send(client,"Histoire épuisée")
         }
     }
 
@@ -278,11 +278,12 @@ exports.run = (client, message, args) => {
         }  
     }
 
-    if (args[0] == "stats" && message.channel.name == adminEventChannel){       
+    if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
+        SendMessage(client,message,"RAPPEL Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
         SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
         SendMessage(client,message,"Statistiques globales :")
         for (const [groupname, groupstats] of stats) {
-            SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get("clues")+"** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
+            SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
         }
     }
 }
@@ -291,14 +292,14 @@ function SendMessage(client,message,messagetoGroup){
     groupe.forEach(function(item){
         onechannel = message.guild.channels.cache.find(channel => channel.name === item)
         onechannel.send(messagetoGroup)
-    })
-    
+    })   
 }
 
 function addStats(name,type,changedValue) {
     stat = stats.get(name)
     //"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded"
     oldvalue = stat.get(type)
+    newvalue = changedValue + oldvalue
     stat.set(type, changedValue + oldvalue)
     stats.set(name,stat)
 }
