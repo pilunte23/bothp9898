@@ -1,4 +1,6 @@
 const { MessageEmbed,MessageAttachment } = require('discord.js');
+let rand = require('../function/random.js');
+
 const imgJelly = new MessageAttachment('image/jelly.png');
 const imgGreen = new MessageAttachment('image/green.png');
 const adminEventChannel = "groupe-admin-event";
