@@ -119,9 +119,10 @@ exports.run = (client, message, args) => {
                         indice = indice - 1
                         addStats(message.channel.name,"clues",1)
                         if (indice > 0){
-                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
+                            SendMessage(client,message,'\ Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
                         {
+                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose le dernier **'+intIndice+'<:TokenClue:443357925369577482>** manquant') 
                             SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         }
                     }else
@@ -292,8 +293,8 @@ exports.run = (client, message, args) => {
     if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
         SendMessage(client,message,"RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
         SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
-        SendMessage(client,message,"Statistiques globales :")
-        for (const [groupname, groupstats] of stats) {
+        SendMessage(client,message,"Statistiques globales :")   
+        for (const [groupname, groupstats] of sortMapByValue(stats)) {
             if (groupname != adminEventChannel){
                 SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, découvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
             }  
@@ -317,6 +318,18 @@ function addStats(name,type,changedValue) {
     stats.set(name,stat)
 }
 
+function sortMapByValue(map) {
+    var tupleArray = [];
+    for (var key in map) tupleArray.push([key, map[key]]);
+    tupleArray.sort(function (a, b) {
+        return b[1] - a[1]
+    });
+    var sortedMap = {};
+    tupleArray.forEach(function (el) {
+        sortedMap[el[0]] = el[1]
+    });
+    return sortedMap;
+}
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
