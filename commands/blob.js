@@ -33,19 +33,25 @@ exports.run = (client, message, args) => {
             {
                 if (!isNaN(args[1])){
                     degat = args[1]
+                    intDegat = parseInt(args[1])
                     if (restantPV > 0 ){
+                        if (intDegat > restantPV){
+                            intDegat = restantPV
+                            degat = intDegat.toString()
+                        }
                         if (degat > BigHit){
-                            BigHit = parseInt(degat)
+                            BigHit = intDegat
                             BigHitName = message.channel.name
                         }
-                        damage = damage + parseInt(args[1])
+                        damage = damage + intDegat
                         restantPV = initialPV - damage
-                        addStats(message.channel.name,"damage",parseInt(degat))
+                        addStats(message.channel.name,"damage",intDegat)
                         if (restantPV > 0 ){
                             SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
                         }
                         else
                         {
+                            SendMessage(client,message,'Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
                             speed = timeInMinute - timeRest
                             SendMessage(client,message,'**Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
                             clearInterval(interval);
@@ -86,18 +92,23 @@ exports.run = (client, message, args) => {
                 message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");    
             }else
             {
-                if (!isNaN(args[1])){            
-                    if (indice > 0){
-                        if (parseInt(args[1]) > 3){
+                if (!isNaN(args[1])){
+                    intIndice = parseInt(args[1])        
+                    if (indice > 0){ 
+                        if (intIndice > 3){
                             message.channel.send("Pas de tricherie, on peut pas en mettre plus de 3 indices"); 
                             return     
                         }
-                        indice  = indice - parseInt(args[1])
-                        addStats(message.channel.name,"clues",parseInt(args[1]))
+                        if (intIndice > indice){
+                            intIndice = indice
+                        }
+                        indice  = indice - intIndice
+                        addStats(message.channel.name,"clues",intIndice)
                         if (indice > 0){
-                            SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+parseInt(args[1])+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
+                            SendMessage(client,message,'Le **'+message.channel.name+'** depose **'+intIndice+'<:TokenClue:443357925369577482>**, il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')       
                         }else{
-                        SendMessage(client,message,'@Event,**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                            SendMessage(client,message,'Le **'+message.channel.name+'** depose le(s) dernier(s) **'+intIndice+'<:TokenClue:443357925369577482>** manquant(s)') 
+                            SendMessage(client,message,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         } 
                     }else{
                         message.channel.send("Il n'y a plus besoin de déposer des indices pour l'instant")
@@ -106,12 +117,12 @@ exports.run = (client, message, args) => {
                 {
                     if (indice > 0){
                         indice = indice - 1
-                        addStats(message.channel.name,"clues",parseInt(args[1]))
+                        addStats(message.channel.name,"clues",1)
                         if (indice > 0){
                             SendMessage(client,message,'Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
                         {
-                            SendMessage(client,message,'@Event, **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
+                            SendMessage(client,message,'**Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         }
                     }else
                     {
@@ -191,7 +202,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         numRandom = getRandomInt(story.length)
-        if (typeof story !== 'undefined' && story.length > 0){    
+        if ( Array.isArray(story) && story.length){    
             SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
             story.splice(numRandom, 1)
         }else
@@ -284,7 +295,7 @@ exports.run = (client, message, args) => {
         SendMessage(client,message,"Statistiques globales :")
         for (const [groupname, groupstats] of stats) {
             if (groupname != adminEventChannel){
-                SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, dévouvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
+                SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, découvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
             }  
         }
     }
