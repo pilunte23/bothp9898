@@ -205,16 +205,17 @@ exports.run = (client, message, args) => {
         if  (args[1] == "reset"){
             message.channel.send(client,"\:information_source: Liste Story Reinitialisée")
             story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
-        }
-        numRandom = getRandomInt(story.length)
-        if ( Array.isArray(story) && story.length){    
-            SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
-            story.splice(numRandom, 1)
         }else
         {
-            message.channel.send(client,"Histoire épuisée")
+            numRandom = getRandomInt(story.length)
+            if ( Array.isArray(story) && story.length){    
+                SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
+                story.splice(numRandom, 1)
+            }else
+            {
+                message.channel.send(client,"Histoire épuisée")
+            }
         }
-
     }
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
@@ -265,7 +266,7 @@ exports.run = (client, message, args) => {
                 }else
                 {
                     if (timeRest == 0 && restantPV > 0){
-                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965>')
+                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965> : il lui restait **'+restantPV+'**/**'+initialPV+'**')
                         clearInterval(interval)
                         timer = 0 
                     }else
