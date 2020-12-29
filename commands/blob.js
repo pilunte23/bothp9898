@@ -44,7 +44,7 @@ exports.run = (client, message, args) => {
                             BigHitName = message.channel.name
                         }
                         damage = damage + intDegat
-                        restantPV = initialPV - damage
+                        restantPV = restantPV - damage
                         addStats(message.channel.name,"damage",intDegat)
                         if (restantPV > 0 ){
                             SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
