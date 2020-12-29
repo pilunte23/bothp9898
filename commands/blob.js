@@ -172,9 +172,9 @@ exports.run = (client, message, args) => {
             .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
-            .addField("!blob timer ", "Lance le timer du chiffre indiqué en minutes")
+            .addField("!blob timer (stop) ", "Lance le timer du chiffre indiqué en minutes, arret de timer avec stop")
             .addField("!blob reset", "Reinitialise les indices de l'acte 1")
-            .addField("!blob story", "Selectionne aléatoirement et Annonce l'histoire selectionnée à chaque groupe")
+            .addField("!blob story (reset)", "Selectionne aléatoirement et Annonce l'histoire selectionnée à chaque groupe")
             .addField("!blob stats", "Diffuse les statistiques par groupe")
             .addField("Commande de Maintenance", "**Les commandes dont on espere ne pas avoir besoin**")
             .addField("!blob repair", "Envoi un message indiquant qu'on remet d'aplomb les valeurs")
@@ -202,6 +202,10 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
+        if  (args[0] == "reset"){
+            message.channel.send(client,"Liste Story Reinitialisé")
+            story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
+        }
         numRandom = getRandomInt(story.length)
         if ( Array.isArray(story) && story.length){    
             SendMessage(client,message,'\:mega: L\'histoire choisie est : **'+story[numRandom]+'** pour l\'acte 3b')
@@ -210,6 +214,7 @@ exports.run = (client, message, args) => {
         {
             message.channel.send(client,"Histoire épuisée")
         }
+
     }
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
@@ -231,8 +236,8 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "fixD" && message.channel.name == adminEventChannel){
-        damage = parseInt(args[1])
-        SendMessage(client,message,'\:tools: Compteur <:TokenDamage:443355098773585920> remis à **'+damage+'**')
+        restantPV = parseInt(args[1])
+        SendMessage(client,message,'\:tools: Compteur <:TokenDamage:443355098773585920> remis à **'+restantPV+'**')
     }
 
     if (args[0] == "fixCM" && message.channel.name == adminEventChannel){
@@ -253,7 +258,7 @@ exports.run = (client, message, args) => {
                 timeRest = timeInMinute - count
                 message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
                 if (timeRest > 10){      
-                    rest = timeRest % 5 
+                    rest = timeRest % 30 
                     if (rest == 0){
                         SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
                     }        
@@ -269,8 +274,12 @@ exports.run = (client, message, args) => {
                     }           
                 }   
             }, 60000 );
-        }
-    
+        }else{
+            if (args[1] == "stop"){
+                clearInterval(interval)
+                timer = 0 
+            }      
+        }  
     }
 
     if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
@@ -299,7 +308,7 @@ exports.run = (client, message, args) => {
         mapAsc = mapSort3 = new Map([...stats.entries()].sort());
         for (const [groupname, groupstats] of mapAsc) {
             if (groupname != adminEventChannel){
-                SendMessage(client,message, groupname+" a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, découvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
+                SendMessage(client,message, 'Le **'+groupname+"** a infligé **"+groupstats.get("damage")+"**<:TokenDamage:443355098773585920>, découvert **"+groupstats.get("clues")+"<:TokenClue:443357925369577482>** , utilisé **"+groupstats.get("cmUsed")+" Contre-Mesure** et en a offert **"+groupstats.get("cmAdded")+"**")
             }  
         }
     }
