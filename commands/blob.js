@@ -147,7 +147,7 @@ exports.run = (client, message, args) => {
             .addField("!blob i", "Ajoute un indice sur l'acte 1")
             .addField("!blob i suivi d'une chiffre", "Ajoute le nombre indiqué d'indice sur l'acte 1")
             .addField("!blob cm", "Utilise une contre mesure")
-            .addField("!blob cm +", "(Cas rare) Ajout une contre mesure.")
+            .addField("!blob cm +", "(Cas rare) Ajout d'une contre mesure.")
             message.channel.send(embed);
     }   
     //Command for admin
@@ -203,7 +203,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         if  (args[0] == "reset"){
-            message.channel.send(client,"Liste Story Reinitialisé")
+            message.channel.send(client,"Liste Story Reinitialisée")
             story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
         }
         numRandom = getRandomInt(story.length)
@@ -278,6 +278,7 @@ exports.run = (client, message, args) => {
             if (args[1] == "stop"){
                 clearInterval(interval)
                 timer = 0 
+                message.channel.send('\:timer: Timer arrété')
             }      
         }  
     }
