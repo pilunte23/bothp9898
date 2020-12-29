@@ -6,7 +6,6 @@ initialIndice = 0;
 initialPV = 0;
 initialCM = 0;
 restantPV = 0;
-damage = 0;
 contreMesure = 0;
 indice = 0;
 timer = 0;
@@ -43,8 +42,7 @@ exports.run = (client, message, args) => {
                             BigHit = intDegat
                             BigHitName = message.channel.name
                         }
-                        damage = damage + intDegat
-                        restantPV = restantPV - damage
+                        restantPV = restantPV - intDegat
                         addStats(message.channel.name,"damage",intDegat)
                         if (restantPV > 0 ){
                             SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
@@ -193,7 +191,6 @@ exports.run = (client, message, args) => {
             indice = initialIndice 
             initialCM = Math.ceil(args[1]/2)
             contreMesure = initialCM  
-            damage = 0
             SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")
         }
         else{
