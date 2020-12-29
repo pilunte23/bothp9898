@@ -203,7 +203,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
         if  (args[0] == "reset"){
-            message.channel.send(client,"Liste Story Reinitialisée")
+            message.channel.send(client,"\:information_source: Liste Story Reinitialisée")
             story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
         }
         numRandom = getRandomInt(story.length)
@@ -278,7 +278,7 @@ exports.run = (client, message, args) => {
             if (args[1] == "stop"){
                 clearInterval(interval)
                 timer = 0 
-                message.channel.send('\:timer: Timer arrété')
+                message.channel.send('\:information_source: Timer arrété')
             }      
         }  
     }
@@ -295,7 +295,7 @@ exports.run = (client, message, args) => {
                 stats.set(channel.name,m)
                 message.channel.send(channel.name+' ajouté');
             })
-            message.channel.send('Scan fini')
+            message.channel.send('\:information_source: Scan fini')
         }catch (e){
             console.log(e)
             message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, redemarre le bot');
@@ -303,7 +303,7 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
-        SendMessage(client,message,"RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
+        SendMessage(client,message,"\:information_source: RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
         SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
         SendMessage(client,message,"Statistiques globales :") 
         mapAsc = mapSort3 = new Map([...stats.entries()].sort());
