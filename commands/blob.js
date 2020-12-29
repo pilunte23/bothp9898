@@ -263,7 +263,7 @@ exports.run = (client, message, args) => {
                 }else
                 {
                     if (timeRest == 0 && restantPV > 0){
-                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965> : il lui restait **'+restantPV+'**/**'+initialPV+'**')
+                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965> : il lui en restait **'+restantPV+'**/**'+initialPV+'**')
                         clearInterval(interval)
                         timer = 0 
                     }else
