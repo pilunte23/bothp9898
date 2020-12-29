@@ -202,7 +202,7 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "story" && message.channel.name == adminEventChannel){
-        if  (args[0] == "reset"){
+        if  (args[1] == "reset"){
             message.channel.send(client,"\:information_source: Liste Story Reinitialisée")
             story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
         }
