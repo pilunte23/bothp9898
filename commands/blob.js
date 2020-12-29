@@ -120,7 +120,7 @@ exports.run = (client, message, args) => {
                             SendMessage(client,message,'\ Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
                         }else
                         {
-                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose le dernier **'+intIndice+'<:TokenClue:443357925369577482>** manquant') 
+                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose le dernier <:TokenClue:443357925369577482> manquant') 
                             SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
                         }
                     }else
