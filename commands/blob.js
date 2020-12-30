@@ -49,16 +49,21 @@ exports.run = (client, message, args) => {
                         restantPV = restantPV - intDegat
                         addStats(message.channel.name,"damage",intDegat)
                         if (restantPV > 0 ){
-                            cutPV = Math.ceil(restantPV/splitPV)
-                            if (cutPV < fullPV){
-                                fullPV = cutPV
-                                emptyPV = initialBarPV - fullPV
-                                lifeBar(client,message,emptyPV,fullPV)
-                            }
-                            massagePV = 'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**'
-                            message.channel.send(massagePV) 
-                            adminchannel = message.guild.channels.cache.find(channel => channel.name === adminEventChannel)
-                            adminchannel.send(massagePV)      
+                            messagePV = 'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**'
+                            if (restantPV > splitPV){
+                                cutPV = Math.ceil(restantPV/splitPV)
+                                if (cutPV < fullPV){
+                                    fullPV = cutPV
+                                    emptyPV = initialBarPV - fullPV
+                                    lifeBar(client,message,emptyPV,fullPV)
+                                } 
+                                message.channel.send(messagePV) 
+                                adminchannel = message.guild.channels.cache.find(channel => channel.name === adminEventChannel)
+                                adminchannel.send(messagePV)  
+                            }else
+                            {
+                                SendMessage(client,message,messagePV)
+                            }                          
                         }
                         else
                         {
