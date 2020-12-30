@@ -53,9 +53,12 @@ exports.run = (client, message, args) => {
                             if (cutPV < fullPV){
                                 fullPV = cutPV
                                 emptyPV = initialBarPV - fullPV
-                                lifeBar(emptyPV,fullPV)
+                                lifeBar(client,message,emptyPV,fullPV)
                             }
-                            message.channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
+                            massagePV = 'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**'
+                            message.channel.send(massagePV) 
+                            adminchannel = message.guild.channels.cache.find(channel => channel.name === adminEventChannel)
+                            adminchannel.send(massagePV)      
                         }
                         else
                         {
@@ -347,7 +350,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function lifeBar(emptyPV,fullPV){
+function lifeBar(client,message,emptyPV,fullPV){
     
     emptyString = ""
     fullString = ""
