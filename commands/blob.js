@@ -6,6 +6,10 @@ initialIndice = 0;
 initialPV = 0;
 initialCM = 0;
 restantPV = 0;
+splitPV = 25;
+fullPV = 0;
+emptyPV = 0;
+initialBarPV = 0;
 contreMesure = 0;
 indice = 0;
 timer = 0;
@@ -45,7 +49,13 @@ exports.run = (client, message, args) => {
                         restantPV = restantPV - intDegat
                         addStats(message.channel.name,"damage",intDegat)
                         if (restantPV > 0 ){
-                            SendMessage(client,message,'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
+                            cutPV = Math.ceil(restantPV/splitPV)
+                            if (cutPV < fullPV){
+                                fullPV = cutPV
+                                emptyPV = initialBarPV - fullPV
+                                lifeBar(emptyPV,fullPV)
+                            }
+                            message.channel.send('Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**')       
                         }
                         else
                         {
@@ -191,6 +201,10 @@ exports.run = (client, message, args) => {
             indice = initialIndice 
             initialCM = Math.ceil(args[1]/2)
             contreMesure = initialCM  
+            splitPV = 25
+            initialBarPV = Math.ceil(initialPV/splitPV)
+            fullPV = initialBarPV
+            emptyPV = 0
             SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")
         }
         else{
@@ -302,7 +316,7 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
         SendMessage(client,message,"\:information_source: RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
-        SendMessage(client,message,'Le coup le plus sanglant revient à **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
+        SendMessage(client,message,'Le coup le plus sanglant revient au **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
         SendMessage(client,message,"Statistiques globales :") 
         mapAsc = mapSort3 = new Map([...stats.entries()].sort());
         for (const [groupname, groupstats] of mapAsc) {
@@ -331,6 +345,19 @@ function addStats(name,type,changedValue) {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function lifeBar(emptyPV,fullPV){
+    
+    emptyString = ""
+    fullString = ""
+    for (let pas = 0; pas < emptyPV; pas++) {
+        emptyString = emptyString +"═"   
+    }
+    for (let pas = 0; pas < fullPV; pas++) {
+        fullString = fullString +"▬"   
+    }
+    SendMessage(client,message, "**LIFE BAR** : "+emptyString+"<:jelly:733931040942587965>"+fullString+"\:skull_crossbones:")
 }
 
 exports.help = {
