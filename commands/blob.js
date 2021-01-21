@@ -337,23 +337,21 @@ exports.run = (client, message, args) => {
             }  
         }
     }
-
-    
-    if (args[0] == "createGr" && message.channel.name == adminEventChannel){
+  
+    if (args[0] == "createG" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
             for (let i = 1; i = args[1]; i++) {
                 channelName= "groupe-" + i   
+                message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
+                {console.log(channel)
+                 const category = '791580496509403177'
+                    channel.setParent(category)
+                    groupe.push(channel.name)
+                    m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
+                    stats.set(channel.name,m)
+                    message.channel.send(channel.name+' ajouté')
+                })
             }
-            message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
-            {console.log(channel)
-             const category = '791580496509403177'
-                channel.setParent(category)
-                groupe.push(channel.name)
-                m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
-                stats.set(channel.name,m)
-                message.channel.send(channel.name+' ajouté')
-            }
-            )
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de groupe");
