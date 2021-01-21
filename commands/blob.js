@@ -1,4 +1,5 @@
 const { MessageEmbed,MessageAttachment } = require('discord.js');
+const constants = require('../constants');
 const imgJelly = new MessageAttachment('image/jelly.png');
 const imgGreen = new MessageAttachment('image/green.png');
 const adminEventChannel = "groupe-admin-event";
@@ -166,6 +167,8 @@ exports.run = (client, message, args) => {
             message.channel.send(embed);
     }   
     //Command for admin
+
+
     if (args[0] == "welcome" && message.channel.name == adminEventChannel){
         let embed = new MessageEmbed()
             .setTitle("**Dévoreur de Toute Chose**")
@@ -184,6 +187,7 @@ exports.run = (client, message, args) => {
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("Ordre conseillé des commandes", "**!b scan, !b welcome, !b init et !b timer**")
+            .addField("!blob createG", "créer le nombre de salon indiqué")
             .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
@@ -333,6 +337,29 @@ exports.run = (client, message, args) => {
             }  
         }
     }
+
+    
+    if (args[0] == "createGr" && message.channel.name == adminEventChannel){
+        if (!isNaN(args[1])){
+            for (let i = 1; i = args[1]; i++) {
+                channelName= "groupe-" + i   
+            }
+            message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
+            {console.log(channel)
+             const category = '791580496509403177'
+                channel.setParent(category)
+                groupe.push(channel.name)
+                m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
+                stats.set(channel.name,m)
+                message.channel.send(channel.name+' ajouté')
+            }
+            )
+        }
+        else{
+            message.channel.send(client,"Il faut mettre le nombre de groupe");
+        }
+    }
+
 }
 
 function SendMessage(client,message,messagetoGroup){
