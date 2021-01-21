@@ -187,7 +187,7 @@ exports.run = (client, message, args) => {
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
             .addField("Ordre conseillé des commandes", "**!b scan, !b welcome, !b init et !b timer**")
-            .addField("!blob createG", "créer le nombre de salon indiqué")
+            .addField("!blob create", "créer le nombre de salon indiqué")
             .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
@@ -338,10 +338,12 @@ exports.run = (client, message, args) => {
         }
     }
   
-    if (args[0] == "createG" && message.channel.name == adminEventChannel){
+    if (args[0] == "create" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
+            console.log(args[1])
             for (let i = 1; i = args[1]; i++) {
-                channelName= "groupe-" + i   
+                channelName= "groupe-" + i  
+                console.log(channelName) 
                 message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
                 {console.log(channel)
                  const category = '791580496509403177'
