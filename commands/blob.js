@@ -16,9 +16,10 @@ timer = 0;
 timeInMinute = 0;
 count = 0;
 timeRest = 0;
-var interval= null;
+interval= null;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
 groupe = [];
+groupDeath = [];
 stats = new Map();
 BigHit = 0
 BigHitName = ""
@@ -52,7 +53,7 @@ exports.run = (client, message, args) => {
                             messagePV = 'Le **'+message.channel.name+'** ajoute **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> : il lui reste **'+restantPV+'**/**'+initialPV+'**'
                             if (restantPV > splitPV){
                                 cutPV = Math.ceil(restantPV/splitPV)
-                                if (cutPV < fullPV){
+                                if (cutPV != fullPV){
                                     fullPV = cutPV
                                     emptyPV = initialBarPV - fullPV
                                     lifeBar(client,message,emptyPV,fullPV)
@@ -129,23 +130,21 @@ exports.run = (client, message, args) => {
                     }else{
                         message.channel.send("Il n'y a plus besoin de déposer des indices pour l'instant")
                     }                        
-                }else
-                {
-                    if (indice > 0){
-                        indice = indice - 1
-                        addStats(message.channel.name,"clues",1)
-                        if (indice > 0){
-                            SendMessage(client,message,'\ Le **'+message.channel.name+'** depose **1 <:TokenClue:443357925369577482>** , il en reste **'+indice+'**<:TokenClue:443357925369577482> à trouver')
-                        }else
-                        {
-                            SendMessage(client,message,'\:information_source: Le **'+message.channel.name+'** depose le dernier <:TokenClue:443357925369577482> manquant') 
-                            SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont découvert la totalité des <:TokenClue:443357925369577482>, dès le prochain round passer à l acte 2')
-                        }
-                    }else
-                    {
-                        message.channel.send("Il n'y a plus besoin de déposer des indices pour l'instant")
-                    }          
-                } 
+                }
+            }    
+        }
+
+        //Dead command
+        if (args[0] == "dead"){
+            if (timer == 0){
+                message.channel.send("Commande inutilisable tant que le timer n'est pas lancé.");    
+            }else
+            {
+                groupDeath.push(message.channel.name)
+                SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** a été dévoré par <:jelly:733931040942587965>')       
+                if ((groupe.length -1 ) == groupDeath.length){
+                    SendMessage(client,message,'Tout les \:spy: ont été dévorés par<:jelly:733931040942587965> ; \:skull_crossbones:GAME OVER\:skull_crossbones: ') 
+                }
             }    
         }
 
@@ -160,10 +159,10 @@ exports.run = (client, message, args) => {
             .addField("Toutes les commandes pour l'evenement commencent par !blob.", " Le !b peut être utilisé en raccourci")
             .addField("Utilisable uniquement quand le timer sera déclenché", "Dans les salons prévus pour l'evenement")
             .addField("!blob d suivi d'un chiffre ", "Inflige le nombre de degat au Dévoreur")
-            .addField("!blob i", "Ajoute un indice sur l'acte 1")
             .addField("!blob i suivi d'une chiffre", "Ajoute le nombre indiqué d'indice sur l'acte 1")
             .addField("!blob cm", "Utilise une contre mesure")
             .addField("!blob cm +", "(Cas rare) Ajout d'une contre mesure.")
+            .addField("!blob dead", "Permet d'indiquer aux autres groupes que votre groupe est mort ")
             message.channel.send(embed);
     }   
     //Command for admin
@@ -198,6 +197,7 @@ exports.run = (client, message, args) => {
             .addField("!blob fixD suivi d'un chiffre", "Refixe le nombre de dégat suite missplay ou crashbot")
             .addField("!blob fixI suivi d'un chiffre", "Refixe le nombre d'indice suite missplay ou crashbot")
             .addField("!blob fixCM suivi d'un chiffre", "Refixe le nombre de contre mesure suite missplay ou crashbot")
+            .addField("!blob undead suivi du nom du groupe", "Sort le groupe de la liste des tués")
             message.channel.send(embed);
     }
 
