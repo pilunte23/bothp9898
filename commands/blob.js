@@ -187,8 +187,9 @@ exports.run = (client, message, args) => {
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
-            .addField("Ordre conseillé des commandes", "**!b scan, !b welcome, !b init et !b timer**")
-            .addField("!blob create", "créer le nombre de salon indiqué")
+            .addField("Ordre conseillé des commandes", "**!b welcome, !b init et !b timer**")
+            .addField("!blob create", "Créer le nombre de salon indiqué")
+            .addField("!blob delete", "Supprime tous les salons de l event")
             .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
@@ -315,10 +316,15 @@ exports.run = (client, message, args) => {
             groupe = []
             stats.clear()
             client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
-                groupe.push(channel.name)
-                m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
-                stats.set(channel.name,m)
-                message.channel.send(channel.name+' ajouté');
+                if (groupe.includes(channel.name)){
+                    groupe.push(channel.name)
+                    m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
+                    stats.set(channel.name,m)
+                    message.channel.send(channel.name+' scanné et ajouté');
+                }else{
+                    message.channel.send(channel.name+' scanné mais dejà présent');
+                }
+                
             })
             message.channel.send('\:information_source: Scan fini')
         }catch (e){
@@ -353,7 +359,7 @@ exports.run = (client, message, args) => {
                     stats.set(channel.name,m)
                     message.channel.send(channel.name+' ajouté')
                 })
-                vocalChannelname = "groupe-"  + i + "-audio"
+                vocalChannelname = "vocal-groupe-"  + i
                 
                 message.guild.channels.create(vocalChannelname,{ type: 'voice'}).then((channel)=> 
                 {
