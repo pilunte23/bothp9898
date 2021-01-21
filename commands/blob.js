@@ -353,7 +353,7 @@ exports.run = (client, message, args) => {
                     stats.set(channel.name,m)
                     message.channel.send(channel.name+' ajouté')
                 })
-                vocalChannelname = "group-"  + i + "-audio"
+                vocalChannelname = "groupe-"  + i + "-audio"
                 
                 message.guild.channels.create(vocalChannelname,{ type: 'voice'}).then((channel)=> 
                 {
