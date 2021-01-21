@@ -363,7 +363,7 @@ exports.run = (client, message, args) => {
                 })
             }
             groupe.push("groupe-admin-event")
-            message.channel.send(channel.name+' ajouté')
+            message.channel.send("groupe-admin-event ajouté")
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de groupe");
