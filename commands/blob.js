@@ -20,6 +20,7 @@ timeRest = 0;
 interval= null;
 story = ['Repousser les Mi-Go', 'Désamorcer les Explosifs','Récuperer le Fragment','Secourir la Chimiste'];
 groupe = [];
+groupVocal = [];
 groupDeath = [];
 stats = new Map();
 BigHit = 0
@@ -342,24 +343,44 @@ exports.run = (client, message, args) => {
         if (!isNaN(args[1])){
             console.log(args[1])
             for (let i = 1; i <= args[1]; i++) {
-                channelName= "groupe-" + i  
-                console.log(channelName) 
+                const category = '791580496509403177'
+                channelName= "groupe-" + i
                 message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
-                {console.log(channel)
-                 const category = '791580496509403177'
+                {
                     channel.setParent(category)
                     groupe.push(channel.name)
                     m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
                     stats.set(channel.name,m)
                     message.channel.send(channel.name+' ajouté')
                 })
+                vocalChannelname = "group-"  + i + "-audio"
+                
+                message.guild.channels.create(channelName,{ type: 'voice'}).then((channel)=> 
+                {
+                    channel.setParent(category)
+                    groupVocal.push(channel.name)
+                    message.channel.send(channel.name+' ajouté')
+                })
             }
+            groupe.push("groupe-admin-event")
+            message.channel.send(channel.name+' ajouté')
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de groupe");
         }
     }
-
+    if (args[0] == "delete" && message.channel.name == adminEventChannel){
+        groupe.forEach(function(item){
+            if (item != "groupe-admin-event"){
+                message.guild.channels.cache.find(channel => channel.delete())
+                message.channel.send(channel.name+' effacé')
+            }  
+        }) 
+        groupVocal.forEach(function(item){
+            message.guild.channels.cache.find(channel => channel.delete())
+            message.channel.send(channel.name+' effacé')
+        })      
+    }
 }
 
 function SendMessage(client,message,messagetoGroup){
