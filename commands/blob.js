@@ -341,7 +341,7 @@ exports.run = (client, message, args) => {
     if (args[0] == "create" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
             console.log(args[1])
-            for (let i = 1; i = args[1]; i++) {
+            for (let i = 1; i <= args[1]; i++) {
                 channelName= "groupe-" + i  
                 console.log(channelName) 
                 message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
