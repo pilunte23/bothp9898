@@ -357,7 +357,6 @@ exports.run = (client, message, args) => {
                     groupe.push(channel.name)
                     m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
                     stats.set(channel.name,m)
-                    message.channel.send(channel.name+' ajouté')
                 })
                 vocalChannelname = "vocal-groupe-"  + i
                 
@@ -365,7 +364,6 @@ exports.run = (client, message, args) => {
                 {
                     channel.setParent(category)
                     groupVocal.push(channel.name)
-                    message.channel.send(channel.name+' ajouté')
                 })
             }
             groupe.push("groupe-admin-event")
@@ -380,6 +378,7 @@ exports.run = (client, message, args) => {
             if (item != "groupe-admin-event"){
                 onechannel = message.guild.channels.cache.find(channel => channel.name === item)
                 onechannel.delete()   
+                stats.clear()
             }  
         }) 
         groupVocal.forEach(function(item){
