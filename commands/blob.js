@@ -355,7 +355,7 @@ exports.run = (client, message, args) => {
                 })
                 vocalChannelname = "group-"  + i + "-audio"
                 
-                message.guild.channels.create(channelName,{ type: 'voice'}).then((channel)=> 
+                message.guild.channels.create(vocalChannelname,{ type: 'voice'}).then((channel)=> 
                 {
                     channel.setParent(category)
                     groupVocal.push(channel.name)
