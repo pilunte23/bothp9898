@@ -372,15 +372,21 @@ exports.run = (client, message, args) => {
     if (args[0] == "delete" && message.channel.name == adminEventChannel){
         groupe.forEach(function(item){
             if (item != "groupe-admin-event"){
-                channelDelete = message.guild.channels.cache.find(channel => channel.name === item)
-                channelDelete.delete()
-                message.channel.send(channel.name+' effacé')
+                message.guild.channels.cache.find(channel => {
+                    if (channel.name === item){
+                        channel.delete()
+                        message.channel.send(channel.name+' effacé')
+                    }
+                })       
             }  
         }) 
         groupVocal.forEach(function(item){
-            channelDelete = message.guild.channels.cache.find(channel => channel.name === item)
-            channelDelete.delete()
-            message.channel.send(channel.name+' effacé')
+            message.guild.channels.cache.find(channel => {
+                if (channel.name === item){
+                    channel.delete()
+                    message.channel.send(channel.name+' effacé')
+                }
+            })   
         })      
     }
 }
