@@ -397,6 +397,8 @@ function addStats(name,type,changedValue) {
     console.log(name,type,changedValue)
     stat = stats.get(name)
     //"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded"
+    console.log(stat)
+    console.log(stats)
     oldValue = stat.get(type)
     newValue = changedValue + oldValue
     stat.set(type, newValue)
