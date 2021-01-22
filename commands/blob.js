@@ -317,7 +317,7 @@ exports.run = (client, message, args) => {
     if (args[0] == "group" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
             //Suppression des anciens groupes et reinialisation des stats
-            DeleteGroup()        
+            DeleteGroup(message)        
             //Creation des groupes
             for (let i = 1; i <= args[1]; i++) {
                 const category = '791580496509403177'
@@ -346,11 +346,11 @@ exports.run = (client, message, args) => {
         }
     }
     if (args[0] == "delete" && message.channel.name == adminEventChannel){
-        DeleteGroup()
+        DeleteGroup(message)
     }
 }
 
-function DeleteGroup(){
+function DeleteGroup(message){
     //Suppression par scan
     try{
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
