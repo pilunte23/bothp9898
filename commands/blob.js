@@ -242,7 +242,7 @@ exports.run = (client, message, args) => {
     }
 
     if (args[0] == "reset" && message.channel.name == adminEventChannel){
-        indice  = initialIndice
+        indice = initialIndice
         SendMessage(client,message,'\:mega: Reinitialisation Acte 1 à **'+indice+'<:TokenClue:443357925369577482>**')
     }
 
@@ -363,20 +363,20 @@ function DeleteGroup(client,message){
                 channel.delete()   
             }   
         })
+        //Suppression des anciens groupes en listant le group
+        groupe.forEach(function(item){
+            if (item != "groupe-admin-event"){
+                onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+                onechannel.delete()   
+            }  
+        }) 
+        groupVocal.forEach(function(item){
+            onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+            onechannel.delete()    
+        }) 
     }catch (e){
         console.log(e)
     }  
-    //Suppression des anciens groupes en listant le group
-    groupe.forEach(function(item){
-        if (item != "groupe-admin-event"){
-            onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-            onechannel.delete()   
-        }  
-    }) 
-    groupVocal.forEach(function(item){
-        onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-        onechannel.delete()    
-    }) 
     //Reset des stats
     BigHit = 0
     BigHitName = ""
@@ -394,6 +394,7 @@ function SendMessage(client,message,messagetoGroup){
 }
 
 function addStats(name,type,changedValue) {
+    console.log(name,type,changedValue)
     stat = stats.get(name)
     //"damage" : 0, "clues" : 0 , "cmUsed" : 0, "cmAdded"
     oldValue = stat.get(type)
