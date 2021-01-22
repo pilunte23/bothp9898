@@ -354,12 +354,12 @@ function DeleteGroup(client,message){
     //Suppression par scan
     try{
         client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
-            if (item != "groupe-admin-event"){
+            if (channel.name != "groupe-admin-event"){
                 channel.delete()   
             }   
         })
         client.channels.cache.filter(chan => chan.name.startsWith("vocal-groupe")).forEach(channel => {
-            if (item != "groupe-admin-event"){
+            if (channel.name != "groupe-admin-event"){
                 channel.delete()   
             }   
         })
