@@ -142,7 +142,7 @@ exports.run = (client, message, args) => {
             }else
             {
                 groupDeath.push(message.channel.name)
-                SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** a été dévoré par <:jelly:733931040942587965>')       
+                SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** ont été dévoré par <:jelly:733931040942587965>')       
                 if ((groupe.length -1 ) == groupDeath.length){
                     SendMessage(client,message,'Tout les \:spy: ont été dévorés par<:jelly:733931040942587965> ; \:skull_crossbones:GAME OVER\:skull_crossbones: ') 
                     Timer(client,message,0)
@@ -217,6 +217,12 @@ exports.run = (client, message, args) => {
             initialBarPV = Math.ceil(initialPV/splitPV)
             fullPV = initialBarPV
             emptyPV = 0
+            stats.clear()
+            groupe.forEach(function(item){ 
+                m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
+                stats.set(item,m) 
+            })       
+            
             SendMessage(client,message,"Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")
         }
         else{
