@@ -278,7 +278,7 @@ exports.run = (client, message, args) => {
         }  
     }
 
-    if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
+    /*if (args[0] == "scan" && message.channel.name == adminEventChannel){ 
         try{
             BigHit = 0
             BigHitName = ""
@@ -301,7 +301,7 @@ exports.run = (client, message, args) => {
             message.channel.send('Désolé <:jelly:733931040942587965> a dévoré ta commande, redemarre le bot');
         }  
     }
-
+*/
     if (args[0] == "stats" && message.channel.name == adminEventChannel){ 
         SendMessage(client,message,"\:information_source: RAPPEL\n Total PV <:jelly:733931040942587965> : **"+initialPV+"**\n Total <:TokenClue:443357925369577482> Acte 1 : **"+initialIndice+"**\n Contre mesure : **"+initialCM+"**")      
         SendMessage(client,message,'Le coup le plus sanglant revient au **'+BigHitName+'** avec **'+BigHit+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965> ; Félicitation');
@@ -316,14 +316,15 @@ exports.run = (client, message, args) => {
   
     if (args[0] == "group" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-            DeleteGroup()
-            
+            //Suppression des anciens groupes et reinialisation des stats
+            DeleteGroup()        
             //Creation des groupes
             for (let i = 1; i <= args[1]; i++) {
                 const category = '791580496509403177'
                 channelName= "groupe-" + i
                 message.guild.channels.create(channelName,{ type: 'text'}).then((channel)=> 
                 {
+                  
                     channel.setParent(category)
                     groupe.push(channel.name)
                     m = new Map([["damage", 0], ["clues", 0], ["cmUsed", 0], ["cmAdded", 0]])   
@@ -350,19 +351,39 @@ exports.run = (client, message, args) => {
 }
 
 function DeleteGroup(){
-    //Suppression des anciens groupes text sauf admin-event et nettoyage des stats
+    //Suppression par scan
+    try{
+        client.channels.cache.filter(chan => chan.name.startsWith("group")).forEach(channel => {
+            if (item != "groupe-admin-event"){
+                channel.delete()   
+            }   
+        })
+        client.channels.cache.filter(chan => chan.name.startsWith("vocal-groupe")).forEach(channel => {
+            if (item != "groupe-admin-event"){
+                channel.delete()   
+            }   
+        })
+    }catch (e){
+        console.log(e)
+    }  
+    //Suppression des anciens groupes en listant le group
     groupe.forEach(function(item){
         if (item != "groupe-admin-event"){
             onechannel = message.guild.channels.cache.find(channel => channel.name === item)
             onechannel.delete()   
-            stats.clear()
         }  
     }) 
-    //Suppression des anciens groupes voice
     groupVocal.forEach(function(item){
         onechannel = message.guild.channels.cache.find(channel => channel.name === item)
         onechannel.delete()    
     }) 
+    //Reset des stats
+    BigHit = 0
+    BigHitName = ""
+    groupe = []
+    groupVocal = [];
+    groupDeath = [];
+    stats.clear()
 }
 
 function SendMessage(client,message,messagetoGroup){
