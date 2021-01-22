@@ -73,7 +73,7 @@ exports.run = (client, message, args) => {
                             SendMessage(client,message,'\:information_source: Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
                             speed = timeInMinute - timeRest
                             SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
-                            Timer(0)   
+                            Timer(client,message,0)   
                         }
                     }else{
                         message.channel.send("Trop tard <:jelly:733931040942587965> est déjà vaincu.");  
@@ -145,7 +145,7 @@ exports.run = (client, message, args) => {
                 SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** a été dévoré par <:jelly:733931040942587965>')       
                 if ((groupe.length -1 ) == groupDeath.length){
                     SendMessage(client,message,'Tout les \:spy: ont été dévorés par<:jelly:733931040942587965> ; \:skull_crossbones:GAME OVER\:skull_crossbones: ') 
-                    Timer(0)
+                    Timer(client,message,0)
                 }
             }    
         }
@@ -272,9 +272,9 @@ exports.run = (client, message, args) => {
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
         //temps en miliseconde
-            Timer(args[1])  
+            Timer(client,message,args[1])  
         }else{
-            Timer(0)      
+            Timer(client,message,0)      
         }  
     }
 
@@ -403,7 +403,7 @@ function addStats(name,type,changedValue) {
 }
 
 
-function Timer(time){
+function Timer(client,message,time){
     if (time > 0){
         timeInMinute = parseInt(time)
         timer = timeInMinute * 60000
