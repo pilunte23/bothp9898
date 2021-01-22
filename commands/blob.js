@@ -73,8 +73,7 @@ exports.run = (client, message, args) => {
                             SendMessage(client,message,'\:information_source: Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
                             speed = timeInMinute - timeRest
                             SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
-                            clearInterval(interval);
-                            timer = 0      
+                            timer(0)   
                         }
                     }else{
                         message.channel.send("Trop tard <:jelly:733931040942587965> est déjà vaincu.");  
@@ -146,6 +145,7 @@ exports.run = (client, message, args) => {
                 SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** a été dévoré par <:jelly:733931040942587965>')       
                 if ((groupe.length -1 ) == groupDeath.length){
                     SendMessage(client,message,'Tout les \:spy: ont été dévorés par<:jelly:733931040942587965> ; \:skull_crossbones:GAME OVER\:skull_crossbones: ') 
+                    timer(0)
                 }
             }    
         }
@@ -187,10 +187,8 @@ exports.run = (client, message, args) => {
             .attachFiles(imgJelly)
             .setThumbnail('attachment://jelly.png')
             .setColor("#67C355")
-            .addField("Ordre conseillé des commandes", "**!b welcome, !b init et !b timer**")
-            .addField("!blob create", "Créer le nombre de salon indiqué")
-            .addField("!blob delete", "Supprime tous les salons de l event")
-            .addField("!blob scan ", "Scanne les salons commençant par 'group' et reinitialise les stats")
+            .addField("Ordre conseillé des commandes", "**!b group !b welcome, !b init et !b timer**")
+            .addField("!blob group", "Supprime et Recreer le nombre de salon indiqué")
             .addField("!blob welcome ", "Message d'introduction")
             .addField("!blob init suivi d'un chiffre ", "Initialisation des compteurs selon le nombre de participants")
             .addField("!blob timer (stop) ", "Lance le timer du chiffre indiqué en minutes, arret de timer avec stop")
@@ -273,39 +271,10 @@ exports.run = (client, message, args) => {
 
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-        //temps en miliseconde  
-            timeInMinute = parseInt(args[1])
-            timer = timeInMinute * 60000
-            timerRest = timer         
-            SendMessage(client,message,'\:timer: Mise en place d un timer de **'+timeInMinute+'** minutes')
-
-            interval = setInterval (function () {
-                count = count + 1
-                timeRest = timeInMinute - count
-                message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
-                if (timeRest > 10){      
-                    rest = timeRest % 30 
-                    if (rest == 0){
-                        SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
-                    }        
-                }else
-                {
-                    if (timeRest == 0 && restantPV > 0){
-                        SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965> : il lui en restait **'+restantPV+'**/**'+initialPV+'**')
-                        clearInterval(interval)
-                        timer = 0 
-                    }else
-                    {
-                        SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
-                    }           
-                }   
-            }, 60000 );
+        //temps en miliseconde
+            timer(args[1])  
         }else{
-            if (args[1] == "stop"){
-                clearInterval(interval)
-                timer = 0 
-                message.channel.send('\:information_source: Timer arrété')
-            }      
+            timer(0)      
         }  
     }
 
@@ -345,9 +314,22 @@ exports.run = (client, message, args) => {
         }
     }
   
-    if (args[0] == "create" && message.channel.name == adminEventChannel){
+    if (args[0] == "group" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-            console.log(args[1])
+            //Suppression des anciens groupes text sauf admin-event et nettoyage des stats
+            groupe.forEach(function(item){
+                if (item != "groupe-admin-event"){
+                    onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+                    onechannel.delete()   
+                    stats.clear()
+                }  
+            }) 
+            //Suppression des anciens groupes voice
+            groupVocal.forEach(function(item){
+                onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+                onechannel.delete()    
+            }) 
+            //Creation des groupes
             for (let i = 1; i <= args[1]; i++) {
                 const category = '791580496509403177'
                 channelName= "groupe-" + i
@@ -374,17 +356,7 @@ exports.run = (client, message, args) => {
         }
     }
     if (args[0] == "delete" && message.channel.name == adminEventChannel){
-        groupe.forEach(function(item){
-            if (item != "groupe-admin-event"){
-                onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-                onechannel.delete()   
-                stats.clear()
-            }  
-        }) 
-        groupVocal.forEach(function(item){
-            onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-            onechannel.delete()    
-        })      
+             
     }
 }
 
@@ -402,6 +374,43 @@ function addStats(name,type,changedValue) {
     newValue = changedValue + oldValue
     stat.set(type, newValue)
     stats.set(name,stat)
+}
+
+
+function timer(time){
+    if (time > 0){
+        timeInMinute = parseInt(time)
+        timer = timeInMinute * 60000
+        timerRest = timer         
+        SendMessage(client,message,'\:timer: Mise en place d un timer de **'+timeInMinute+'** minutes')
+        
+        interval = setInterval (function () {
+            count = count + 1
+            timeRest = timeInMinute - count
+            message.channel.send('\:timer: **'+timeRest+'** minute(s) restante(s)')
+            if (timeRest > 10){      
+                rest = timeRest % 30 
+                if (rest == 0){
+                    SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
+                }        
+            }else
+            {
+                if (timeRest == 0 && restantPV > 0){
+                    SendMessage(client,message,'**Temps écoulé** les \:skull_crossbones:\:spy:\:skull_crossbones: sont vaincus par <:jelly:733931040942587965> : il lui en restait **'+restantPV+'**/**'+initialPV+'**')
+                    clearInterval(interval)
+                    timer = 0 
+                }else
+                {
+                    SendMessage(client,message,'\:spy: Il reste **'+timeRest+'** minute(s)')
+                }           
+            }   
+        }, 60000 )
+    }else
+    {
+        clearInterval(interval)
+        timer = 0 
+    }
+
 }
 
 function getRandomInt(max) {
