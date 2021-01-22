@@ -73,7 +73,7 @@ exports.run = (client, message, args) => {
                             SendMessage(client,message,'\:information_source: Le Coup Final est porté **'+message.channel.name+'** ajoutant **'+degat+'**<:TokenDamage:443355098773585920> sur <:jelly:733931040942587965>')
                             speed = timeInMinute - timeRest
                             SendMessage(client,message,'\:mega: **Félicitation** les \:spy: ont vaincu \:skull_crossbones:<:jelly:733931040942587965>\:skull_crossbones: en **'+speed+'** minutes')
-                            timer(0)   
+                            Timer(0)   
                         }
                     }else{
                         message.channel.send("Trop tard <:jelly:733931040942587965> est déjà vaincu.");  
@@ -145,7 +145,7 @@ exports.run = (client, message, args) => {
                 SendMessage(client,message,'Les \:spy: du **'+message.channel.name+'** a été dévoré par <:jelly:733931040942587965>')       
                 if ((groupe.length -1 ) == groupDeath.length){
                     SendMessage(client,message,'Tout les \:spy: ont été dévorés par<:jelly:733931040942587965> ; \:skull_crossbones:GAME OVER\:skull_crossbones: ') 
-                    timer(0)
+                    Timer(0)
                 }
             }    
         }
@@ -272,9 +272,9 @@ exports.run = (client, message, args) => {
     if (args[0] == "timer" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
         //temps en miliseconde
-            timer(args[1])  
+            Timer(args[1])  
         }else{
-            timer(0)      
+            Timer(0)      
         }  
     }
 
@@ -316,19 +316,8 @@ exports.run = (client, message, args) => {
   
     if (args[0] == "group" && message.channel.name == adminEventChannel){
         if (!isNaN(args[1])){
-            //Suppression des anciens groupes text sauf admin-event et nettoyage des stats
-            groupe.forEach(function(item){
-                if (item != "groupe-admin-event"){
-                    onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-                    onechannel.delete()   
-                    stats.clear()
-                }  
-            }) 
-            //Suppression des anciens groupes voice
-            groupVocal.forEach(function(item){
-                onechannel = message.guild.channels.cache.find(channel => channel.name === item)
-                onechannel.delete()    
-            }) 
+            DeleteGroup()
+            
             //Creation des groupes
             for (let i = 1; i <= args[1]; i++) {
                 const category = '791580496509403177'
@@ -349,15 +338,31 @@ exports.run = (client, message, args) => {
                 })
             }
             groupe.push("groupe-admin-event")
-            message.channel.send("groupe-admin-event ajouté")
+            message.channel.send("Salons ajoutés")
         }
         else{
             message.channel.send(client,"Il faut mettre le nombre de groupe");
         }
     }
     if (args[0] == "delete" && message.channel.name == adminEventChannel){
-             
+        DeleteGroup()
     }
+}
+
+function DeleteGroup(){
+    //Suppression des anciens groupes text sauf admin-event et nettoyage des stats
+    groupe.forEach(function(item){
+        if (item != "groupe-admin-event"){
+            onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+            onechannel.delete()   
+            stats.clear()
+        }  
+    }) 
+    //Suppression des anciens groupes voice
+    groupVocal.forEach(function(item){
+        onechannel = message.guild.channels.cache.find(channel => channel.name === item)
+        onechannel.delete()    
+    }) 
 }
 
 function SendMessage(client,message,messagetoGroup){
@@ -377,7 +382,7 @@ function addStats(name,type,changedValue) {
 }
 
 
-function timer(time){
+function Timer(time){
     if (time > 0){
         timeInMinute = parseInt(time)
         timer = timeInMinute * 60000
