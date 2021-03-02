@@ -14,55 +14,17 @@ describe("TabooCommand", () => {
     bot = new LovecraftBot(mockClient);
   });
 
-  it("s'exécute quand il voit '!tb'", async () => {
-    const message = new MockDiscordMessage("Bonjour, !tb stp");
-    message.channel = {
-      send: sinon.fake(),
-    };
-    await bot.whenCommandsLoaded();
-    mockClient.emit("message", message);
-    expect(message.channel.send).to.have.been.called;
-  });
-
-  it("s'exécute quand il voit '!taboo'", async () => {
-    const message = new MockDiscordMessage("Vite la liste !taboo");
-    message.channel = {
-      send: sinon.fake(),
-    };
-    await bot.whenCommandsLoaded();
-    mockClient.emit("message", message);
-    expect(message.channel.send).to.have.been.called;
-  });
-
-  it("s'exécute quand il voit '!taboos'", async () => {
-    const message = new MockDiscordMessage("Vite les !taboos");
-    message.channel = {
-      send: sinon.fake(),
-    };
-    await bot.whenCommandsLoaded();
-    mockClient.emit("message", message);
-    expect(message.channel.send).to.have.been.called;
-  });
-
-  it("s'exécute quand il voit '!tabou'", async () => {
-    const message = new MockDiscordMessage("C'est quoi un !tabou ?");
-    message.channel = {
-      send: sinon.fake(),
-    };
-    await bot.whenCommandsLoaded();
-    mockClient.emit("message", message);
-    expect(message.channel.send).to.have.been.called;
-  });
-
-  it("s'exécute quand il voit '!tabous'", async () => {
-    const message = new MockDiscordMessage("Ah bon y'a des !tabous ?");
-    message.channel = {
-      send: sinon.fake(),
-    };
-    await bot.whenCommandsLoaded();
-    mockClient.emit("message", message);
-    expect(message.channel.send).to.have.been.called;
-  });
+  for (const trigger of ["!tb", "!taboo", "!taboos", "!tabou", "!tabous"]) {
+    it(`s'exécute quand il voit '${trigger}'`, async () => {
+      const message = new MockDiscordMessage(`Bonjour, les ${trigger} stp`);
+      message.channel = {
+        send: sinon.fake(),
+      };
+      await bot.whenCommandsLoaded();
+      mockClient.emit("message", message);
+      expect(message.channel.send).to.have.been.called;
+    });
+  }
 
   it("ne s'exécute pas quand il ne voit pas '!tabou'", async () => {
     const message = new MockDiscordMessage(

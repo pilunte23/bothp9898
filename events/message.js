@@ -16,15 +16,6 @@ module.exports = (client, message) => {
     .split(/ +/g);
   console.log("args : " + args);
   let command = args.shift().toLowerCase();
-  //hack card=carte
-  if (
-    command == "carte" ||
-    command == "cards" ||
-    command == "cartes" ||
-    command == "!" ||
-    command == "c"
-  )
-    command = "card";
   if (command == "regles" || command == "r") command = "rules";
   if (command == "aide" || command == "h") command = "help";
   if (command == "s") command = "search";

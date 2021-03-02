@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { promisify } = require("util");
+const CardService = require("./CardService");
 
 const readdir = promisify(fs.readdir);
 
@@ -14,11 +15,22 @@ class LovecraftBot {
    */
   constructor(client) {
     this.client = client;
+    this.cardService = CardService;
     this.commands = [];
 
     this._loaded = this._loadCommands();
+    this._isWorking = undefined;
 
     this.client.on("message", this.handleMessage.bind(this));
+  }
+
+  /**
+   * Renvoie le CardService qui va permettre d'avoir des informations sur les
+   * cartes.
+   * @returns {CardService} Le CardService
+   */
+  getCardService() {
+    return this.cardService;
   }
 
   /**
@@ -34,7 +46,7 @@ class LovecraftBot {
    * @param {Discord.Message} message - le message reçu
    * @returns {Promise<void[]>} - Promesse d'exécution des commandes
    */
-  async handleMessage(message) {
+  handleMessage(message) {
     if (isMessageFromBot(message)) {
       return;
     }
@@ -43,9 +55,11 @@ class LovecraftBot {
       command.shouldExecute(message)
     );
 
-    return Promise.all(
+    this._isWorking = Promise.all(
       commandsForMessage.map((command) => command.execute(message, this))
-    );
+    ).then(() => {
+      this._isWorking = undefined;
+    });
   }
 
   /**
@@ -56,6 +70,19 @@ class LovecraftBot {
    */
   whenCommandsLoaded() {
     return this._loaded;
+  }
+
+  /**
+   * Retourne la promesse de traitement des messages qui ne sera résolue qu'une
+   * fois les messages traités. Utile pour les tests.
+   * @returns {Promise<void>} - La promesse de chargement des méthodes
+   */
+  whenDone() {
+    if (this._isWorking) {
+      return this._isWorking;
+    } else {
+      return Promise.resolve();
+    }
   }
 
   /**
