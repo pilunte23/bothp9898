@@ -43,8 +43,19 @@ describe("CardCommand", () => {
   });
 
   for (const trigger of ["!!", "!c", "!carte", "!cartes", "!card", "!cards"]) {
-    it(`s'exécute quand il voit '${trigger}'`, async () => {
+    it(`s'exécute quand il voit '${trigger}' suivi d'un texte`, async () => {
       const message = new MockDiscordMessage(`Bonjour, ${trigger} Nier`);
+      message.reply = sinon.fake();
+      await bot.whenCommandsLoaded();
+      mockClient.emit("message", message);
+      await bot.whenDone();
+      expect(message.reply).to.have.been.called;
+    });
+  }
+
+  for (const trigger of ["!!", "!c", "!carte", "!cartes", "!card", "!cards"]) {
+    it(`s'exécute quand il voit '${trigger}' suivi d'un numéro de carte`, async () => {
+      const message = new MockDiscordMessage(`Bonjour, ${trigger} 05032`);
       message.reply = sinon.fake();
       await bot.whenCommandsLoaded();
       mockClient.emit("message", message);
@@ -81,5 +92,14 @@ describe("CardCommand", () => {
     await bot.whenDone();
     expect(fakeCardService.getCardLink).to.have.been.calledWith("05032");
     expect(fakeCardService.getCardLink).to.have.been.calledWith("05280");
+  });
+
+  it("renvoie la carte dont l'ID a été précisé", async () => {
+    const message = new MockDiscordMessage(`Bonjour, !! 99999`);
+    message.reply = sinon.fake();
+    await bot.whenCommandsLoaded();
+    mockClient.emit("message", message);
+    await bot.whenDone();
+    expect(fakeCardService.getCardLink).to.have.been.calledWith("99999");
   });
 });
