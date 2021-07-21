@@ -15,7 +15,7 @@ const CardService = {
     const searchResultPage = await axios.get(url);
     const $ = cheerio.load(searchResultPage.data);
 
-    const REGEX = /^([^(]+)(?: \((\d)\))?$/;
+    const REGEX = /^([^(]+(?: \(\D+\))?)(?: \((\d)\))?$/;
 
     const cards = $("table.tableau")
       // C'est toujours le dernier tableau qui contient la recherche par titre
